@@ -32,13 +32,16 @@
         <input type="text" id="smiles" name="smiles" placeholder="Enter smiles string" maxlength="50"/>
         <select name="disease" id="disease">
           <option value="default">Select Target Disease</option>
-
+		  <option value="corona">Coronavirus</option>
+          <option value="hiv">HIV</option>
         </select>
         <p id="showmore"><a href="#" onclick="showMore()">more>></a></p>
         <div id="more">
           <select name="modelName" id="modelName">
             <option value="default">Select Specific Model</option>
-
+            <option value="adac_corona">AdaBoost Classifier</option>
+            <option value="rfc_hiv">Random Forest Classifier</option>
+            <option value="xgbc_hiv">XBG CLassifier</option>
           </select>
           <p><a href="#" onclick="showLess()">hide>></a></p>
         </div>
