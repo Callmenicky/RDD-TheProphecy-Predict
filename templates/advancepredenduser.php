@@ -34,15 +34,6 @@
 		<address>&#169; RDD 2021. All rights reserved</address> 
 		<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 	</footer>
-  <script type="text/javascript">
-    $("#disease").change(function(){
-        var x = $("#disease").val();
-        xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET","preddropdown.php?model="+x,false);
-        xmlhttp.send(null);
-        $("#modelName").html(xmlhttp.responseText)
-    });
-  </script>
 </body>
 {% endblock %}
 </html>
