@@ -3,7 +3,25 @@ from flask_mysqldb import MySQL
 import numpy as np
 import pickle
 import sklearn
+
+#Import RDKit
+import kora.install.rdkit
+
+#Import pandas
+import pandas as pd
+from rdkit.Chem import PandasTools
+
+#Import matolib
+import matplotlib.pyplot as plt
+
+#Import padelpy
+from padelpy import from_smiles
+
+#scalar
 from sklearn.preprocessing import StandardScaler
+
+#dimensional reduction
+from sklearn.decomposition import PCA
 
 app = Flask(__name__)
 
@@ -57,11 +75,6 @@ def basicpredict():
     data2 = request.form['disease']
     data3 = request.form['modelName']
     
-    cur = mysql.connection.cursor()
-    cur.execute("INSERT INTO basic_prediction(Smiles, TargetDisease, ModelApply, Output) VALUES (%s, %s , %s , %s)", ("hi", "HIV", 1, "Active"))
-    mysql.connection.commit()
-    cur.close()
-    
     #diseases = ["HIV", "Corona Virus"]
     #modelName = [model1, model2]
     
@@ -69,12 +82,78 @@ def basicpredict():
         #if(data2 == disease):
             #position = diseases.index(disease)
             #model = modelName[position]
-        
+            
+    # Convert SMILES into molecular descriptors
+    molecule_list = [data1]#insert name of list containing only SMILES e.g. smiles_only_lst
+    counter = 0
+
+    for molecule in molecule_list:
+        descriptors = from_smiles(molecule,descriptors=True, fingerprints=False, timeout=3600)
+        counter += 1
+        if molecule_list.index(molecule) == 0:
+          df = pd.DataFrame(descriptors, index=[0])
+        if molecule_list.index(molecule) > 0:
+            temp_df = pd.DataFrame(descriptors, index=[0])
+            df = df.append(temp_df, ignore_index=True)
+            
+    dataset_train = pd.read_csv('hiv integrase dataset (padelpy_active_train).csv')
     
-    #train_X = data1
-    #scaler = StandardScaler()
-    #X_train_norm = scaler.fit_transform(train_X)
-    #pred = model1.predict(data1)
+    md = df
+    
+    dataset_train = dataset_train.dropna()
+    #check descriptor NaN cell
+    #dataset_train.isnull().sum()
+    
+    #Training set remove columns that is not features
+
+    feature_train = [dataset_train.drop(['active'], axis=1, inplace=True)]
+    feature_train = dataset_train.columns
+    print('Training set updated columns:')
+    dataset_train.columns
+    
+    feature_test = df.columns
+    print('Testing set updated columns:')
+    feature_test
+    
+    #identify x_train and y_train
+    x_train = dataset_train.loc[:, feature_train].values
+
+    dataset_train = pd.read_csv('hiv integrase dataset (padelpy_active_train).csv')
+    y_train = dataset_train.loc[:, ['active']].values
+    
+    feature_test
+    x_test = df.loc[:,feature_test].values
+    y_test = x_test
+    
+    #value standarization in x_train and x_test
+    stdsc = StandardScaler()
+    x_train_norm = stdsc.fit_transform(x_train)
+    x_test_norm = stdsc.transform(x_test)
+    
+    #fit transform and transform in training and test PCA respectively (75.06% variance explained)
+    pca = PCA(n_components = 10)
+    x_train_pca = pca.fit_transform(x_train_norm)
+    x_test_pca = pca.transform(x_test_norm)
+    
+    #Perform the principal component analysis at test set (10 PCA)
+    df_test_pca = pd.DataFrame(data = x_test_pca, columns = ['PC1', 'PC2', 'PC3', 'PC4', 'PC5', 'PC6', 'PC7', 'PC8', 'PC9', 'PC10'])
+    #df_test_target = dataset_test[['active']]
+    new_test_df = pd.concat([df_test_pca],axis = 1)
+        
+    pred = model1.predict(data1)
+    
+    if pred == 1:
+       pred = "Active" 
+    
+    else:
+        pred = "Inactive"
+    
+    cur = mysql.connection.cursor()
+    cur.execute("INSERT INTO basic_prediction(Smiles, TargetDisease, ModelApply, Output) VALUES (%s, %s , %s , %s)", (data1, "HIV", 2, pred))
+    mysql.connection.commit()
+    cur.close()
+    
+    
     return render_template('after.php')
     #return render_template('after.php', data=pred)
     

@@ -25,8 +25,8 @@
 		<a href="dashboardenduser.php"><img src="{{url_for('static', filename='images/logo_RDD.png')}}" alt="logo"/></a>
 		<li class="parent"><a href="#">Prediction</a>
 		  <ul class="child">
-			<li><a href="https://rdd-theprophecy.herokuapp.com/basicpredenduser.php">Basic</a></li>
-			<li><a href="https://rdd-theprophecy.herokuapp.com/advancepredenduser.php">Advance</a></li>
+			<li><a href="https://rdd-theprophecy-predict.herokuapp.com/basicpredenduser">Basic</a></li>
+			<li><a href="https://rdd-theprophecy-predict.herokuapp.com/advancepredenduser">Advance</a></li>
 		  </ul>
 		</li>
 		<li class="parent"><a href="#">History</a>

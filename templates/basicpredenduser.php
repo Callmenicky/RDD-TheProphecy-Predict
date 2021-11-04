@@ -20,7 +20,7 @@
 			<option value="adac_corona">AdaBoost Classifier</option>
             <option value="rfc_hiv">Random Forest Classifier</option>
             <option value="xgbc_hiv">XBG CLassifier</option>
-          </select>
+        </select>
         <br/>
         <button type="submit" name="predictbasicenduser" class="btn btn-info">Predict</button>
         </form>
