@@ -22,31 +22,55 @@
 </head>
 <body>
   <header>
-    <a href="index.php"><img class="logo" src="{{url_for('static', filename='images/logo_RDD.png')}}" alt="logo"/></a>
-    <h1>Machine Learning Reverse Drug Discovery</h1>
+	<nav>
+	<!-- The logo is originally illustrated and designed -->
+	  <ul>
+		<a href="dashboardenduser.php"><img src="{{url_for('static', filename='images/logo_RDD.png')}}" alt="logo"/></a>
+		<li class="parent"><a href="#">Prediction</a>
+		  <ul class="child">
+			<li><a href="https://rdd-theprophecy.herokuapp.com/basicpredenduser.php">Basic</a></li>
+			<li><a href="https://rdd-theprophecy.herokuapp.com/advancepredenduser.php">Advance</a></li>
+		  </ul>
+		</li>
+		<li class="parent"><a href="#">History</a>
+		  <ul class="child">
+			<li><a href="https://rdd-theprophecy.herokuapp.com/basichistoryenduser.php">Basic</a></li>
+			<li><a href="https://rdd-theprophecy.herokuapp.com/advancehistoryenduser.php">Advance</a></li>
+		  </ul>
+		</li>
+		<li class="parent"><a href="https://rdd-theprophecy.herokuapp.com/profileenduser.php">Profile</a></li>
+		<li class="parent"><a href="#" onclick = "logout()">Logout</a></li>
+	  </ul>
+	</nav>
   </header>
+  <h1>Machine Learning Reverse Drug Discovery</h1>
   <section class="predict">
     <div class="predcontent">
         <h2>Advance Prediction</h2>
 		<form id="AdvancePrediction" method="post" action="{{url_for('advancepredict')}}">
-        <p>Upload a CSV file containing SMILES</p>
+        <p>upload a CSV file containing SMILES</p>
         <input type="file" id="smilescsv" name="smilescsv"/>
         <select name="disease" id="disease">
           <option value="default">Select Target Disease</option>
-		  <option value="corona">Coronavirus</option>
-          <option value="hiv">HIV</option>
+          <?php
+                $conn = mysqli_connect('us-cdbr-east-04.cleardb.com', 'b0f9135aa66d86', '2e28f6a7', 'heroku_c703864e708562a');
+                $db = mysqli_select_db($conn, 'b0f9135aa66d86');
+
+                $query = " SELECT DISTINCT TargetDisease FROM model";
+                $query_run = mysqli_query($conn,$query);
+
+                while($row = mysqli_fetch_array($query_run)){
+           ?>
+                    <option><?php echo $row['TargetDisease']; ?></option>
+           <?php
+            }
+           ?>
         </select>
-        <p id="showmore"><a href="#" onclick="showMore()">more>></a></p>
-        <div id="more">
-          <select name="modelName" id="modelName">
+        <select name="modelName" id="modelName">
             <option value="default">Select Specific Model</option>
-            <option value="adac_corona">AdaBoost Classifier</option>
-            <option value="rfc_hiv">Random Forest Classifier</option>
-            <option value="xgbc_hiv">XBG CLassifier</option>
-          </select>
-          <p><a href="#" onclick="showLess()">hide>></a></p>
-        </div>
-        <button type="submit" name="predictadvance" class="btn btn-info">Predict</button>
+        </select>
+        <br/>
+        <button type="submit" name="predictadvanceEnduser" class="btn btn-info">Predict</button>
         </form>
       </div>
       <div class="predimg">
@@ -57,6 +81,14 @@
 		<address>&#169; RDD 2021. All rights reserved</address> 
 		<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 	</footer>
+  <script type="text/javascript">
+    $("#disease").change(function(){
+        var x = $("#disease").val();
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET","preddropdown.php?model="+x,false);
+        xmlhttp.send(null);
+        $("#modelName").html(xmlhttp.responseText)
+    });
   </script>
 </body>
   

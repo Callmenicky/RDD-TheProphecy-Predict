@@ -204,7 +204,28 @@ function validateForm6(){
 
 	if( SmilesOK && DiseaseOK && ModelOK)
 	{
-		alert("8");
+		isAllOK = true;
+	}
+	
+   else{
+       alert(gErrorMsg); 
+       gErrorMsg = "";  
+       isAllOK = false;
+   }
+   
+   return isAllOK;
+}
+
+function validateForm7(){
+    "use strict";  
+    var isAllOK = false;  
+    gErrorMsg = "";
+	var InputCSVOK = chkInputCSV();
+	var DiseaseOK = chkDisease();
+	var ModelOK = chkModel();
+
+	if( InputCSVOK && DiseaseOK && ModelOK)
+	{
 		isAllOK = true;
 	}
 	
@@ -497,6 +518,28 @@ function chkModel(){
 	return ModelOk;	
 }
 
+function chkInputCSV(){
+	var File = document.getElementById("smilescsv");
+    var FileV;  
+	var FileOk = true;
+	if(File != null)
+	{
+		FileV = document.getElementById("smilescsv").value;
+	}
+	
+	else
+	{
+		File = document.getElementById("smilescsv");
+		FileV = document.getElementById("smilescsv").value;
+	}
+	if(FileV == ""){ 
+		gErrorMsg = gErrorMsg + "Please attach a file of SMILES strings\n" 
+        FileOk = false; 
+        File.style.borderColor = "red";
+	}
+	return FileOk;
+}
+
 function validateInputOnBlur(){
 	
 	var objectLostFocus_id = this.id;
@@ -536,6 +579,9 @@ function validateInputOnBlur(){
 		case "modelName": 
 			isOk = chkModel();
 			break;
+		case "smilescsv": 
+			isOk = chkInputCSV();
+			break;
             }
 	if (!isOk) {
         document.getElementById(objectLostFocus_id).style.borderColor = ""; 
@@ -570,14 +616,15 @@ function resetFormat(){
 					if(myForm == null)
 					{ 
 						myForm = document.getElementById("BasicPrediction");	
+						
+						if(myForm == null)
+						{ 
+							myForm = document.getElementById("AdvancePrediction");	
+						}
 					}					
-				
 				}
-				
 			}
-			
 		}
-		
 	}
 	var inputElements = myForm.getElementsByTagName("input");
 	for (var i = 0; i < inputElements.length; i++){
@@ -607,13 +654,15 @@ function registerInputsOnClick(){
 					if(myForm == null)
 					{ 
 						myForm = document.getElementById("BasicPrediction");	
+						
+						if(myForm == null)
+						{ 
+							myForm = document.getElementById("AdvancePrediction");	
+						}
 					}	
-				
 				}	
 			}
-			
 		}
-		
 	}
 	var inputElements = myForm.getElementsByTagName("input");
 	for (var i = 0; i < inputElements.length; i++){
@@ -675,6 +724,16 @@ function init() {
 						if(myForm != null)
 						{	
 							myForm.onsubmit = validateForm6;
+						}
+						
+						else
+						{
+							myForm = document.getElementById("AdvancePrediction");
+					
+							if(myForm != null)
+							{	
+								myForm.onsubmit = validateForm7;
+							}
 						}
 					}
 				}
