@@ -28,7 +28,7 @@
   <section class="predict">
         <div class="predcontent">
         <h2>Basic Prediction</h2>
-        <form id="BasicPrediction" method="post" action="{{url_for('home')}}">
+        <form id="BasicPrediction" method="post" action="{{url_for('basicpredict')}}">
         <input type="text" id="smiles" name="smiles" placeholder="Enter smiles string" maxlength="50"/>
         <select name="disease" id="disease">
           <option value="default">Select Target Disease</option>
