@@ -15,19 +15,6 @@
           <option value="default">Select Target Disease</option>
 		  <option value="corona">Coronavirus</option>
           <option value="hiv">HIV</option>
-          <?php
-                $conn = mysqli_connect('us-cdbr-east-04.cleardb.com', 'b0f9135aa66d86', '2e28f6a7', 'heroku_c703864e708562a');
-                $db = mysqli_select_db($conn, 'b0f9135aa66d86');
-
-                $query = " SELECT DISTINCT TargetDisease FROM model";
-                $query_run = mysqli_query($conn,$query);
-
-                while($row = mysqli_fetch_array($query_run)){
-           ?>
-                    <option><?php echo $row['TargetDisease']; ?></option>
-           <?php
-            }
-           ?>
         </select>
         <select name="modelName" id="modelName">
             <option value="default">Select Specific Model</option>
