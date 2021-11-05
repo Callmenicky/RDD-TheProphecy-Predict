@@ -146,6 +146,7 @@ def basicpredict():
    
     print(pred)
     print(pred[0])
+    print(new_test_df)
     
     if pred[0] == 1:
        pred = "Active" 
