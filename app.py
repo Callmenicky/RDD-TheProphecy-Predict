@@ -110,11 +110,9 @@ def basicpredict():
 
     feature_train = [dataset_train.drop(['active'], axis=1, inplace=True)]
     feature_train = dataset_train.columns
-    print('Training set updated columns:')
     dataset_train.columns
     
     feature_test = df.columns
-    print('Testing set updated columns:')
     feature_test
     
     #identify x_train and y_train
@@ -146,6 +144,7 @@ def basicpredict():
    
     print(pred)
     print(pred[0])
+    print(new_test_df)
     
     if pred[0] == 1:
        pred = "Active" 
@@ -159,7 +158,6 @@ def basicpredict():
     cur.execute("INSERT INTO basic_prediction(Smiles, TargetDisease, ModelApply, Output) VALUES (%s, %s , %s , %s)", (data1, "HIV", 2, pred))
     mysql.connection.commit()
     cur.close()
-    
     
     return render_template('after.php', data = pred)
     #return render_template('after.php', data=pred)
