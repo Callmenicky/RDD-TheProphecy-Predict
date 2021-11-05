@@ -70,11 +70,11 @@
         </div>
         <div class="predimg">
 				{%if data == "Active"%}
-				<h1>Iris-setosa</h1>  
+				<h1>Active</h1>  
 				<img src="images/icon_ml.JPG" alt="identity icon"> 
 
 				{%else%}
-				<h1>Iris-versicolor</h1>
+				<h1>Inactive</h1>
 				<img src="images/icon_ml.JPG" alt="identity icon">
 				
 				{%endif%}
