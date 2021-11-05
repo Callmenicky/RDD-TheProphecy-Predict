@@ -22,7 +22,7 @@
 <nav>
 	<!-- The logo is originally illustrated and designed -->
   <ul>
-    <a href="dashboardadmin.php"><img src="{{url_for('static', filename='images/logo_RDD.png')}}" alt="logo"/></a>
+    <a href="https://rdd-theprophecy.herokuapp.com/dashboardadmin.php"><img src="{{url_for('static', filename='images/logo_RDD.png')}}" alt="logo"/></a>
     <li class="parent"><a href="#">Prediction</a>
       <ul class="child">
         <li><a href="https://rdd-theprophecy-predict.herokuapp.com/basicpredadmin">Basic</a></li>

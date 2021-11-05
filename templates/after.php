@@ -69,7 +69,7 @@
         <button type="submit" name="predictbasic" class="btn btn-info">Predict</button>
         </div>
         <div class="predimg">
-				{%if data == 0%}
+				{%if data == "Active"%}
 				<h1>Iris-setosa</h1>  
 				<img src="images/icon_ml.JPG" alt="identity icon"> 
 

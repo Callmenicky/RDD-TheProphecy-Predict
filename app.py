@@ -4,6 +4,7 @@ import numpy as np
 import pickle
 import sklearn
 
+
 #Import RDKit
 import kora.install.rdkit
 
@@ -74,6 +75,7 @@ def basicpredict():
     data1 = request.form['smiles']
     data2 = request.form['disease']
     data3 = request.form['modelName']
+
     
     #diseases = ["HIV", "Corona Virus"]
     #modelName = [model1, model2]
@@ -140,13 +142,18 @@ def basicpredict():
     #df_test_target = dataset_test[['active']]
     new_test_df = pd.concat([df_test_pca],axis = 1)
         
-    pred = model1.predict(data1)
+    pred = model1.predict(new_test_df)
+   
+    print(pred)
+    print(pred[0])
     
-    if pred == 1:
+    if pred[0] == 1:
        pred = "Active" 
     
     else:
         pred = "Inactive"
+        
+    print(pred)
     
     cur = mysql.connection.cursor()
     cur.execute("INSERT INTO basic_prediction(Smiles, TargetDisease, ModelApply, Output) VALUES (%s, %s , %s , %s)", (data1, "HIV", 2, pred))
@@ -154,7 +161,7 @@ def basicpredict():
     cur.close()
     
     
-    return render_template('after.php')
+    return render_template('after.php', data = pred)
     #return render_template('after.php', data=pred)
     
 @app.route('/advancepredict', methods=['POST'])
