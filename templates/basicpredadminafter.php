@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 
-{% extends 'enduserheader.php' %}
+{% extends 'adminheader.php' %}
 {% block content %}
 <body>
   <h1>Machine Learning Reverse Drug Discovery</h1>
   <section class="predict">
         <div class="predcontent">
         <h2>Basic Prediction</h2>
-        <form id="BasicPrediction" method="post" action="{{url_for('basicpredictenduser')}}">
+        <form id="BasicPrediction" method="post" action="{{url_for('basicpredictadmin')}}">
         <input type="text" id="smiles" name="smiles" placeholder="Enter smiles string" maxlength="150"/>
         <select name="disease" id="disease">
           <option value="default">Select Target Disease</option>
@@ -22,17 +22,29 @@
             <option value="xgbc_hiv">XBG CLassifier</option>
         </select>
         <br/>
-        <button type="submit" name="predictbasicenduser" class="btn btn-info">Predict</button>
+        <button type="submit" name="predictbasicadmin" class="btn btn-info">Predict</button>
         </form>
         </div>
         <div class="predimg">
           <img src="{{url_for('static', filename='images/icon_ml.JPG')}}" alt="identity icon">
+		  {%if data == "Active"%}
+				<h1>Active</h1>  
+				<img src="images/icon_ml.JPG" alt="identity icon"> 
+
+				{%else%}
+				<h1>InActive</h1>
+				<img src="images/icon_ml.JPG" alt="identity icon">
+				
+				{%endif%}
+
+					<br><br>
+				<a href='/'>go back to home page</a>
         </div>
     </section>
-  	<footer>
+	<footer>
 		<address>&#169; RDD 2021. All rights reserved</address> 
 		<script src="{{ url_for('static', filename='js/script.js') }}"></script>
-	</footer>
+	</footer>	
 </body>
- {% endblock %}
+  {% endblock %}
 </html>
