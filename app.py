@@ -68,10 +68,7 @@ def basicpredenduser():
 def advancepredenduser():
     return render_template('advancepredenduser.php')
     
-    
-
-@app.route('/basicpredict', methods=['POST'])
-def basicpredict():
+def basicpredmethod():
     data1 = request.form['smiles']
     data2 = request.form['disease']
     data3 = request.form['modelName']
@@ -160,13 +157,9 @@ def basicpredict():
     cur.execute("INSERT INTO basic_prediction(Smiles, TargetDisease, ModelApply, Output) VALUES (%s, %s , %s , %s)", (data1, "HIV", 2, pred))
     mysql.connection.commit()
     cur.close()
+    return pred
     
-    
-    return render_template('after.php', data = pred)
-    #return render_template('after.php', data=pred)
-    
-@app.route('/advancepredict', methods=['POST'])
-def advancepredict():
+def advancepredmethod():
     #data1 = request.form['smiles']
     #data2 = request.form['disease']
     #data3 = request.form['modelName']
@@ -189,7 +182,42 @@ def advancepredict():
     #scaler = StandardScaler()
     #X_train_norm = scaler.fit_transform(train_X)
     #pred = model1.predict(data1)
+    return pred
+
+@app.route('/basicpredict', methods=['POST'])
+def basicpredict():
+    pred = basicpredmethod()
+    return render_template('after.php', data = pred)
+    #return render_template('after.php', data=pred)
+
+@app.route('/basicpredictadmin', methods=['POST'])
+def basicpredictadmin():
+    pred = basicpredmethod()
+    return render_template('basicpredadminafter.php', data = pred)
+    #return render_template('after.php', data=pred)
+
+@app.route('/basicpredictenduser', methods=['POST'])
+def basicpredictenduser():
+    pred = basicpredmethod()
+    return render_template('basicpredenduserafter.php', data = pred)
+    #return render_template('after.php', data=pred)
+    
+@app.route('/advancepredict', methods=['POST'])
+def advancepredict():
+    pred = advancepredmethod()
     return render_template('after.php')
+    #return render_template('after.php', data=pred)
+
+@app.route('/advancepredictadmin', methods=['POST'])
+def advancepredictadmin():
+    pred = advancepredmethod()
+    return render_template('advancepredadminafter.php')
+    #return render_template('after.php', data=pred)
+
+@app.route('/advancepredictenduser', methods=['POST'])
+def advancepredictenduser():
+    pred = advancepredmethod()
+    return render_template('advancepredenduserafter.php')
     #return render_template('after.php', data=pred)
 
 if __name__=="__main__":
