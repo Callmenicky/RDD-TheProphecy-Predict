@@ -26,7 +26,6 @@
         </form>
         </div>
         <div class="predimg">
-          <img src="{{url_for('static', filename='images/icon_ml.JPG')}}" alt="identity icon">
 		  {%if data == "Active"%}
 				<h1>Active</h1>  
 				<img src="images/icon_ml.JPG" alt="identity icon"> 
