@@ -98,7 +98,7 @@ def basicpredict():
             temp_df = pd.DataFrame(descriptors, index=[0])
             df = df.append(temp_df, ignore_index=True)
             
-    dataset_train = pd.read_csv('hiv integrase dataset (padelpy_active_train).csv')
+    #dataset_train = pd.read_csv('hiv integrase dataset (padelpy_active_train).csv')
     
     md = df
     
