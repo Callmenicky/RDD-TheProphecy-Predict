@@ -69,7 +69,7 @@ def advancepredenduser():
     return render_template('advancepredenduser.php')
     
 def basicpredmethod():
-    data1 = request.form['smiles']
+    data1 = request.form["smiles"]
     data2 = request.form['disease']
     data3 = request.form['modelName']
 
