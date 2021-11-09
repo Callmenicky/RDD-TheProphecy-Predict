@@ -87,7 +87,7 @@ def basicpredmethod():
     counter = 0
 
     for molecule in molecule_list:
-        descriptors = from_smiles(data1,descriptors=True,fingerprints=False,timeout=3600)
+        descriptors = from_smiles("data1",descriptors=True,fingerprints=False,timeout=3600)
         counter += 1
         if molecule_list.index(molecule) == 0:
           df = pd.DataFrame(descriptors, index=[0])
