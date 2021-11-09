@@ -86,7 +86,7 @@ def basicpredmethod():
     molecule_list = [data1]#insert name of list containing only SMILES e.g. smiles_only_lst
     counter = 0
     
-    Smile = S(=O)(=O)(Nc1ccc(OCC)cc1)c1ccc(NC(=O)c2cc(O)c(O)c(O)c2)cc1
+    Smile = "S(=O)(=O)(Nc1ccc(OCC)cc1)c1ccc(NC(=O)c2cc(O)c(O)c(O)c2)cc1"
 
     for molecule in molecule_list:
         descriptors = from_smiles(Smile,descriptors=True,fingerprints=False,timeout=3600)
