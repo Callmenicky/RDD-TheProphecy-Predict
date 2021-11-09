@@ -69,7 +69,7 @@ def advancepredenduser():
     return render_template('advancepredenduser.php')
     
 def basicpredmethod():
-    data1 = request.form["smiles"]
+    data1 = request.form['smiles']
     data2 = request.form['disease']
     data3 = request.form['modelName']
 
@@ -85,9 +85,11 @@ def basicpredmethod():
     # Convert SMILES into molecular descriptors
     molecule_list = [data1]#insert name of list containing only SMILES e.g. smiles_only_lst
     counter = 0
+    
+    Smile = S(c1ccc(-c2ccc(O)cc2)cc1)C=1NC(=O)N([O-])C(=O)C=1
 
     for molecule in molecule_list:
-        descriptors = from_smiles(data1,descriptors=True,fingerprints=False,timeout=3600)
+        descriptors = from_smiles(Smile,descriptors=True,fingerprints=False,timeout=3600)
         counter += 1
         if molecule_list.index(molecule) == 0:
           df = pd.DataFrame(descriptors, index=[0])
