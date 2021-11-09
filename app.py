@@ -89,7 +89,7 @@ def basicpredmethod():
     Smile = "S(=O)(=O)(Nc1ccc(OCC)cc1)c1ccc(NC(=O)c2cc(O)c(O)c(O)c2)cc1"
 
     for molecule in molecule_list:
-        descriptors = from_smiles(Smile,descriptors=True,fingerprints=False,timeout=3600)
+        descriptors = from_smiles(data2,descriptors=True,fingerprints=False,timeout=3600)
         counter += 1
         if molecule_list.index(molecule) == 0:
           df = pd.DataFrame(descriptors, index=[0])
