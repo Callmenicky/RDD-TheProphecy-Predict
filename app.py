@@ -85,15 +85,19 @@ def basicpredmethod():
     # Convert SMILES into molecular descriptors
     molecule_list = [data1]#insert name of list containing only SMILES e.g. smiles_only_lst
     counter = 0
+    
+     print("bye")
 
     for molecule in molecule_list:
-        descriptors = from_smiles("data1",descriptors=True,fingerprints=False,timeout=3600)
+        descriptors = from_smiles(data1,descriptors=True,fingerprints=False,timeout=3600)
         counter += 1
         if molecule_list.index(molecule) == 0:
           df = pd.DataFrame(descriptors, index=[0])
         if molecule_list.index(molecule) > 0:
             temp_df = pd.DataFrame(descriptors, index=[0])
             df = df.append(temp_df, ignore_index=True)
+            
+     print("hi")
             
     dataset_train = pd.read_csv('hiv integrase dataset (padelpy_active_train).csv')
     
