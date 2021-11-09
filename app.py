@@ -86,7 +86,7 @@ def basicpredmethod():
     molecule_list = [data1]#insert name of list containing only SMILES e.g. smiles_only_lst
     counter = 0
     
-     print("bye")
+    print("bye")
 
     for molecule in molecule_list:
         descriptors = from_smiles(data1,descriptors=True,fingerprints=False,timeout=3600)
