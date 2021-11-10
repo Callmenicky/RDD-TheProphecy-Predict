@@ -74,7 +74,7 @@ def basicpredmethod():
     data3 = request.form['modelName']
 
     
-    #diseases = ["HIV", "Corona Virus"]
+    #diseases = ["HIV", "Coronavirus"]
     #modelName = [model1, model2]
     
     #for disease in diseases:
