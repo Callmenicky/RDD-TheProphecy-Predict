@@ -142,17 +142,17 @@ def basicpredmethod():
     new_test_df = pd.concat([df_test_pca],axis = 1)
     #new_test_df['active'] = y_train
     
-    plt.figure(figsize=(7,7))
-    sns.scatterplot(
-        x="PC1", y="PC2",
+    #plt.figure(figsize=(7,7))
+    #sns.scatterplot(
+        #x="PC1", y="PC2",
         #hue="active",
-        palette=sns.color_palette("hls", 2),
-        data=new_test_df,
-        legend="full",
-        alpha=0.3
-    )
+        #palette=sns.color_palette("hls", 2),
+        #data=new_test_df,
+        #legend="full",
+        #alpha=0.3
+    #)
     
-    plt.savefig('static/images/plots.PNG')
+    #plt.savefig('static/images/plots.PNG')
     
     pred = model1.predict(new_test_df)
    
