@@ -17,6 +17,8 @@ import matplotlib.pyplot as plt
 
 #Import padelpy
 from padelpy import from_smiles
+from padelpy import padeldescriptor
+
 
 #scalar
 from sklearn.preprocessing import StandardScaler
@@ -85,8 +87,22 @@ def basicpredmethod():
     molecule_list = [data1]#insert name of list containing only SMILES e.g. smiles_only_lst
     counter = 0
     
-    descriptors = from_smiles(data1)
-    df = pd.DataFrame(descriptors, index=[0])
+    descriptors_table = np.ndarray((len(molecule_list), 1826), dtype=object)
+    print("Generating mordred descriptors:")
+    for index in notebook.tqdm(range(descriptors_table.shape[0])):
+    structure = molecule_list[index]
+    mol = Chem.MolFromSmiles(structure)
+    
+    if mol is None:
+        descriptors_table[index, :] = [None] * 1826
+    else:
+        AllChem.EmbedMolecule(mol, useExpTorsionAnglePrefs=True, useBasicKnowledge=True)
+        descriptors_table[index, :] = Calculator(descriptors, ignore_3D=False)(mol).fill_missing()
+        
+    df =  pd.DataFrame(descriptors_table, columns=Calculator(descriptors, ignore_3D=False).descriptors)
+    
+    #descriptors = from_smiles(data1)
+    #df = pd.DataFrame(descriptors, index=[0])
     
     #for molecule in molecule_list:
         #descriptors = from_smiles(data1)
