@@ -19,6 +19,8 @@ import matplotlib.pyplot as plt
 from padelpy import from_smiles
 from padelpy import padeldescriptor
 from tqdm import notebook
+from rdkit import Chem
+from rdkit.Chem import AllChem
 
 #scalar
 from sklearn.preprocessing import StandardScaler
