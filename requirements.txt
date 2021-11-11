@@ -34,7 +34,7 @@ prompt-toolkit==3.0.22
 Pygments==2.10.0
 PyMySQL==1.0.2
 pyparsing==2.4.7
-python-dateutil==3.7.9
+python-dateutil==2.8.2
 pytz==2021.3
 rdkit-pypi==2021.9.2
 scikit-learn==1.0.1
