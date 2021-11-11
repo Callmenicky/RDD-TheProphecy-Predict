@@ -50,11 +50,11 @@
         <div class="predimg">
 				{%if data == "Active"%}
 				<h1>Active</h1>  
-				<img src="images/icon_ml.JPG" alt="identity icon"> 
+				<img src="{{url_for('static', filename='images/plots.PNG')}}" alt="identity icon"> 
 
 				{%else%}
 				<h1>InActive</h1>
-				<img src="images/icon_ml.JPG" alt="identity icon">
+				<img src="{{url_for('static', filename='images/plots.PNG')}}" alt="identity icon"> 
 				
 				{%endif%}
 
