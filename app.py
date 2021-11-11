@@ -90,8 +90,8 @@ def basicpredmethod():
     descriptors_table = np.ndarray((len(molecule_list), 1826), dtype=object)
     print("Generating mordred descriptors:")
     for index in notebook.tqdm(range(descriptors_table.shape[0])):
-    structure = molecule_list[index]
-    mol = Chem.MolFromSmiles(structure)
+        structure = molecule_list[index]
+        mol = Chem.MolFromSmiles(structure)
     
     if mol is None:
         descriptors_table[index, :] = [None] * 1826
