@@ -85,7 +85,7 @@ def basicpredmethod():
     molecule_list = [data1]#insert name of list containing only SMILES e.g. smiles_only_lst
     counter = 0
     
-    data1.decode('utf-8', 'ignore')
+    data1 = data1.encode(encoding = 'UTF-8', errors = 'strict')
     
     descriptors = from_smiles(str(data1))
     df = pd.DataFrame(descriptors, index=[0])
