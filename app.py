@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 #Import padelpy
 from padelpy import from_smiles
 from padelpy import padeldescriptor
-
+from tqdm import notebook
 
 #scalar
 from sklearn.preprocessing import StandardScaler
