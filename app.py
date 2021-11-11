@@ -5,7 +5,6 @@ import pickle
 import sklearn
 import seaborn as sns
 
-
 #Import RDKit
 import kora.install.rdkit
 
@@ -74,6 +73,7 @@ def basicpredmethod():
     data2 = request.form['disease']
     data3 = request.form['modelName']
 
+    
     #diseases = ["HIV", "Corona Virus"]
     #modelName = [model1, model2]
     
@@ -85,18 +85,15 @@ def basicpredmethod():
     # Convert SMILES into molecular descriptors
     molecule_list = [data1]#insert name of list containing only SMILES e.g. smiles_only_lst
     counter = 0
-    
-    descriptors = from_smiles(data1,descriptors=True, fingerprints=False, timeout=3600)
-    df = pd.DataFrame(descriptors, index=[0])
 
-    #for molecule in molecule_list:
-        #descriptors = from_smiles(molecule,descriptors=True, fingerprints=False, timeout=3600)
-        #counter += 1
-        #if molecule_list.index(molecule) == 0:
-          #df = pd.DataFrame(descriptors, index=[0])
-        #if molecule_list.index(molecule) > 0:
-            #temp_df = pd.DataFrame(descriptors, index=[0])
-            #df = df.append(temp_df, ignore_index=True)
+    for molecule in molecule_list:
+        descriptors = from_smiles(molecule,descriptors=True, fingerprints=False, timeout=3600)
+        counter += 1
+        if molecule_list.index(molecule) == 0:
+          df = pd.DataFrame(descriptors, index=[0])
+        if molecule_list.index(molecule) > 0:
+            temp_df = pd.DataFrame(descriptors, index=[0])
+            df = df.append(temp_df, ignore_index=True)
             
     dataset_train = pd.read_csv('hiv integrase dataset (padelpy_active_train).csv')
     
@@ -144,17 +141,17 @@ def basicpredmethod():
     new_test_df = pd.concat([df_test_pca],axis = 1)
     #new_test_df['active'] = y_train
     
-    #plt.figure(figsize=(7,7))
-    #sns.scatterplot(
-        #x="PC1", y="PC2",
+    plt.figure(figsize=(7,7))
+    sns.scatterplot(
+        x="PC1", y="PC2",
         #hue="active",
-        #palette=sns.color_palette("hls", 2),
-        #data=new_test_df,
-        #legend="full",
-        #alpha=0.3
-    #)
+        palette=sns.color_palette("hls", 2),
+        data=new_test_df,
+        legend="full",
+        alpha=0.3
+    )
     
-    #plt.savefig('static/images/plots.PNG')
+    plt.savefig('static/images/plots.PNG')
     
     pred = model1.predict(new_test_df)
    
