@@ -3,7 +3,7 @@ from flask_mysqldb import MySQL
 import numpy as np
 import pickle
 import sklearn
-import seaborn as sns
+
 
 #Import RDKit
 import kora.install.rdkit
@@ -73,8 +73,7 @@ def basicpredmethod():
     data2 = request.form['disease']
     data3 = request.form['modelName']
 
-    
-    #diseases = ["HIV", "Corona Virus"]
+    #diseases = ["HIV", "Coronavirus"]
     #modelName = [model1, model2]
     
     #for disease in diseases:
@@ -85,15 +84,18 @@ def basicpredmethod():
     # Convert SMILES into molecular descriptors
     molecule_list = [data1]#insert name of list containing only SMILES e.g. smiles_only_lst
     counter = 0
-
-    for molecule in molecule_list:
-        descriptors = from_smiles(molecule,descriptors=True, fingerprints=False, timeout=3600)
-        counter += 1
-        if molecule_list.index(molecule) == 0:
-          df = pd.DataFrame(descriptors, index=[0])
-        if molecule_list.index(molecule) > 0:
-            temp_df = pd.DataFrame(descriptors, index=[0])
-            df = df.append(temp_df, ignore_index=True)
+    
+    descriptors = from_smiles(str(data1))
+    df = pd.DataFrame(descriptors, index=[0])
+    
+    #for molecule in molecule_list:
+        #descriptors = from_smiles(data1)
+        #counter += 1
+        #if molecule_list.index(molecule) == 0:
+          #df = pd.DataFrame(descriptors, index=[0])
+        #if molecule_list.index(molecule) > 0:
+            #temp_df = pd.DataFrame(descriptors, index=[0])
+            #df = df.append(temp_df, ignore_index=True)
             
     dataset_train = pd.read_csv('hiv integrase dataset (padelpy_active_train).csv')
     
@@ -129,7 +131,7 @@ def basicpredmethod():
     x_train_norm = stdsc.fit_transform(x_train)
     x_test_norm = stdsc.transform(x_test)
     
-    #fit transform and transform in training and test PCA respectively
+    #fit transform and transform in training and test PCA respectively (75.06% variance explained)
     pca = PCA(n_components = 10)
     x_train_pca = pca.fit_transform(x_train_norm)
     x_test_pca = pca.transform(x_test_norm)
@@ -137,22 +139,8 @@ def basicpredmethod():
     #Perform the principal component analysis at test set (10 PCA)
     df_test_pca = pd.DataFrame(data = x_test_pca, columns = ['PC1', 'PC2', 'PC3', 'PC4', 'PC5', 'PC6', 'PC7', 'PC8', 'PC9', 'PC10'])
     #df_test_target = dataset_test[['active']]
-    
     new_test_df = pd.concat([df_test_pca],axis = 1)
-    #new_test_df['active'] = y_train
-    
-    plt.figure(figsize=(7,7))
-    sns.scatterplot(
-        x="PC1", y="PC2",
-        #hue="active",
-        palette=sns.color_palette("hls", 2),
-        data=new_test_df,
-        legend="full",
-        alpha=0.3
-    )
-    
-    plt.savefig('static/images/plots.PNG')
-    
+        
     pred = model1.predict(new_test_df)
    
     print(pred)
