@@ -21,6 +21,7 @@ from padelpy import padeldescriptor
 from tqdm import notebook
 from rdkit import Chem
 from rdkit.Chem import AllChem
+from mordred import Calculator, descriptors
 
 #scalar
 from sklearn.preprocessing import StandardScaler
