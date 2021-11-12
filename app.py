@@ -118,8 +118,6 @@ def basicpredmethod():
         if column1 not in df.columns : del dataset_train[column1]
     for column2 in df.columns:
         if column2 not in dataset_train.columns : del df[column2]
-    
-    #Training set remove columns that is not features
 
     #Training set remove columns that is not features
     #feature_train = [dataset_train.drop(['active'], axis=1, inplace=True)]
