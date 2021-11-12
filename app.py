@@ -134,7 +134,7 @@ def basicpredmethod():
     #identify x_train and y_train
     x_train = dataset_train.loc[:, feature_train].values
 
-    dataset_train = pd.read_csv('/content/drive/MyDrive/Dataset/hiv integrase dataset (mordred_active_train).csv')
+    dataset_train = pd.read_csv('hiv integrase dataset (mordred_active_train).csv')
     #dataset_train = pd.read_csv('hiv integrase dataset (padelpy_active_train).csv')
     y_train = dataset_train.loc[:, ['active']].values
     
