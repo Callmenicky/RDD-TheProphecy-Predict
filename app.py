@@ -103,30 +103,26 @@ def basicpredmethod():
         descriptors_table[index, :] = Calculator(descriptors, ignore_3D=False)(mol).fill_missing()
         
     df =  pd.DataFrame(descriptors_table, columns=Calculator(descriptors, ignore_3D=False).descriptors)
-    
-    #descriptors = from_smiles(data1)
-    #df = pd.DataFrame(descriptors, index=[0])
-    
-    #for molecule in molecule_list:
-        #descriptors = from_smiles(data1)
-        #counter += 1
-        #if molecule_list.index(molecule) == 0:
-          #df = pd.DataFrame(descriptors, index=[0])
-        #if molecule_list.index(molecule) > 0:
-            #temp_df = pd.DataFrame(descriptors, index=[0])
-            #df = df.append(temp_df, ignore_index=True)
             
-    dataset_train = pd.read_csv('hiv integrase dataset (padelpy_active_train).csv')
+    dataset_train = pd.read_csv('hiv integrase dataset (mordred_active_train).csv')
     
     md = df
     
-    dataset_train = dataset_train.dropna()
-    #check descriptor NaN cell
-    #dataset_train.isnull().sum()
+    dataset_train = dataset_train.dropna(axis='columns')
+    df = df.dropna(axis='columns')
+    
+    df.to_csv('singlesmiles', index=False) 
+    df = pd.read_csv('singlesmiles')
+    
+    for column1 in dataset_train.columns:
+        if column1 not in df.columns : del dataset_train[column1]
+    for column2 in df.columns:
+        if column2 not in dataset_train.columns : del df[column2]
     
     #Training set remove columns that is not features
 
-    feature_train = [dataset_train.drop(['active'], axis=1, inplace=True)]
+    #Training set remove columns that is not features
+    #feature_train = [dataset_train.drop(['active'], axis=1, inplace=True)]
     feature_train = dataset_train.columns
     print('Training set updated columns:')
     dataset_train.columns
@@ -138,7 +134,8 @@ def basicpredmethod():
     #identify x_train and y_train
     x_train = dataset_train.loc[:, feature_train].values
 
-    dataset_train = pd.read_csv('hiv integrase dataset (padelpy_active_train).csv')
+    #dataset_train = pd.read_csv('/content/drive/MyDrive/Dataset/hiv integrase dataset (mordred_active_train).csv')
+    dataset_train = pd.read_csv('/content/drive/MyDrive/output/hiv integrase dataset (padelpy_active_train).csv')
     y_train = dataset_train.loc[:, ['active']].values
     
     feature_test
