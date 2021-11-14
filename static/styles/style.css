@@ -30,18 +30,24 @@ h2{
     height: 10vw;
 }
 
+header, header h1{
+    background-color: #e1e2e1;
+}
+
 footer{
     margin-top: 12%;
+    position: fixed;
 }
 
 footer>address{
 	padding: 1%;
-	background-color: #0070ff;
+	background-color: #e1e2e1;
     font-size: 12px;
-	color: #fff;
+	color: #000;
 	clear: both;
     position: fixed;
     left:0;
+    margin-bottom: 0;
     bottom: 0;
     width: 100%;
     text-decoration: none;
@@ -89,18 +95,18 @@ button:hover{
 
 /*navigation bar*/
 nav{
+    padding-top: 1%;
     box-sizing: border-box;
-    background-color: #fff;
-	box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.3);
+    background-color: #e1e2e1;
 }
 
 nav ul{
     text-align: left;
-    background-color: #fff;
+    background-color: #e1e2e1;
 }
 
 nav>ul>li, nav>ul>li>a{
-    background-color: #fff;
+    background-color: #e1e2e1;
 	display: inline;
 	list-style-type: none;
     padding: 1% 4%;
@@ -112,7 +118,7 @@ nav>ul>li, nav>ul>li>a{
 
 nav ul a, nav ul a img{
     margin: 0.5vw 2vw 2vw 2vw;
-    background-color: #fff;
+    background-color: #e1e2e1;
     text-align: left;
 	height: 10vw;
 }
@@ -123,9 +129,9 @@ nav a{
 }
 
 nav a:hover{
-	color: #0070ff;
     font-weight: bold;
-    text-decoration: none;
+    color: #000;
+    text-decoration: underline;
 }
 
 .parent:hover .child{
@@ -148,7 +154,7 @@ nav a:hover{
 	display: none;
     position: absolute;
 	top: 100%;
-    background-color: #fff;
+    background-color: #e1e2e1;
     box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
     z-index: 5;
     line-height: 2vw;
@@ -161,7 +167,7 @@ nav a:hover{
 	text-align: left;
 	display: block;
 	width: inherit;
-    background-color: #fff;
+    background-color: #e1e2e1;
     left:0;
 }
 
@@ -229,7 +235,7 @@ span.labelcolon{
     text-align: right;
 }
 
-input[type=text],input[type=password],select{
+input[type=text],input[type=password],select,input[type=date]{
 	width: 45%;
 	height: 3vw;
 	margin: 1vw;
@@ -244,16 +250,6 @@ input[type=file]{
 	height: 3vw;
 	margin: 1vw;
 	box-sizing: border-box;
-	font-size: 1.5vw;
-}
-
-input[type=date]{
-	width: 15%;
-	height: 3vw;
-	margin: 1vw 3vw 1vw 1vw;
-	box-sizing: border-box;
-	border: 2px solid #000;
-    border-radius: 0.5vw;
 	font-size: 1.5vw;
 }
 
@@ -384,7 +380,26 @@ table, th, td {
     text-align: left;
 }
 
+.form-group label{
+    display: inline-block;
+    width: 28%;
+    margin-left: 5%;
+    text-align: left;
+}
+
+.form-view label.viewtext{
+    display: inline-block;
+    width: 28%;
+    margin-left: 0;
+    text-align: left;
+}
+
 .content p span.labelcolon{
+    text-align: right;
+    padding-right: 25px;
+}
+
+span.labelcolons{
     text-align: right;
     padding-right: 25px;
 }
