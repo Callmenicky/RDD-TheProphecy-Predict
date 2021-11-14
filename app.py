@@ -4,6 +4,7 @@ import numpy as np
 import pickle
 import sklearn
 import csv
+import seaborn as sns
 
 
 #Import RDKit
@@ -149,11 +150,64 @@ def basicpredmethod():
     x_train_pca = pca.fit_transform(x_train_norm)
     x_test_pca = pca.transform(x_test_norm)
     
+    #Perform the principal component analysis at train set (10 PCA)
+    df_train_pca = pd.DataFrame(data = x_train_pca, columns = ['PC1', 'PC2', 'PC3', 'PC4', 'PC5', 'PC6', 'PC7', 'PC8', 'PC9', 'PC10'])
+    df_train_target = dataset_train[['active']]
+    #df_train_pca['active'] = df_train_target
+    new_train_df = pd.concat([df_train_pca, df_train_target],axis = 1)
+    
     #Perform the principal component analysis at test set (10 PCA)
     df_test_pca = pd.DataFrame(data = x_test_pca, columns = ['PC1', 'PC2', 'PC3', 'PC4', 'PC5', 'PC6', 'PC7', 'PC8', 'PC9', 'PC10'])
     #df_test_target = dataset_test[['active']]
     new_test_df = pd.concat([df_test_pca],axis = 1)
-        
+    
+    #save as csv
+    new_train_df.to_csv('hiv integrase dataset (pca_train_descriptors).csv', index=True, header=True)
+    new_test_df.to_csv('hiv integrase dataset (pca_test_descriptors).csv', index=True, header=True)
+    
+    #load dataset
+    dataset_train = pd.read_csv('hiv integrase dataset (pca_train_descriptors).csv')
+    dataset_test = pd.read_csv('hiv integrase dataset (pca_test_descriptors).csv')
+    
+    # Remove columns
+    dataset_train.drop(['Unnamed: 0'], axis=1, inplace=True)
+    dataset_train.drop(['active'], axis=1, inplace=True)
+    dataset_test.drop(['Unnamed: 0'], axis=1, inplace=True)
+    
+    #Add column with value train or test
+    dataset_train['designation'] = "Train"
+    dataset_test['designation'] = "Test"
+    
+    #complie dataset
+    all = pd.concat([dataset_train,dataset_test], axis=0)
+    
+    all.reset_index(inplace=True)
+    
+    #set target value to y
+    y = all['designation']
+    
+    #generate 2d pca
+    pca_train = PCA(n_components=2)
+    principalComponents_train = pca_train.fit_transform(all.iloc[:,:-1])
+    principal_Df = pd.DataFrame(data = principalComponents_train, columns = ['PC1', 'PC2'])
+    principal_Df['Designation'] = y
+    principal_Df.head()
+    
+    #plot pca graph
+    plt.figure(figsize=(7,7))
+    sns.scatterplot(
+        x="PC1", y="PC2",
+        hue="Designation",
+        size = "Designation",
+        sizes=[20,100],
+        palette=['red', 'green'],
+        data=principal_Df,
+        legend="full",
+        alpha=0.7
+    )
+    
+    plt.savefig('static/images/plots.PNG')
+    
     pred = model1.predict(new_test_df)
    
     print(pred)
