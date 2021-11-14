@@ -194,17 +194,17 @@ def basicpredmethod():
     principal_Df.head()
     
     #plot pca graph
-    plt.figure(figsize=(7,7))
-    sns.scatterplot(
-        x="PC1", y="PC2",
-        hue="Designation",
-        size = "Designation",
-        sizes=[20,100],
-        palette=['red', 'green'],
-        data=principal_Df,
-        legend="full",
-        alpha=0.7
-    )
+    #plt.figure(figsize=(7,7))
+    #sns.scatterplot(
+        #x="PC1", y="PC2",
+        #hue="Designation",
+        #size = "Designation",
+        #sizes=[20,100],
+        #palette=['red', 'green'],
+        #data=principal_Df,
+        #legend="full",
+        #alpha=0.7
+    #)
     
     plt.savefig('static/images/plots.PNG')
     
