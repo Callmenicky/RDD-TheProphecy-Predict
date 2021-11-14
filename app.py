@@ -106,8 +106,6 @@ def basicpredmethod():
             
     dataset_train = pd.read_csv('hiv integrase dataset (mordred_active_train).csv')
     
-    md = df
-    
     dataset_train = dataset_train.dropna(axis='columns')
     df = df.dropna(axis='columns')
     
