@@ -4,7 +4,7 @@ import numpy as np
 import pickle
 import sklearn
 import csv
-#import seaborn as sns
+import seaborn as sns
 
 
 #Import RDKit
