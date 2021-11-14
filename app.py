@@ -291,7 +291,7 @@ def advancepredmethod():
 @app.route('/basicpredict', methods=['POST'])
 def basicpredict():
     pred = basicpredmethod()
-    return render_template('after.php', data = pred)
+    return render_template('afterbasicpred.php', data = pred)
     #return render_template('after.php', data=pred)
 
 @app.route('/basicpredictadmin', methods=['POST'])
@@ -309,7 +309,7 @@ def basicpredictenduser():
 @app.route('/advancepredict', methods=['POST'])
 def advancepredict():
     pred = advancepredmethod()
-    return render_template('after.php')
+    return render_template('afteradvancepred.php')
     #return render_template('after.php', data=pred)
 
 @app.route('/advancepredictadmin', methods=['POST'])
