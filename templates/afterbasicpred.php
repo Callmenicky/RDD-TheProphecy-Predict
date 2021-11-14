@@ -22,7 +22,7 @@
 </head>
 <body>
   <header>
-    <a href="index.php"><img class="logo" src="{{url_for('static', filename='images/logo_RDD.png')}}" alt="logo"/></a>
+    <a href="https://rdd-theprophecy.herokuapp.com/"><img class="logo" src="{{url_for('static', filename='images/logo_RDD.png')}}" alt="logo"/></a>
     <h1>Machine Learning Reverse Drug Discovery</h1>
   </header>
   <section class="predict">
