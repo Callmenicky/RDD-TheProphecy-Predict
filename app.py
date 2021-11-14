@@ -4,7 +4,7 @@ import numpy as np
 import pickle
 import sklearn
 import csv
-import seaborn as sns
+#import seaborn as sns
 
 
 #Import RDKit
@@ -206,7 +206,7 @@ def basicpredmethod():
         #alpha=0.7
     #)
     
-    plt.savefig('static/images/plots.PNG')
+    #plt.savefig('static/images/plots.PNG')
     
     pred = model1.predict(new_test_df)
    
