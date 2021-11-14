@@ -53,7 +53,7 @@
 				<img src="{{url_for('static', filename='images/plots.PNG')}}" alt="identity icon"> 
 
 				{%else%}
-				<h1>InActive</h1>
+				<h1>Inactive</h1>
 				<img src="{{url_for('static', filename='images/plots.PNG')}}" alt="identity icon"> 
 				
 				{%endif%}
