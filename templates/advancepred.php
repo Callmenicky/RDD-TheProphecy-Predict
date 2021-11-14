@@ -28,7 +28,7 @@
   <section class="predict">
     <div class="predcontent">
         <h2>Advance Prediction</h2>
-		<form id="AdvancePrediction" method="post" action="{{url_for('advancepredict')}}">
+		<form id="AdvancePrediction" method="post" action="{{url_for('advancepredict')}}" enctype=multipart/form-data>
         <p>Upload a CSV file containing SMILES</p>
         <input type="file" id="smilescsv" name="smilescsv"/>
         <select name="disease" id="disease">
