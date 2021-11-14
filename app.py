@@ -174,11 +174,22 @@ def basicpredmethod():
     return pred
     
 def advancepredmethod():
-    data1 = request.form['smilescsv']
+    data1 = request.files['smilescsv']
     data2 = request.form['disease']
     data3 = request.form['modelName']
     
-    with open(data1, newline='') as f:
+    #diseases = ["HIV", "Coronavirus"]
+    #modelName = [model1, model2]
+    
+    #for disease in diseases:
+        #if(data2 == disease):
+            #position = diseases.index(disease)
+            #model = modelName[position]
+      
+    if data1.filename != '':
+        data1.save(data1.filename)
+    
+    with open("inputsmiles.txt", newline='') as f:
         reader = csv.reader(f)
         data = list(reader)
     
