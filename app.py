@@ -6,7 +6,6 @@ import sklearn
 import csv
 import seaborn as sns
 
-
 #Import RDKit
 import kora.install.rdkit
 
@@ -30,6 +29,7 @@ from sklearn.preprocessing import StandardScaler
 
 #dimensional reduction
 from sklearn.decomposition import PCA
+
 
 app = Flask(__name__)
 
@@ -253,7 +253,7 @@ def advancepredmethod():
         molecule_list.append(i[0])
     
     # Convert SMILES into molecular descriptors
-    print(molecule_list)
+    print(len(molecule_list))
     counter = 0
     
     descriptors_table = np.ndarray((len(molecule_list), 1826), dtype=object)
@@ -269,16 +269,16 @@ def advancepredmethod():
         descriptors_table[index, :] = Calculator(descriptors, ignore_3D=False)(mol).fill_missing()
         
     df =  pd.DataFrame(descriptors_table, columns=Calculator(descriptors, ignore_3D=False).descriptors)
-            
-    dataset_train = pd.read_csv('hiv integrase dataset (mordred_active_train).csv')
     
-    md = df
+    print(df)
+    
+    df.to_csv('singlesmiles', index=False) 
+    
+    df = pd.read_csv('singlesmiles')     
+    dataset_train = pd.read_csv('hiv integrase dataset (mordred_active_train).csv')
     
     dataset_train = dataset_train.dropna(axis='columns')
     df = df.dropna(axis='columns')
-    
-    df.to_csv('singlesmiles', index=False) 
-    df = pd.read_csv('singlesmiles')
     
     for column1 in dataset_train.columns:
         if column1 not in df.columns : del dataset_train[column1]
