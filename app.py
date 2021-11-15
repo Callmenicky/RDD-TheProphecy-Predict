@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
 from flask_mysqldb import MySQL
 import numpy as np
 import pickle
@@ -208,10 +208,6 @@ def basicpredmethod():
     plt.savefig('static/images/plots.PNG')
     
     pred = model1.predict(new_test_df)
-   
-    print(pred)
-    print(pred[0])
-    print(new_test_df)
     
     if pred[0] == 1:
        pred = "Active" 
@@ -270,8 +266,6 @@ def advancepredmethod():
         
     df =  pd.DataFrame(descriptors_table, columns=Calculator(descriptors, ignore_3D=False).descriptors)
     
-    print(df)
-    
     df.to_csv('singlesmiles', index=False) 
     
     df = pd.read_csv('singlesmiles')     
@@ -299,7 +293,6 @@ def advancepredmethod():
     x_train = dataset_train.loc[:, feature_train].values
 
     dataset_train = pd.read_csv('hiv integrase dataset (mordred_active_train).csv')
-    #dataset_train = pd.read_csv('hiv integrase dataset (padelpy_active_train).csv')
     y_train = dataset_train.loc[:, ['active']].values
     
     feature_test
@@ -322,61 +315,63 @@ def advancepredmethod():
     new_test_df = pd.concat([df_test_pca],axis = 1)
         
     pred = model1.predict(new_test_df)
-   
-    print(pred)
-    print(pred[0])
-    print(new_test_df)
     
-    if pred[0] == 1:
-       pred = "Active" 
+    prediction = []
     
-    else:
-        pred = "Inactive"
+    for i in pred: 
+        if i == 1:
+           prediction.append("Active") 
         
-    print(pred)
+        else:
+           prediction.append("Inactive")
+           
+    count = 0
     
+    with open("static\outcome.txt", "w") as f:
+        for i in pred: 
+            f.write("Smile String ")
+            f.write(str(count + 1))
+            f.write(": ")
+            f.write(prediction[count] + "\n") 
+            count += 1
+           
     cur = mysql.connection.cursor()
-    cur.execute("INSERT INTO basic_prediction(Smiles, TargetDisease, ModelApply, Output) VALUES (%s, %s , %s , %s)", ("bye", "HIV", 1, "Active"))
+    cur.execute("INSERT INTO advance_prediction(InputCSV, TargetDisease, ModelApply, OutputCSV) VALUES (%s, %s , %s , %s)", (Data1, "HIV", 1, "static\outcome.txt"))
     mysql.connection.commit()
     cur.close()
    
-    return pred
+    return prediction
 
 @app.route('/basicpredict', methods=['POST'])
 def basicpredict():
     pred = basicpredmethod()
     return render_template('afterbasicpred.php', data = pred)
-    #return render_template('after.php', data=pred)
 
 @app.route('/basicpredictadmin', methods=['POST'])
 def basicpredictadmin():
     pred = basicpredmethod()
     return render_template('basicpredadminafter.php', data = pred)
-    #return render_template('after.php', data=pred)
 
 @app.route('/basicpredictenduser', methods=['POST'])
 def basicpredictenduser():
     pred = basicpredmethod()
     return render_template('basicpredenduserafter.php', data = pred)
-    #return render_template('after.php', data=pred)
     
 @app.route('/advancepredict', methods=['POST'])
 def advancepredict():
     pred = advancepredmethod()
-    return render_template('afteradvancepred.php')
-    #return render_template('after.php', data=pred)
+    return render_template('afteradvancepred.php', data = pred)
 
 @app.route('/advancepredictadmin', methods=['POST'])
 def advancepredictadmin():
     pred = advancepredmethod()
-    return render_template('advancepredadminafter.php')
-    #return render_template('after.php', data=pred)
+    return render_template('advancepredadminafter.php', data = pred)
 
 @app.route('/advancepredictenduser', methods=['POST'])
 def advancepredictenduser():
     pred = advancepredmethod()
-    return render_template('advancepredenduserafter.php')
-    #return render_template('after.php', data=pred)
+    return render_template('advancepredenduserafter.php', data = pred)
+    
 
 if __name__=="__main__":
     app.run(debug=True)
