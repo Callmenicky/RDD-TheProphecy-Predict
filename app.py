@@ -336,7 +336,7 @@ def advancepredmethod():
             count += 1
            
     cur = mysql.connection.cursor()
-    cur.execute("INSERT INTO advance_prediction(InputCSV, TargetDisease, ModelApply, OutputCSV) VALUES (%s, %s , %s , %s)", (Data1, "HIV", 1, "static\outcome.txt"))
+    cur.execute("INSERT INTO advance_prediction(InputCSV, TargetDisease, ModelApply, OutputCSV) VALUES (%s, %s , %s , %s)", (data1, "HIV", 1, "static\outcome.txt"))
     mysql.connection.commit()
     cur.close()
    
