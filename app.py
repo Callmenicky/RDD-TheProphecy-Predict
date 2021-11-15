@@ -30,6 +30,8 @@ from sklearn.preprocessing import StandardScaler
 #dimensional reduction
 from sklearn.decomposition import PCA
 
+from datetime import date
+
 app = Flask(__name__)
 
 # Use pickle to load in the pre-trained model.
@@ -217,8 +219,10 @@ def basicpredmethod():
         
     print(pred)
     
+    today = date.today()
+    
     cur = mysql.connection.cursor()
-    cur.execute("INSERT INTO basic_prediction(Smiles, TargetDisease, ModelApply, Output) VALUES (%s, %s , %s , %s)", (data1, "HIV", 2, pred))
+    cur.execute("INSERT INTO basic_prediction(Smiles, TargetDisease, ModelApply, Output, Date) VALUES (%s, %s , %s , %s)", (data1, "HIV", 2, pred, today))
     mysql.connection.commit()
     cur.close()
     return pred
@@ -334,8 +338,10 @@ def advancepredmethod():
             f.write(prediction[count] + "\n") 
             count += 1
            
+    today = date.today()
+    
     cur = mysql.connection.cursor()
-    cur.execute("INSERT INTO advance_prediction(InputCSV, TargetDisease, ModelApply, OutputCSV) VALUES (%s, %s , %s , %s)", (data1, "HIV", 1, "static\outcome.txt"))
+    cur.execute("INSERT INTO advance_prediction(InputCSV, TargetDisease, ModelApply, OutputCSV, Date) VALUES (%s, %s , %s , %s, %s)", (data1, "HIV", 1, "static\outcome.txt", today))
     mysql.connection.commit()
     cur.close()
    
