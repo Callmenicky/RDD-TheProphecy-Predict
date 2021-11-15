@@ -36,7 +36,7 @@
 		  </ul>
 		</li>
 		<li class="parent"><a href="https://rdd-theprophecy.herokuapp.com/profileenduser.php">Profile</a></li>
-		<li class="parent"><a href="#" onclick = "logout()">Logout</a></li>
+		<li class="parent"><a href="https://rdd-theprophecy.herokuapp.com/index.php">Logout</a></li>
 	  </ul>
 </nav>
 </header>
