@@ -258,11 +258,9 @@ def advancepredmethod():
     
         if mol is None:
             descriptors_table[index, :] = [None] * 1826
-            print("hi")
         else:
             AllChem.EmbedMolecule(mol, useExpTorsionAnglePrefs=True, useBasicKnowledge=True)
             descriptors_table[index, :] = Calculator(descriptors, ignore_3D=False)(mol).fill_missing()
-            print("his")
         
     df =  pd.DataFrame(descriptors_table, columns=Calculator(descriptors, ignore_3D=False).descriptors)
     
@@ -326,6 +324,7 @@ def advancepredmethod():
            prediction.append("Inactive")
            
     count = 0
+    print(prediction)
     
     with open("static\outcome.txt", "w") as f:
         for i in pred: 
