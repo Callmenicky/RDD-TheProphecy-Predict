@@ -27,16 +27,16 @@
         </form>
       </div>
       <div class="predimg">
-		{%if data == "Active"%}
-				<h1>Active</h1>  
-				<img src="images/icon_ml.JPG" alt="identity icon"> 
+				{%if data[0] == "Active"%}
+				<a download href="outcome.txt">  
+				<a href=" {{url_for('static', filename='outcome.txt')}}" download>Download</a>
+				<img src="{{url_for('static', filename='images/plots.PNG')}}" alt="identity icon"> 
 
 				{%else%}
-				<h1>InActive</h1>
-				<img src="images/icon_ml.JPG" alt="identity icon">
+				<a href=" {{url_for('static', filename='outcome.txt')}}" download>Download</a>
+				<img src="{{url_for('static', filename='images/plots.PNG')}}" alt="identity icon"> 
 				
 				{%endif%}
-
 					<br><br>
 				<a href='/'>go back to home page</a>
       </div>
