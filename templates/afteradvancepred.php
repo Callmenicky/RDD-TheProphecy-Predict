@@ -47,6 +47,7 @@
           <p><a href="#" onclick="showLess()">hide>></a></p>
         </div>
         <button type="submit" name="predictadvance" class="btn btn-info">Predict</button>
+	</div>
         <div class="predimg">
 				{%if data == "Active"%}
 				<h1>Active</h1>  
