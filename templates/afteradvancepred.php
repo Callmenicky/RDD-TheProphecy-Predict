@@ -50,6 +50,7 @@
 	</div>
         <div class="predimg">
 				{%if data[0] == "Active"%}
+				<a download href="outcome.txt">  
 				<a href=" {{url_for('static', filename='outcome.txt')}}" download>Download</a>
 				<img src="{{url_for('static', filename='images/plots.PNG')}}" alt="identity icon"> 
 
