@@ -59,7 +59,6 @@
 				
 				{%endif%}
 					<br><br>
-				<a href='/'>go back to home page</a>
         </div>
         </form>
     </section>
