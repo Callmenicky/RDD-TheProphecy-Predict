@@ -22,14 +22,13 @@ from padelpy import padeldescriptor
 from tqdm import notebook
 from rdkit import Chem
 from rdkit.Chem import AllChem
-from mordred import Calculator, descriptors
+from mordred import Calculator, descriptors, is_missing
 
 #scalar
 from sklearn.preprocessing import StandardScaler
 
 #dimensional reduction
 from sklearn.decomposition import PCA
-
 
 app = Flask(__name__)
 
@@ -242,7 +241,7 @@ def advancepredmethod():
             #model = modelName[position]
       
     if data1.filename != '':
-        data1.save(data1.filename)
+        data1.save("inputsmiles.txt")
     
     with open("inputsmiles.txt", newline='') as f:
         reader = csv.reader(f)
@@ -251,9 +250,8 @@ def advancepredmethod():
     molecule_list = []
     for i in data:
         molecule_list.append(i[0])
-    
+
     # Convert SMILES into molecular descriptors
-    print(len(molecule_list))
     counter = 0
     
     descriptors_table = np.ndarray((len(molecule_list), 1826), dtype=object)
@@ -262,11 +260,13 @@ def advancepredmethod():
         structure = molecule_list[index]
         mol = Chem.MolFromSmiles(structure)
     
-    if mol is None:
-        descriptors_table[index, :] = [None] * 1826
-    else:
-        AllChem.EmbedMolecule(mol, useExpTorsionAnglePrefs=True, useBasicKnowledge=True)
-        descriptors_table[index, :] = Calculator(descriptors, ignore_3D=False)(mol).fill_missing()
+        if mol is None:
+            descriptors_table[index, :] = [None] * 1826
+            print("hi")
+        else:
+            AllChem.EmbedMolecule(mol, useExpTorsionAnglePrefs=True, useBasicKnowledge=True)
+            descriptors_table[index, :] = Calculator(descriptors, ignore_3D=False)(mol).fill_missing()
+            print("his")
         
     df =  pd.DataFrame(descriptors_table, columns=Calculator(descriptors, ignore_3D=False).descriptors)
     
