@@ -336,7 +336,7 @@ def advancepredmethod():
     count = 0
     print(prediction)
     
-    path = "static\outcome.txt"
+    path = "static/outcome.txt"
     
     with open(path, "r") as f:
         print(f.read())
