@@ -33,16 +33,24 @@
         <input type="file" id="smilescsv" name="smilescsv"/>
         <select name="disease" id="disease">
           <option value="default">Select Target Disease</option>
-		  <option value="corona">Coronavirus</option>
-          <option value="hiv">HIV</option>
+          <?php
+                $conn = mysqli_connect('us-cdbr-east-04.cleardb.com', 'b0f9135aa66d86', '2e28f6a7', 'heroku_c703864e708562a');
+                $db = mysqli_select_db($conn, 'b0f9135aa66d86');
+
+                $query = " SELECT DISTINCT TargetDisease FROM model";
+                $query_run = mysqli_query($conn,$query);
+
+                while($row = mysqli_fetch_array($query_run)){
+           ?>
+                    <option><?php echo $row['TargetDisease']; ?></option>
+           <?php
+            }
+           ?>
         </select>
         <p id="showmore"><a href="#" onclick="showMore()">more>></a></p>
         <div id="more">
           <select name="modelName" id="modelName">
             <option value="default">Select Specific Model</option>
-            <option value="adac_corona">AdaBoost Classifier</option>
-            <option value="rfc_hiv">Random Forest Classifier</option>
-            <option value="xgbc_hiv">XBG CLassifier</option>
           </select>
           <p><a href="#" onclick="showLess()">hide>></a></p>
         </div>
@@ -57,6 +65,14 @@
 		<address>&#169; RDD 2021. All rights reserved</address> 
 		<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 	</footer>
+  <script type="text/javascript">
+    $("#disease").change(function(){
+        var x = $("#disease").val();
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET","preddropdown.php?model="+x,false);
+        xmlhttp.send(null);
+        $("#modelName").html(xmlhttp.responseText)
+    });
   </script>
 </body>
   
