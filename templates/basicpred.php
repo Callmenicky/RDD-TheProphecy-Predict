@@ -28,6 +28,11 @@
   <section class="predict">
         <div class="predcontent">
         <h2>Basic Prediction</h2>
+        {% for model in disease %}
+        <tr>
+            <td>{{disease[0]}}</td>
+        </tr>
+        {% endfor %}
         <form id="BasicPrediction" method="post" action="{{url_for('basicpredict')}}">
         <input type="text" id="smiles" name="smiles" placeholder="Enter smiles string" maxlength="150"/>
         <select name="disease" id="disease">

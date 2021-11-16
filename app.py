@@ -47,6 +47,12 @@ app.config['MYSQL_DB'] = 'heroku_c703864e708562a'
 
 mysql = MySQL(app)
 
+def loadselection():
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT DISTINCT TargetDisease FROM model")
+    if resultValue > 0:
+        disease = cur.fetchall()
+        return render_template('basicpred.php', disease=disease)
 
 @app.route('/')
 def man():
