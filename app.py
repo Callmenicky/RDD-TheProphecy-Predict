@@ -222,7 +222,7 @@ def basicpredmethod():
     today = date.today()
     
     cur = mysql.connection.cursor()
-    cur.execute("INSERT INTO basic_prediction(Smiles, TargetDisease, ModelApply, Output, Date) VALUES (%s, %s , %s , %s)", (data1, "HIV", 2, pred, today))
+    cur.execute("INSERT INTO basic_prediction(Smiles, TargetDisease, ModelApply, Output, PredictionDate) VALUES (%s, %s , %s , %s)", (data1, "HIV", 2, pred, today))
     mysql.connection.commit()
     cur.close()
     return pred
