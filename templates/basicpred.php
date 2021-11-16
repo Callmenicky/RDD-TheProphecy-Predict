@@ -32,16 +32,16 @@
         <input type="text" id="smiles" name="smiles" placeholder="Enter smiles string" maxlength="150"/>
         <select name="disease" id="disease">
           <option value="default">Select Target Disease</option>
-          {% for row in data %}    
-            <tr>
-                <option>{{row[0]}}</option>
-            </tr>
-        {% endfor %}
+		  <option value="corona">Coronavirus</option>
+          <option value="hiv">HIV</option>
         </select>
         <p id="showmore"><a href="#" onclick="showMore()">more>></a></p>
         <div id="more">
           <select name="modelName" id="modelName">
             <option value="default">Select Specific Model</option>
+            <option value="adac_corona">AdaBoost Classifier</option>
+            <option value="rfc_hiv">Random Forest Classifier</option>
+            <option value="xgbc_hiv">XBG CLassifier</option>
           </select>
           <p><a href="#" onclick="showLess()">hide>></a></p>
         </div>
@@ -56,15 +56,7 @@
 		<address>&#169; RDD 2021. All rights reserved</address> 
 		<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 	</footer>
-    <script type="text/javascript">
-    $("#disease").change(function(){
-        var x = $("#disease").val();
-        xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET","preddropdown.php?model="+x,false);
-        xmlhttp.send(null);
-        $("#modelName").html(xmlhttp.responseText)
-    });
-  </script>
+
 </body>
   
 </html>

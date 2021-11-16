@@ -54,9 +54,7 @@ def man():
 
 @app.route('/basicpred')
 def basicpred():
-    mycursor.execute("SELECT DISTINCT TargetDisease FROM model")
-    data = mycursor.fetchall()
-    return render_template('basicpred.php', data=data)
+    return render_template('basicpred.php')
     
 @app.route('/advancepred')
 def advancepred():
