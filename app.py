@@ -330,7 +330,7 @@ def advancepredmethod():
     count = 0
     print(prediction)
     
-    with open("'static\outcome.txt'", "r") as f:
+    with open("static'\'outcome.txt", "r") as f:
         print(f.read())
     
     with open("static\outcome.txt", "w") as f:
