@@ -330,7 +330,7 @@ def advancepredmethod():
     count = 0
     print(prediction)
     
-    with open("static\outcome.txt", "w") as f:
+    with open("outcome.txt", "w") as f:
         for i in pred: 
             f.write("Smile String ")
             f.write(str(count + 1))
