@@ -373,7 +373,7 @@ def advancepredmethod():
         alpha=0.7
     )
     
-    plt.savefig('static/images/advanceplots.PNG')
+    plt.savefig('static/images/plots1.PNG')
         
     pred = model1.predict(new_test_df)
     
