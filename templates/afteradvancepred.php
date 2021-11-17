@@ -52,11 +52,11 @@
         <div class="predimg">
 				{%if data[0] == "Active"%}
 				<a href=" {{url_for('static', filename='outcome.txt')}}" download>Download Output Result</a>
-				<img src="{{url_for('static', filename='images/advanceplots.PNG')}}" alt="identity icon"> 
+				<img src="{{url_for('static', filename='images/plots1.PNG')}}" alt="identity icon"> 
 
 				{%else%}
 				<a href=" {{url_for('static', filename='outcome.txt')}}" download>Download Output Result</a>
-				<img src="{{url_for('static', filename='images/advanceplots.PNG')}}" alt="identity icon"> 
+				<img src="{{url_for('static', filename='images/plots1.PNG')}}" alt="identity icon"> 
 				
 				{%endif%}
 					<br><br>
