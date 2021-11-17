@@ -330,11 +330,11 @@ def advancepredmethod():
     
     #save as csv
     new_train_df.to_csv('hiv integrase dataset (pca_train_descriptors).csv', index=True, header=True)
-    new_test_df.to_csv('hiv integrase dataset (pca_test_descriptors).csv', index=True, header=True)
+    new_test_df.to_csv('hiv integrase dataset (pca_test_descriptors_advance).csv', index=True, header=True)
     
     #load dataset
     dataset_train = pd.read_csv('hiv integrase dataset (pca_train_descriptors).csv')
-    dataset_test = pd.read_csv('hiv integrase dataset (pca_test_descriptors).csv')
+    dataset_test = pd.read_csv('hiv integrase dataset (pca_test_descriptors_advance).csv')
     
     # Remove columns
     dataset_train.drop(['Unnamed: 0'], axis=1, inplace=True)
