@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request, send_file
-from flask_mysqldb import MySQL
+from flask import Flask, render_template, jsonify, request, send_file
+from flask_mysqldb import MySQL,MySQLdb
 import numpy as np
 import pickle
 import sklearn
@@ -53,52 +53,63 @@ def man():
 
 @app.route('/basicpred')
 def basicpred():
-    cur = mysql.connection.cursor()
-    resultValue = cur.execute("SELECT TargetDisease, ModelName FROM model")
-    if resultValue > 0:
-        disease = cur.fetchall()
-        return render_template('basicpred.php', disease=disease)
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
+    disease = cur.fetchall()
+    return render_template('basicpred.php', disease=disease)
     
 @app.route('/advancepred')
 def advancepred():
-    cur = mysql.connection.cursor()
-    resultValue = cur.execute("SELECT TargetDisease, ModelName FROM model")
-    if resultValue > 0:
-        disease = cur.fetchall()
-        return render_template('advancepred.php', disease=disease)
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
+    disease = cur.fetchall()
+    return render_template('advancepred.php', disease=disease)
     
 @app.route('/basicpredadmin')
 def basicpredadmin():
-    cur = mysql.connection.cursor()
-    resultValue = cur.execute("SELECT TargetDisease, ModelName FROM model")
-    if resultValue > 0:
-        disease = cur.fetchall()
-        return render_template('basicpredadmin.php', disease=disease)
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
+    disease = cur.fetchall()
+    return render_template('basicpredadmin.php', disease=disease)
     
 @app.route('/advancepredadmin')
 def advancepredadmin():
-    cur = mysql.connection.cursor()
-    resultValue = cur.execute("SELECT TargetDisease, ModelName FROM model")
-    if resultValue > 0:
-        disease = cur.fetchall()
-        return render_template('advancepredadmin.php', disease=disease)
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
+    disease = cur.fetchall()
+    return render_template('advancepredadmin.php', disease=disease)
     
 @app.route('/basicpredenduser')
 def basicpredenduser():
-    cur = mysql.connection.cursor()
-    resultValue = cur.execute("SELECT TargetDisease, ModelName FROM model")
-    if resultValue > 0:
-        disease = cur.fetchall()
-        return render_template('basicpredenduser.php', disease=disease)
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
+    disease = cur.fetchall()
+    return render_template('basicpredenduser.php', disease=disease)
     
 @app.route('/advancepredenduser')
 def advancepredenduser():
-    cur = mysql.connection.cursor()
-    resultValue = cur.execute("SELECT TargetDisease, ModelName FROM model")
-    if resultValue > 0:
-        disease = cur.fetchall()
-        return render_template('advancepredenduser.php', disease=disease)
-    
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
+    disease = cur.fetchall()
+    return render_template('advancepredenduser.php', disease=disease)
+
+@app.route("/mlmodel",methods=["POST","GET"])
+def dropdownlist():  
+    cursor = mysql.connection.cursor()
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    if request.method == 'POST':
+        disease_name = request.form['disease_name'] 
+        print(disease_name)  
+        result = cur.execute("SELECT * FROM model WHERE TargetDisease = %s ORDER BY ModelName ASC", [disease_name] )
+        mlmodel = cur.fetchall()  
+        OutputArray = []
+        for row in mlmodel:
+            outputObj = {
+                'id': row['TargetDisease'],
+                'name': row['ModelName']}
+            OutputArray.append(outputObj)
+    return jsonify(OutputArray)
+
 def basicpredmethod():
     data1 = request.form['smiles']
     data2 = request.form['disease']
