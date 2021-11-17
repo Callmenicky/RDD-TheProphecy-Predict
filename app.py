@@ -433,27 +433,42 @@ def basicpredict():
 @app.route('/basicpredictadmin', methods=['POST'])
 def basicpredictadmin():
     pred = basicpredmethod()
-    return render_template('basicpredadminafter.php', data = pred)
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
+    disease = cur.fetchall()
+    return render_template('basicpredadminafter.php', disease=disease, data = pred)
 
 @app.route('/basicpredictenduser', methods=['POST'])
 def basicpredictenduser():
     pred = basicpredmethod()
-    return render_template('basicpredenduserafter.php', data = pred)
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
+    disease = cur.fetchall()
+    return render_template('basicpredenduserafter.php', disease=disease, data = pred)
     
 @app.route('/advancepredict', methods=['POST'])
 def advancepredict():
     pred = advancepredmethod()
-    return render_template('afteradvancepred.php', data = pred)
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
+    disease = cur.fetchall()
+    return render_template('afteradvancepred.php', disease=disease, data = pred)
 
 @app.route('/advancepredictadmin', methods=['POST'])
 def advancepredictadmin():
     pred = advancepredmethod()
-    return render_template('advancepredadminafter.php', data = pred)
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
+    disease = cur.fetchall()
+    return render_template('advancepredadminafter.php', disease=disease, data = pred)
 
 @app.route('/advancepredictenduser', methods=['POST'])
 def advancepredictenduser():
     pred = advancepredmethod()
-    return render_template('advancepredenduserafter.php', data = pred)
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
+    disease = cur.fetchall()
+    return render_template('advancepredenduserafter.php', disease=disease, data = pred)
 
 @app.route("/mlmodel",methods=["POST","GET"])
 def dropdownlist():  
