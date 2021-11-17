@@ -5,6 +5,11 @@
 {% block content %}
 <body>
   <h1>Machine Learning Reverse Drug Discovery</h1>
+  <style>
+    .bootstrap-select.dropdown-toggle{
+        display:none;
+    }
+  </style>
   <section class="predict">
     <div class="predcontent">
         <h2>Advance Prediction</h2>
