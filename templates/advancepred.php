@@ -33,8 +33,9 @@
         <input type="file" id="smilescsv" name="smilescsv"/>
         <select name="disease" id="disease">
           <option value="default">Select Target Disease</option>
-		  <option value="corona">Coronavirus</option>
-          <option value="hiv">HIV</option>
+		  {% for d in disease %}
+		      <option>{{d[0]}}</option>
+          {% endfor %}
         </select>
         <p id="showmore"><a href="#" onclick="showMore()">more>></a></p>
         <div id="more">

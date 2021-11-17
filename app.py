@@ -60,27 +60,51 @@ def man():
 
 @app.route('/basicpred')
 def basicpred():
-    return render_template('basicpred.php')
+    cur = mysql.connection.cursor()
+    resultValue = cur.execute("SELECT DISTINCT TargetDisease FROM model")
+    if resultValue > 0:
+        disease = cur.fetchall()
+        return render_template('basicpred.php', disease=disease)
     
 @app.route('/advancepred')
 def advancepred():
-    return render_template('advancepred.php')
+    cur = mysql.connection.cursor()
+    resultValue = cur.execute("SELECT DISTINCT TargetDisease FROM model")
+    if resultValue > 0:
+        disease = cur.fetchall()
+        return render_template('advancepred.php', disease=disease)
     
 @app.route('/basicpredadmin')
 def basicpredadmin():
-    return render_template('basicpredadmin.php')
+    cur = mysql.connection.cursor()
+    resultValue = cur.execute("SELECT DISTINCT TargetDisease FROM model")
+    if resultValue > 0:
+        disease = cur.fetchall()
+        return render_template('basicpredadmin.php', disease=disease)
     
 @app.route('/advancepredadmin')
 def advancepredadmin():
-    return render_template('advancepredadmin.php')
+    cur = mysql.connection.cursor()
+    resultValue = cur.execute("SELECT DISTINCT TargetDisease FROM model")
+    if resultValue > 0:
+        disease = cur.fetchall()
+        return render_template('advancepredadmin.php', disease=disease)
     
 @app.route('/basicpredenduser')
 def basicpredenduser():
-    return render_template('basicpredenduser.php')
+    cur = mysql.connection.cursor()
+    resultValue = cur.execute("SELECT DISTINCT TargetDisease FROM model")
+    if resultValue > 0:
+        disease = cur.fetchall()
+        return render_template('basicpredenduser.php', disease=disease)
     
 @app.route('/advancepredenduser')
 def advancepredenduser():
-    return render_template('advancepredenduser.php')
+    cur = mysql.connection.cursor()
+    resultValue = cur.execute("SELECT DISTINCT TargetDisease FROM model")
+    if resultValue > 0:
+        disease = cur.fetchall()
+        return render_template('advancepredenduser.php', disease=disease)
     
 def basicpredmethod():
     data1 = request.form['smiles']

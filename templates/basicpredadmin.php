@@ -12,8 +12,9 @@
         <input type="text" id="smiles" name="smiles" placeholder="Enter smiles string" maxlength="150"/>
         <select name="disease" id="disease">
           <option value="default">Select Target Disease</option>
-		  <option value="corona">Coronavirus</option>
-          <option value="hiv">HIV</option>
+		  {% for d in disease %}
+		      <option>{{d[0]}}</option>
+          {% endfor %}
         </select>
         <select name="modelName" id="modelName">
             <option value="default">Select Specific Model</option>
