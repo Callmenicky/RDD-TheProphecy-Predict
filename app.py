@@ -47,13 +47,6 @@ app.config['MYSQL_DB'] = 'heroku_c703864e708562a'
 
 mysql = MySQL(app)
 
-def loadselection():
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT DISTINCT TargetDisease FROM model")
-    if resultValue > 0:
-        disease = cur.fetchall()
-        return render_template('basicpred.php', disease=disease)
-
 @app.route('/')
 def man():
     return render_template('basicpred.php')
@@ -61,7 +54,7 @@ def man():
 @app.route('/basicpred')
 def basicpred():
     cur = mysql.connection.cursor()
-    resultValue = cur.execute("SELECT DISTINCT TargetDisease FROM model")
+    resultValue = cur.execute("SELECT TargetDisease, ModelName FROM model")
     if resultValue > 0:
         disease = cur.fetchall()
         return render_template('basicpred.php', disease=disease)
@@ -69,7 +62,7 @@ def basicpred():
 @app.route('/advancepred')
 def advancepred():
     cur = mysql.connection.cursor()
-    resultValue = cur.execute("SELECT DISTINCT TargetDisease FROM model")
+    resultValue = cur.execute("SELECT TargetDisease, ModelName FROM model")
     if resultValue > 0:
         disease = cur.fetchall()
         return render_template('advancepred.php', disease=disease)
@@ -77,7 +70,7 @@ def advancepred():
 @app.route('/basicpredadmin')
 def basicpredadmin():
     cur = mysql.connection.cursor()
-    resultValue = cur.execute("SELECT DISTINCT TargetDisease FROM model")
+    resultValue = cur.execute("SELECT TargetDisease, ModelName FROM model")
     if resultValue > 0:
         disease = cur.fetchall()
         return render_template('basicpredadmin.php', disease=disease)
@@ -85,7 +78,7 @@ def basicpredadmin():
 @app.route('/advancepredadmin')
 def advancepredadmin():
     cur = mysql.connection.cursor()
-    resultValue = cur.execute("SELECT DISTINCT TargetDisease FROM model")
+    resultValue = cur.execute("SELECT TargetDisease, ModelName FROM model")
     if resultValue > 0:
         disease = cur.fetchall()
         return render_template('advancepredadmin.php', disease=disease)
@@ -93,7 +86,7 @@ def advancepredadmin():
 @app.route('/basicpredenduser')
 def basicpredenduser():
     cur = mysql.connection.cursor()
-    resultValue = cur.execute("SELECT DISTINCT TargetDisease FROM model")
+    resultValue = cur.execute("SELECT TargetDisease, ModelName FROM model")
     if resultValue > 0:
         disease = cur.fetchall()
         return render_template('basicpredenduser.php', disease=disease)
@@ -101,7 +94,7 @@ def basicpredenduser():
 @app.route('/advancepredenduser')
 def advancepredenduser():
     cur = mysql.connection.cursor()
-    resultValue = cur.execute("SELECT DISTINCT TargetDisease FROM model")
+    resultValue = cur.execute("SELECT TargetDisease, ModelName FROM model")
     if resultValue > 0:
         disease = cur.fetchall()
         return render_template('advancepredenduser.php', disease=disease)

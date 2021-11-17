@@ -41,9 +41,9 @@
         <div id="more">
           <select name="modelName" id="modelName">
             <option value="default">Select Specific Model</option>
-            <option value="adac_corona">AdaBoost Classifier</option>
-            <option value="rfc_hiv">Random Forest Classifier</option>
-            <option value="xgbc_hiv">XBG CLassifier</option>
+            {% for d in disease %}
+		      <option>{{d[1]}}</option>
+            {% endfor %}
           </select>
           <p><a href="#" onclick="showLess()">hide>></a></p>
         </div>
