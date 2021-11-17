@@ -93,23 +93,6 @@ def advancepredenduser():
     disease = cur.fetchall()
     return render_template('advancepredenduser.php', disease=disease)
 
-@app.route("/mlmodel",methods=["POST","GET"])
-def dropdownlist():  
-    cursor = mysql.connection.cursor()
-    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    if request.method == 'POST':
-        disease_name = request.form['disease_name'] 
-        print(disease_name)  
-        result = cur.execute("SELECT * FROM model WHERE TargetDisease = %s ORDER BY ModelName ASC", [disease_name] )
-        mlmodel = cur.fetchall()  
-        OutputArray = []
-        for row in mlmodel:
-            outputObj = {
-                'id': row['TargetDisease'],
-                'name': row['ModelName']}
-            OutputArray.append(outputObj)
-    return jsonify(OutputArray)
-
 def basicpredmethod():
     data1 = request.form['smiles']
     data2 = request.form['disease']
@@ -442,7 +425,10 @@ def advancepredmethod():
 @app.route('/basicpredict', methods=['POST'])
 def basicpredict():
     pred = basicpredmethod()
-    return render_template('afterbasicpred.php', data = pred)
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
+    disease = cur.fetchall()
+    return render_template('afterbasicpred.php', disease=disease, data = pred)
 
 @app.route('/basicpredictadmin', methods=['POST'])
 def basicpredictadmin():
@@ -468,7 +454,23 @@ def advancepredictadmin():
 def advancepredictenduser():
     pred = advancepredmethod()
     return render_template('advancepredenduserafter.php', data = pred)
-    
+
+@app.route("/mlmodel",methods=["POST","GET"])
+def dropdownlist():  
+    cursor = mysql.connection.cursor()
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    if request.method == 'POST':
+        disease_name = request.form['disease_name'] 
+        print(disease_name)  
+        result = cur.execute("SELECT * FROM model WHERE TargetDisease = %s ORDER BY ModelName ASC", [disease_name] )
+        mlmodel = cur.fetchall()  
+        OutputArray = []
+        for row in mlmodel:
+            outputObj = {
+                'id': row['TargetDisease'],
+                'name': row['ModelName']}
+            OutputArray.append(outputObj)
+    return jsonify(OutputArray)
 
 if __name__=="__main__":
     app.run(debug=True)
