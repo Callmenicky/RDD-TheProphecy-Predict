@@ -6,7 +6,7 @@
 <body>
   <h1>Machine Learning Reverse Drug Discovery</h1>
   <style>
-    .bootstrap-select.dropdown-toggle{
+    .bootstrap-select .dropdown-toggle{
         display:none;
     }
   </style>
