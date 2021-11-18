@@ -13,7 +13,7 @@
   <section class="predict">
     <div class="predcontent">
         <h2>Advance Prediction</h2>
-		<form id="AdvancePrediction" method="post" action="{{url_for('advancepredictadmin')}}">
+		<form id="AdvancePrediction" method="post" action="{{url_for('advancepredictadmin')}}" enctype=multipart/form-data>
         <p>upload a CSV file containing SMILES</p>
         <input type="file" id="smilescsv" name="smilescsv"/>
         <select name="disease" id="disease"> 
@@ -39,7 +39,6 @@
 				
 				{%endif%}
 					<br><br>
-				<a href='/'>go back to home page</a>
       </div>
     </section>
   	<footer>
