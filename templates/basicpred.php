@@ -24,11 +24,6 @@
   <header>
     <a href="https://rdd-theprophecy.herokuapp.com/"><img class="logo" src="{{url_for('static', filename='images/logo_RDD.png')}}" alt="logo"/></a>
     <h1>Machine Learning Reverse Drug Discovery</h1>
-    <style>
-    .bootstrap-select .dropdown-toggle{
-        display:none;
-    }
-  </style>
   </header>
   <section class="predict">
         <div class="predcontent">

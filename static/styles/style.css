@@ -273,6 +273,20 @@ p.chklink{
     text-align: center;
 }
 
+.bootstrap-select .dropdown-toggle{
+    display:none;
+}
+
+#disease, #modelName{
+    width: 30%;
+    height: 3vw;
+    margin: 1vw;
+    box-sizing: border-box;
+    border: 2px solid #000;
+    border-radius: 0.5vw;
+    font-size: 1.5vw;
+}
+
 /*hide password icon*/
 .eye{
 	position: absolute;
