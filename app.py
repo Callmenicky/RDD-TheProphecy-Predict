@@ -345,14 +345,14 @@ def advancepredmethod():
     dataset_train = new_train_df
     dataset_test = new_test_df 
     
-    X_train = dataset_train.iloc[:,0:10] #11 columns 
-    y_train = dataset_train['active']
-    X_test = dataset_test.iloc[:,0:10] #11 columns
+    #X_train = dataset_train.iloc[:,0:10] #11 columns 
+    #y_train = dataset_train['active']
+    #X_test = dataset_test.iloc[:,0:10] #11 columns
     
-    scaler = StandardScaler()
+    #scaler = StandardScaler()
     #scaler = MinMaxScaler()
-    X_train_norm = scaler.fit_transform(X_train)
-    X_test_norm = scaler.transform(X_test)
+    #X_train_norm = scaler.fit_transform(X_train)
+    #X_test_norm = scaler.transform(X_test)
     
     pred = model1.predict(X_test_norm)
     
