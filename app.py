@@ -49,7 +49,10 @@ mysql = MySQL(app)
 
 @app.route('/')
 def man():
-    return render_template('basicpred.php')
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
+    disease = cur.fetchall()
+    return render_template('basicpred.php', disease=disease)
 
 @app.route('/basicpred')
 def basicpred():
