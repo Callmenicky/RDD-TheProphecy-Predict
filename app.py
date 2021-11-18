@@ -35,7 +35,7 @@ from datetime import date
 app = Flask(__name__)
 
 # Use pickle to load in the pre-trained model.
-with open('hiv_rfc', 'rb') as f:
+with open('hiv_xgbc', 'rb') as f:
     model1 = pickle.load(f)
 
 #model2 = pickle.load(open('hiv_rfc', 'rb'))
