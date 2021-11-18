@@ -434,9 +434,6 @@ def advancepredmethod():
     
     path = "static/outcome.txt"
     
-    with open(path, "r") as f:
-        print(f.read())
-    
     with open(path, "w") as f:
         for i in pred: 
             f.write("Smile String ")
