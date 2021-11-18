@@ -35,7 +35,7 @@ from datetime import date
 app = Flask(__name__)
 
 # Use pickle to load in the pre-trained model.
-with open('hiv_bc', 'rb') as f:
+with open('hiv_rfc', 'rb') as f:
     model1 = pickle.load(f)
 
 #model2 = pickle.load(open('hiv_rfc', 'rb'))
@@ -186,6 +186,21 @@ def basicpredmethod():
     new_train_df.to_csv('hiv integrase dataset (pca_train_descriptors).csv', index=True, header=True)
     new_test_df.to_csv('hiv integrase dataset (pca_test_descriptors).csv', index=True, header=True)
     
+    dataset_train = new_train_df
+    dataset_test = new_test_df 
+    
+    print('\n=====Testing======')
+    print(dataset_test.shape)
+    print(dataset_test.columns)
+    
+    X_train = dataset_train.iloc[:,0:10] #11 columns 
+    y_train = dataset_train['active']
+    X_test = dataset_test.iloc[:,0:10] #11 columns
+    
+    scaler = StandardScaler()
+    X_train_norm = scaler.fit_transform(X_train)
+    X_test_norm = scaler.transform(X_test)
+    
     #load dataset
     dataset_train = pd.read_csv('hiv integrase dataset (pca_train_descriptors).csv')
     dataset_test = pd.read_csv('hiv integrase dataset (pca_test_descriptors).csv')
@@ -229,7 +244,9 @@ def basicpredmethod():
     
     plt.savefig('static/images/plots.PNG')
     
-    pred = model1.predict(new_test_df)
+    pred = model1.predict(X_test_norm)
+    
+    print(pred)
     
     if pred[0] == 1:
        pred = "Active" 
@@ -345,14 +362,13 @@ def advancepredmethod():
     dataset_train = new_train_df
     dataset_test = new_test_df 
     
-    #X_train = dataset_train.iloc[:,0:10] #11 columns 
-    #y_train = dataset_train['active']
-    #X_test = dataset_test.iloc[:,0:10] #11 columns
+    X_train = dataset_train.iloc[:,0:10] #11 columns 
+    y_train = dataset_train['active']
+    X_test = dataset_test.iloc[:,0:10] #11 columns
     
-    #scaler = StandardScaler()
-    #scaler = MinMaxScaler()
-    #X_train_norm = scaler.fit_transform(X_train)
-    #X_test_norm = scaler.transform(X_test)
+    scaler = StandardScaler()
+    X_train_norm = scaler.fit_transform(X_train)
+    X_test_norm = scaler.transform(X_test)
     
     pred = model1.predict(X_test_norm)
     
