@@ -38,30 +38,6 @@ function showPswd1(){
 	}
 }
 
-function showMore() {
-  var content = document.getElementById("more");
-  var text = document.getElementById("showmore");
-  if (content.style.display === "none") {
-    content.style.display = "block";
-    text.style.display = "none";
-  }else{
-    content.style.display = "none";
-    text.style.display = "block";
-  }
-}
-
-function showLess() {
-  var content = document.getElementById("more");
-  var text = document.getElementById("showmore");
-  if (content.style.display === "block") {
-    content.style.display = "none";
-    text.style.display = "block";
-  }else{
-    content.style.display = "block";
-    text.style.display = "none";
-  }
-}
-
 function logout(){
 	var logout;
 	logout = confirm("Do you want to continue your action");
