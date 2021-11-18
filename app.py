@@ -445,7 +445,7 @@ def advancepredmethod():
     today = date.today()
     
     cur = mysql.connection.cursor()
-    cur.execute("INSERT INTO advance_prediction(InputCSV, TargetDisease, ModelApply, OutputCSV, Date) VALUES (%s, %s , %s , %s, %s)", (data1, "HIV", 1, "static\outcome.txt", today))
+    cur.execute("INSERT INTO advance_prediction(InputCSV, TargetDisease, ModelApply, OutputCSV, Date) VALUES (%s, %s , %s , %s, %s)", (data1, "HIV", 1, "static/outcome.txt", today))
     mysql.connection.commit()
     cur.close()
    
