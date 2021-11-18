@@ -277,8 +277,8 @@ p.chklink{
     display:none;
 }
 
-#disease, #modelName{
-    width: 30%;
+#smiles, #smilescsv, #disease, #modelName{
+    width: 30vw;
     height: 3vw;
     margin: 1vw;
     box-sizing: border-box;
