@@ -222,9 +222,8 @@ function validateForm7(){
     gErrorMsg = "";
 	var InputCSVOK = chkInputCSV();
 	var DiseaseOK = chkDisease();
-	var ModelOK = chkModel();
 
-	if( InputCSVOK && DiseaseOK && ModelOK)
+	if( InputCSVOK && DiseaseOK)
 	{
 		isAllOK = true;
 	}
@@ -493,29 +492,19 @@ function chkSmiles(){
 function chkDisease(){
 	 var Disease = document.getElementById('disease');
 	 var DiseaseOk = true;
+	 var Model = document.getElementById('modelName');
 
     if(Disease.selectedIndex==0){
-		gErrorMsg = gErrorMsg + "Please choose a specific targeted disease\n" 
+	gErrorMsg = gErrorMsg + "Please choose a specific targeted disease\n" 
+	gErrorMsg = gErrorMsg + "Please choose a specific model\n"
         Disease.focus();
-		DiseaseOk = false; 
+	Model.focus();
+	DiseaseOk = false; 
         document.getElementById("disease").style.borderColor = "red";
+	document.getElementById("modelName").style.borderColor = "red";
     }
 	
 	return DiseaseOk;	
-}
-
-function chkModel(){
-	 var Model = document.getElementById('modelName');
-	 var ModelOk = true;
-
-    if(Model.selectedIndex==0){
-		gErrorMsg = gErrorMsg + "Please choose a specific model\n" 
-        Model.focus();
-		ModelOk = false; 
-        document.getElementById("modelName").style.borderColor = "red";
-    }
-	
-	return ModelOk;	
 }
 
 function chkInputCSV(){
