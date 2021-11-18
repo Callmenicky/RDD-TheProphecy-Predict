@@ -354,6 +354,20 @@ def advancepredmethod():
     X_train_norm = scaler.fit_transform(X_train)
     X_test_norm = scaler.transform(X_test)
     
+    pred = model1.predict(X_test_norm)
+    
+    prediction = []
+    
+    for i in pred: 
+        if i == 1:
+           prediction.append("Active") 
+        
+        else:
+           prediction.append("Inactive")
+           
+    count = 0
+    print(prediction)
+    
     #save as csv
     new_train_df.to_csv('hiv integrase dataset (pca_train_descriptors).csv', index=True, header=True)
     new_test_df.to_csv('hiv integrase dataset (pca_test_descriptors_advance).csv', index=True, header=True)
@@ -401,19 +415,6 @@ def advancepredmethod():
     
     plt.savefig('static/images/plots1.PNG')
         
-    pred = model1.predict(X_test_norm)
-    
-    prediction = []
-    
-    for i in pred: 
-        if i == 1:
-           prediction.append("Active") 
-        
-        else:
-           prediction.append("Inactive")
-           
-    count = 0
-    print(prediction)
     
     path = "static/outcome.txt"
     
