@@ -36,11 +36,8 @@
             <option value="{{row.TargetDisease}}">{{row.TargetDisease}}</option>
             {% endfor %}
         </select>
-        <p id="showmore"><a href="#" onclick="showMore()">more>></a></p>
-        <div id="more">
-          <select name="modelName" id="modelName"><option>Select ML Model</option></select>
-          <p><a href="#" onclick="showLess()">hide>></a></p>
-        </div>
+        <select name="modelName" id="modelName"><option>Select ML Model</option></select>
+	<br/>
         <button type="submit" name="predictadvance" class="btn btn-info">Predict</button>
     </form>
 	</div>
