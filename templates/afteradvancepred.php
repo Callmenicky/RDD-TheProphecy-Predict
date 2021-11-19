@@ -42,7 +42,7 @@
         <button type="submit" name="predictadvance" class="btn btn-info">Predict</button>
     </form>
 	</div>
-        <div class="predimg">
+        <div class="predimg predimgafter">
 		<p><b>Prediction Results</b></p>
 				{%if data[0] == "Active"%}
 				<a href=" {{url_for('static', filename='outcome.txt')}}" download>Download</a>

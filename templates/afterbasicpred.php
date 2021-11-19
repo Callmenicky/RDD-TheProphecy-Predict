@@ -41,7 +41,7 @@
         <button type="submit" name="predictadvance" class="btn btn-info">Predict</button>
     </form>
 	</div>
-        <div class="predimg">
+        <div class="predimg predimgafter">
 				{%if data == "Active"%}
 				<h2>Prediction: Active</h2>  
 				<img src="{{url_for('static', filename='images/plots.PNG')}}" alt="identity icon">

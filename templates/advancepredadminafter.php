@@ -22,7 +22,7 @@
         <button type="submit" name="predictadvanceAdmin" class="btn btn-info">Predict</button>
         </form>
       </div>
-      <div class="predimg">
+      <div class="predimg predimgafter">
 	      <p><b>Prediction Results</b></p>
 				{%if data[0] == "Active"%}
 				<a download href="outcome.txt">  
