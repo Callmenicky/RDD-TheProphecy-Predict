@@ -43,12 +43,13 @@
     </form>
 	</div>
         <div class="predimg">
+		<p><b>Prediction Results</b></p>
 				{%if data[0] == "Active"%}
-				<a href=" {{url_for('static', filename='outcome.txt')}}" download>Download Output Result</a>
+				<a href=" {{url_for('static', filename='outcome.txt')}}" download>Download</a>
 				<img src="{{url_for('static', filename='images/plots1.PNG')}}" alt="identity icon"> 
 
 				{%else%}
-				<a href=" {{url_for('static', filename='outcome.txt')}}" download>Download Output Result</a>
+				<a href=" {{url_for('static', filename='outcome.txt')}}" download>Download</a>
 				<img src="{{url_for('static', filename='images/plots1.PNG')}}" alt="identity icon"> 
 				
 				{%endif%}
