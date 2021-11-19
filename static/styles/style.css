@@ -349,7 +349,7 @@ table, th, td {
 }
 
 .predimgafter{
-    border: #0070ff;
+    border: solid #0070ff 1px;
     border-width: 1vw;
 }
 
