@@ -506,7 +506,7 @@ def dropdownlist():
     if request.method == 'POST':
         disease_name = request.form['disease_name'] 
         print(disease_name)  
-        result = cur.execute("SELECT * FROM model WHERE TargetDisease = %s ORDER BY ModelName ASC", [disease_name] )
+        result = cur.execute("SELECT * FROM model WHERE isEnable=1 AND TargetDisease = %s ORDER BY ModelName ASC", [disease_name] )
         mlmodel = cur.fetchall()  
         OutputArray = []
         for row in mlmodel:
