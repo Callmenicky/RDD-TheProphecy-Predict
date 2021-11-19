@@ -23,7 +23,7 @@
         </form>
       </div>
       <div class="predimg">
-	      <p> Prediction Results </p>
+	      <p><b>Prediction Results</b></p>
 				{%if data[0] == "Active"%}
 				<a download href="outcome.txt">  
 				<a href=" {{url_for('static', filename='outcome.txt')}}" download>Download</a>
