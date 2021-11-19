@@ -331,7 +331,7 @@ table, th, td {
 
 .predcontent h2{
     text-align: left;
-    margin-left: 8vw;
+    margin-left: 18%;
 }
 
 .predcontent p{
@@ -351,6 +351,11 @@ table, th, td {
 .predimg img{
     height: 23vw;
     opacity: 0.95;
+}
+
+.predimg h2{
+    border: #0070ff;
+    border-width: 1vw;
 }
 
 #more{
