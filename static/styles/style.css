@@ -348,14 +348,19 @@ table, th, td {
     margin-top: 5%;
 }
 
+.predimgafter{
+    border: #0070ff;
+    border-width: 1vw;
+}
+
 .predimg img{
     height: 23vw;
     opacity: 0.95;
 }
 
 .predimg h2{
-    border: #0070ff;
-    border-width: 1vw;
+    background: #0070ff;
+    color:#fff;
 }
 
 #more{
