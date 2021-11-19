@@ -17,7 +17,7 @@
             <option value="{{row.TargetDisease}}">{{row.TargetDisease}}</option>
             {% endfor %}
         </select>
-        <select name="modelName" id="modelName"><option>Select ML Model</option></select>>
+        <select name="modelName" id="modelName"><option>Select ML Model</option></select>
         <br/>
         <button type="submit" name="predictadvanceAdmin" class="btn btn-info">Predict</button>
         </form>
