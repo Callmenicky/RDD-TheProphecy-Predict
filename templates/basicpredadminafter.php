@@ -25,7 +25,7 @@
 		  {%if data == "Active"%}
                 <h2>Prediction Result: Active</h2>
                 {% for row in temp %}
-                <p>In <b>{{row.ModelName}}</b> that target on <b>{{row.TargetDisease}}</b>, molecule that has pIC50 higher than {{row.pIC50}} is consider as active.</p>
+                <p>In <b>{{row.ModelName}}</b> model that target on <b>{{row.TargetDisease}}</b>, molecule that has pIC50 higher than <b>{{row.pIC50}}</b> is consider as active.</p>
                 {% endfor %}
                 <p>PCA Chart:</p> 
 				<img src="{{url_for('static', filename='images/plots.PNG')}}" alt="identity icon">
@@ -33,7 +33,7 @@
 				{%else%}
                 <h2>Prediction Result: Inactive</h2>
                 {% for row in temp %}
-                <p>In <b>{{row.ModelName}}</b> that target on <b>{{row.TargetDisease}}</b>, molecule that has pIC50 higher than {{row.pIC50}} is consider as active.</p>
+                <p>In <b>{{row.ModelName}}</b> model that target on <b>{{row.TargetDisease}}</b>, molecule that has pIC50 higher than <b>{{row.pIC50}}</b> is consider as active.</p>
                 {% endfor %}
                 <p>PCA Chart:</p> 
 				<img src="{{url_for('static', filename='images/plots.PNG')}}" alt="identity icon">
