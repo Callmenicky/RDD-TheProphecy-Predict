@@ -273,6 +273,7 @@ def advancepredmethod():
     data2 = request.form['disease']
     data3 = request.form['modelName']
     
+    
     #diseases = ["HIV", "Coronavirus"]
     #modelName = [model1, model2]
     
