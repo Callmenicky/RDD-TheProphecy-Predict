@@ -43,23 +43,19 @@
 	</div>
         <div class="predimg predimgafter">
 				{%if data == "Active"%}
-				<h2>Prediction: Active</h2>
+                <h2>Prediction Result: Active</h2>
                 {% for row in temp %}
-                <p>Selected Model Information</p>
-                <p>Model Name: {{row.ModelName}}</p>
-                <p>Targetted Diesase: {{row.TargetDisease}}</p>
-                <p>Molecule that has pIC50 higher than {{row.pIC50}} is consider as active.</p>
+                <p>In <b>{{row.ModelName}}</b> that target on <b>{{row.TargetDisease}}</b>, molecule that has pIC50 higher than {{row.pIC50}} is consider as active.</p>
                 {% endfor %}
+                <p>PCA Chart:</p> 
 				<img src="{{url_for('static', filename='images/plots.PNG')}}" alt="identity icon">
 
 				{%else%}
-				<h2>Prediction: Inactive</h2>
+                <h2>Prediction Result: Inactive</h2>
                 {% for row in temp %}
-                <p>Selected Model Information</p>
-                <p>Model Name: {{row.ModelName}}</p>
-                <p>Targetted Diesase: {{row.TargetDisease}}</p>
-                <p>Molecule that has pIC50 higher than {{row.pIC50}} is consider as active.</p>
+                <p>In <b>{{row.ModelName}}</b> that target on <b>{{row.TargetDisease}}</b>, molecule that has pIC50 higher than {{row.pIC50}} is consider as active.</p>
                 {% endfor %}
+                <p>PCA Chart:</p> 
 				<img src="{{url_for('static', filename='images/plots.PNG')}}" alt="identity icon">
 				
 				{%endif%}
