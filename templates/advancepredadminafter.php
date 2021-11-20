@@ -25,11 +25,23 @@
       <div class="predimg predimgafter">
 	      <p><b>Prediction Results</b></p>
 				{%if data[0] == "Active"%}
+                {% for row in temp %}
+                <p>Selected Model Information</p>
+                <p>Model Name: {{row.ModelName}}</p>
+                <p>Targetted Diesase: {{row.TargetDisease}}</p>
+                <p>Molecule that has pIC50 higher than {{row.pIC50}} is consider as active.</p>
+                {% endfor %}
 				<a download href="outcome.txt">  
 				<a href=" {{url_for('static', filename='outcome.txt')}}" download>Download</a>
 				<img src="{{url_for('static', filename='images/plots1.PNG')}}" alt="identity icon"> 
 
 				{%else%}
+                {% for row in temp %}
+                <p>Selected Model Information</p>
+                <p>Model Name: {{row.ModelName}}</p>
+                <p>Targetted Diesase: {{row.TargetDisease}}</p>
+                <p>Molecule that has pIC50 higher than {{row.pIC50}} is consider as active.</p>
+                {% endfor %}
 				<a href=" {{url_for('static', filename='outcome.txt')}}" download>Download</a>
 				<img src="{{url_for('static', filename='images/plots1.PNG')}}" alt="identity icon"> 
 				

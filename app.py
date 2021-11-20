@@ -465,7 +465,9 @@ def basicpredict():
     cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
     disease = cur.fetchall()
-    return render_template('afterbasicpred.php', disease=disease, data = pred)
+    result = cur.execute("SELECT ModelID,ModelName,TargetDisease,pIC50 FROM model WHERE ModelID=555")
+    temp = cur.fetchall()
+    return render_template('afterbasicpred.php', disease=disease, temp=temp, data = pred)
 
 @app.route('/basicpredictadmin', methods=['POST'])
 def basicpredictadmin():
@@ -473,7 +475,9 @@ def basicpredictadmin():
     cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
     disease = cur.fetchall()
-    return render_template('basicpredadminafter.php', disease=disease, data = pred)
+    result = cur.execute("SELECT ModelID,ModelName,TargetDisease,pIC50 FROM model WHERE ModelID=555")
+    temp = cur.fetchall()
+    return render_template('basicpredadminafter.php', disease=disease, temp=temp, data = pred)
 
 @app.route('/basicpredictenduser', methods=['POST'])
 def basicpredictenduser():
@@ -481,7 +485,9 @@ def basicpredictenduser():
     cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
     disease = cur.fetchall()
-    return render_template('basicpredenduserafter.php', disease=disease, data = pred)
+    result = cur.execute("SELECT ModelID,ModelName,TargetDisease,pIC50 FROM model WHERE ModelID=555")
+    temp = cur.fetchall()
+    return render_template('basicpredenduserafter.php', disease=disease, temp=temp, data = pred)
     
 @app.route('/advancepredict', methods=['POST'])
 def advancepredict():
@@ -489,7 +495,9 @@ def advancepredict():
     cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
     disease = cur.fetchall()
-    return render_template('afteradvancepred.php', disease=disease, data = pred)
+    result = cur.execute("SELECT ModelID,ModelName,TargetDisease,pIC50 FROM model WHERE ModelID=555")
+    temp = cur.fetchall()
+    return render_template('afteradvancepred.php', disease=disease, temp=temp, data = pred)
 
 @app.route('/advancepredictadmin', methods=['POST'])
 def advancepredictadmin():
@@ -497,7 +505,9 @@ def advancepredictadmin():
     cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
     disease = cur.fetchall()
-    return render_template('advancepredadminafter.php', disease=disease, data = pred)
+    result = cur.execute("SELECT ModelID,ModelName,TargetDisease,pIC50 FROM model WHERE ModelID=555")
+    temp = cur.fetchall()
+    return render_template('advancepredadminafter.php', disease=disease, temp=temp, data = pred)
 
 @app.route('/advancepredictenduser', methods=['POST'])
 def advancepredictenduser():
@@ -505,7 +515,9 @@ def advancepredictenduser():
     cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
     disease = cur.fetchall()
-    return render_template('advancepredenduserafter.php', disease=disease, data = pred)
+    result = cur.execute("SELECT ModelID,ModelName,TargetDisease,pIC50 FROM model WHERE ModelID=555")
+    temp = cur.fetchall()
+    return render_template('advancepredenduserafter.php', disease=disease, temp=temp, data = pred)
 
 @app.route("/mlmodel",methods=["POST","GET"])
 def dropdownlist():  
