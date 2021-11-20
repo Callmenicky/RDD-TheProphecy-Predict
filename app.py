@@ -259,7 +259,11 @@ def basicpredmethod():
     today = date.today()
     
     cur = mysql.connection.cursor()
-    cur.execute("INSERT INTO basic_prediction(Smiles, TargetDisease, ModelApply, Output, PredictionDate) VALUES (%s, %s , %s , %s, %s)", (data1, "HIV", 2, pred, today))
+    sql = "SELECT ModelID FROM model WHERE ModelName=%s and TargetDisease=%s"
+    val = (data3,data2)
+    cur.execute(sql,val)
+    Modelid = cur.fetchall()
+    cur.execute("INSERT INTO basic_prediction(Smiles, TargetDisease, ModelApply, Output, PredictionDate) VALUES (%s, %s , %s , %s, %s)", (data1, data2, Modelid, pred, today))
     mysql.connection.commit()
     cur.close()
     return pred
@@ -445,7 +449,11 @@ def advancepredmethod():
     today = date.today()
     
     cur = mysql.connection.cursor()
-    cur.execute("INSERT INTO advance_prediction(InputCSV, TargetDisease, ModelApply, OutputCSV, Date) VALUES (%s, %s , %s , %s, %s)", (data1, "HIV", 1, "static/outcome.txt", today))
+    sql = "SELECT ModelID FROM model WHERE ModelName=%s and TargetDisease=%s"
+    val = (data3,data2)
+    cur.execute(sql,val)
+    Modelid = cur.fetchall()
+    cur.execute("INSERT INTO advance_prediction(InputCSV, TargetDisease, ModelApply, OutputCSV, Date) VALUES (%s, %s , %s , %s, %s)", (data1, data2, Modelid, "static/outcome.txt", today))
     mysql.connection.commit()
     cur.close()
    
