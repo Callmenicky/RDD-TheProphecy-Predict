@@ -41,7 +41,6 @@
 				{%endif%}
 
 					<br><br>
-				<a href='/'>go back to home page</a>
         </div>
     </section>
 	<footer>
