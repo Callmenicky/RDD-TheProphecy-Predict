@@ -39,7 +39,6 @@
 				<img src="{{url_for('static', filename='images/plots.PNG')}}" alt="identity icon">
 				
 				{%endif%}
-
 					<br><br>
         </div>
     </section>
