@@ -41,7 +41,35 @@
         <button type="submit" name="predictadvance" class="btn btn-info">Predict</button>
     </form>
 	</div>
-        <div class="predimg predimgafter">
+        <div class="predimg predimgafter">\
+            <!--Start of slideshow-->
+              <div class="slideshow-container">
+                  <div class="mySlides fade">
+
+                    <img src="images/parkerfullfront.jpg" alt="Parker Full Front"/>
+              </div>
+              <div class="mySlides fade">
+
+                    <img src="images/parkerfront.jpg" alt="Parker Front"/>
+              </div>
+              <div class="mySlides fade">
+
+                    <img src="images/parkerfullback.jpg" alt="Parker Back"/>
+
+              </div>
+
+                <a class="prev" onclick="plusSlides(-1)">❮</a>
+                <a class="next" onclick="plusSlides(1)">❯</a>
+
+            <div class="sliderButtons">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+
+            </div>
+
+              </div>
+        <!--End of slideshow-->
 				{%if data == "Active"%}
                 <h2>Prediction Result: Active</h2>
                 {% for row in temp %}
