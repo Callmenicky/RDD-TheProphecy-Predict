@@ -50,8 +50,6 @@
 		  <div class="mySlides fade">
 		      <img src="{{url_for('static', filename='images/plots.PNG')}}" alt="pca chart">
 		  </div>
-		  <a class="prev" onclick="plusSlides(-1)">❮</a>
-		  <a class="next" onclick="plusSlides(1)">❯</a>
 		  <div class="sliderButtons">
 		      <span class="dot" onclick="currentSlide(1)"></span>
 		      <span class="dot" onclick="currentSlide(2)"></span>
