@@ -46,9 +46,7 @@
 	      <div class="slideshow-container">
 		  <div class="mySlides">
 		      <img src="{{url_for('static', filename='images/result_ml.jpg')}}" alt="result icon">
-		      <div class="centered">
-			  <p>In <b>{{row.ModelName}}</b> model that target on <b>{{row.TargetDisease}}</b>, molecule that has pIC50 higher than <b>{{row.pIC50}}</b> is consider as active.</p>
-		      </div>
+		      <div class="centered">Center text</div>
 		  </div>
 		  <div class="mySlides">
 		      <img src="{{url_for('static', filename='images/plots.PNG')}}" alt="pca chart" class="pca">
