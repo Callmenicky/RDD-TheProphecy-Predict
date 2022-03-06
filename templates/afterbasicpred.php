@@ -42,7 +42,7 @@
     </form>
 	</div>
         <div class="predimg predimgafter">
-          <img src="{{url_for('static', filename='images/icon_ml.JPG')}}" alt="identity icon">
+          <img src="{{url_for('static', filename='images/result_ml.JPG')}}" alt="identity icon">
 				{%if data == "Active"%}
                 <h2>Prediction Result: Active</h2>
                 {% for row in temp %}
