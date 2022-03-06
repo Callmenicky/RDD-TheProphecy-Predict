@@ -44,10 +44,10 @@
         <div class="predimg predimgafter">
 	  <!--Start of slideshow-->
 	      <div class="slideshow-container">
-		  <div class="mySlides fade">
+		  <div class="mySlides">
 		      <img src="{{url_for('static', filename='images/result_ml.jpg')}}" alt="result icon">
 		  </div>
-		  <div class="mySlides fade">
+		  <div class="mySlides">
 		      <img src="{{url_for('static', filename='images/plots.PNG')}}" alt="pca chart">
 		  </div>
 		  <div class="sliderButtons">
