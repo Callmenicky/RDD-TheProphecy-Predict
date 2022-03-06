@@ -42,41 +42,52 @@
     </form>
 	</div>
         <div class="predimg predimgafter">
-	  <!--Start of slideshow-->
-	      <div class="slideshow-container">
+		{%if data == "Active"%}
+		<!--Start of slideshow-->
+	        <div class="slideshow-container">
 		  <div class="mySlides">
 		      <img src="{{url_for('static', filename='images/result_ml.jpg')}}" alt="result icon">
-		      <div class="centered">Centered 1</div>
+		      <div class="centered">
+			  {% for row in temp %}
+			      <p>Result analysis</p>
+                              <p>In <b>{{row.ModelName}}</b> model that target on <b>{{row.TargetDisease}}</b>, molecule that has pIC50 higher than <b>{{row.pIC50}}</b> is consider as active.</p>
+                          {% endfor %}
+		      </div>
 		  </div>
 		  <div class="mySlides">
 		      <img src="{{url_for('static', filename='images/plots.PNG')}}" alt="pca chart">
-		      <div class="centered">Centered 2</div>
+		      <div class="centered">PCA chart identifies the accuracy of model. If the SMILES(green dot) lays inside the range of training data(red dots), the result is promising.</div>
 		  </div>
 		  <div class="sliderButtons">
 		      <span class="dot" onclick="currentSlide(1)"></span>
 		      <span class="dot" onclick="currentSlide(2)"></span>
 		  </div>
-	      </div>
-	<!--End of slideshow-->
-				{%if data == "Active"%}
-                <h2>Prediction Result: Active</h2>
-                {% for row in temp %}
-                <p>In <b>{{row.ModelName}}</b> model that target on <b>{{row.TargetDisease}}</b>, molecule that has pIC50 higher than <b>{{row.pIC50}}</b> is consider as active.</p>
-                {% endfor %}
-                <p>PCA Chart:</p> 
-				<img src="{{url_for('static', filename='images/plots.PNG')}}" alt="pca chart">
-
-				{%else%}
+	        </div>
+	       <!--End of slideshow-->
+                <h2>Prediction Result: Active</h2> 
+		{%else%}
+		<!--Start of slideshow-->
+	        <div class="slideshow-container">
+		  <div class="mySlides">
+		      <img src="{{url_for('static', filename='images/result_ml.jpg')}}" alt="result icon">
+		      <div class="centered">
+			  {% for row in temp %}
+			      <p>Result analysis</p>
+                              <p>In <b>{{row.ModelName}}</b> model that target on <b>{{row.TargetDisease}}</b>, molecule that has pIC50 higher than <b>{{row.pIC50}}</b> is consider as active.</p>
+                          {% endfor %}
+		      </div>
+		  </div>
+		  <div class="mySlides">
+		      <img src="{{url_for('static', filename='images/plots.PNG')}}" alt="pca chart">
+		      <div class="centered">PCA chart identifies the accuracy of model. If the SMILES(green dot) lays inside the range of training data(red dots), the result is promising.</div>
+		  </div>
+		  <div class="sliderButtons">
+		      <span class="dot" onclick="currentSlide(1)"></span>
+		      <span class="dot" onclick="currentSlide(2)"></span>
+		  </div>
+	        </div>
+	       <!--End of slideshow-->
                 <h2>Prediction Result: Inactive</h2>
-                {% for row in temp %}
-                <p>In <b>{{row.ModelName}}</b> model that target on <b>{{row.TargetDisease}}</b>, molecule that has pIC50 higher than <b>{{row.pIC50}}</b> is consider as active.</p>
-                {% endfor %}
-                <p>PCA Chart:</p> 
-				<img src="{{url_for('static', filename='images/plots.PNG')}}" alt="pca chart">
-				
-				{%endif%}
-
-					<br><br>
         </div>
     </section>	
   	<footer>
