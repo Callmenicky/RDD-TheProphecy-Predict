@@ -42,14 +42,29 @@
     </form>
 	</div>
         <div class="predimg predimgafter">
-          <img src="{{url_for('static', filename='images/result_ml.jpg')}}" alt="identity icon">
+	  <!--Start of slideshow-->
+	      <div class="slideshow-container">
+		  <div class="mySlides fade">
+		      <img src="{{url_for('static', filename='images/result_ml.jpg')}}" alt="result icon">
+		  </div>
+		  <div class="mySlides fade">
+		      <img src="{{url_for('static', filename='images/plots.PNG')}}" alt="pca chart">
+		  </div>
+		  <a class="prev" onclick="plusSlides(-1)">❮</a>
+		  <a class="next" onclick="plusSlides(1)">❯</a>
+		  <div class="sliderButtons">
+		      <span class="dot" onclick="currentSlide(1)"></span>
+		      <span class="dot" onclick="currentSlide(2)"></span>
+		  </div>
+	      </div>
+	<!--End of slideshow-->
 				{%if data == "Active"%}
                 <h2>Prediction Result: Active</h2>
                 {% for row in temp %}
                 <p>In <b>{{row.ModelName}}</b> model that target on <b>{{row.TargetDisease}}</b>, molecule that has pIC50 higher than <b>{{row.pIC50}}</b> is consider as active.</p>
                 {% endfor %}
                 <p>PCA Chart:</p> 
-				<img src="{{url_for('static', filename='images/plots.PNG')}}" alt="identity icon">
+				<img src="{{url_for('static', filename='images/plots.PNG')}}" alt="pca chart">
 
 				{%else%}
                 <h2>Prediction Result: Inactive</h2>
@@ -57,7 +72,7 @@
                 <p>In <b>{{row.ModelName}}</b> model that target on <b>{{row.TargetDisease}}</b>, molecule that has pIC50 higher than <b>{{row.pIC50}}</b> is consider as active.</p>
                 {% endfor %}
                 <p>PCA Chart:</p> 
-				<img src="{{url_for('static', filename='images/plots.PNG')}}" alt="identity icon">
+				<img src="{{url_for('static', filename='images/plots.PNG')}}" alt="pca chart">
 				
 				{%endif%}
 
