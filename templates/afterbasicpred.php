@@ -46,10 +46,18 @@
 	      <div class="slideshow-container">
 		  <div class="mySlides">
 		      <img src="{{url_for('static', filename='images/result_ml.jpg')}}" alt="result icon">
-		      <div class="centered">Center text</div>
+		      <div class="centered">
+			  {% for row in temp %}
+                            <p>In <b>{{row.ModelName}}</b> model that target on <b>{{row.TargetDisease}}</b>, molecule that has pIC50 higher than <b>{{row.pIC50}}</b> is consider as active.</p>
+                          {% endfor %}
+		      </div>
 		  </div>
 		  <div class="mySlides">
 		      <img src="{{url_for('static', filename='images/plots.PNG')}}" alt="pca chart" class="pca">
+		  </div>
+		  <div class="mySlides">
+		      <img src="{{url_for('static', filename='images/result_ml.jpg')}}" alt="result icon">
+		      <div class="centered"><b>PCA chart is applied to visualize the accuacy of prediction. If the SMILES(green) lays between the range of training sample(red), the prediction result is promising.</b></div>
 		  </div>
 		  <div class="sliderButtons">
 		      <span class="dot" onclick="currentSlide(1)"></span>
@@ -57,19 +65,11 @@
 		  </div>
 	      </div>
 	<!--End of slideshow-->
-		<p>PCA chart is applied to visualize the accuacy of prediction. If the SMILES(green) lays between the range of training sample(red), the prediction result is promising.</p>
 		{%if data == "Active"%}
                   <h2>Prediction Result: Active</h2>
-                  {% for row in temp %}
-                    <p>In <b>{{row.ModelName}}</b> model that target on <b>{{row.TargetDisease}}</b>, molecule that has pIC50 higher than <b>{{row.pIC50}}</b> is consider as active.</p>
-                  {% endfor %}
 		  {%else%}
-                    <h2>Prediction Result: Inactive</h2>
-                  {% for row in temp %}
-                    <p>In <b>{{row.ModelName}}</b> model that target on <b>{{row.TargetDisease}}</b>, molecule that has pIC50 higher than <b>{{row.pIC50}}</b> is consider as active.</p>
-                  {% endfor %}		
+                    <h2>Prediction Result: Inactive</h2>		
 		{%endif%}
-					<br><br>
         </div>
     </section>	
   	<footer>
