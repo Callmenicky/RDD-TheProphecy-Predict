@@ -321,12 +321,12 @@ table, th, td {
 
 /*prediction page*/
 .predict{
-    width:80%;
+    width:100%;
     display: inline-flex;
 }
 
 .predcontent{
-    width:70%;
+    width:50%;
 }
 
 .predcontent h2{
@@ -353,7 +353,7 @@ table, th, td {
     border-width: 1vw;
 }
 
-.predimg img.pca{
+.predimg img{
     height: 23vw;
     opacity: 0.95;
 }
@@ -399,6 +399,10 @@ table, th, td {
 .mySlides img{
 	opacity: 0.2;
 	width:100%;
+}
+
+.mySlides img.pca{
+	opacity: 1;
 }
 
 .dot{
