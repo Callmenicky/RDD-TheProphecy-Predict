@@ -42,30 +42,7 @@
     </form>
 	</div>
         <div class="predimg predimgafter">
-            <!--Start of slideshow-->
-              <div class="slideshow-container">
-                  <div class="mySlides fade">
-                    <img src="{{url_for('static', filename='images/icon_ml.JPG')}}" alt="image1">
-              </div>
-              <div class="mySlides fade">
-                    <img src="{{url_for('static', filename='images/icon_ml.JPG')}}" alt="image2">
-              </div>
-              <div class="mySlides fade">
-		    <img src="{{url_for('static', filename='images/icon_ml.JPG')}}" alt="image3">
-              </div>
-
-                <a class="prev" onclick="plusSlides(-1)">❮</a>
-                <a class="next" onclick="plusSlides(1)">❯</a>
-
-            <div class="sliderButtons">
-                <span class="dot" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
-                <span class="dot" onclick="currentSlide(3)"></span>
-
-            </div>
-
-              </div>
-        <!--End of slideshow-->
+          <img src="{{url_for('static', filename='images/icon_ml.JPG')}}" alt="identity icon">
 				{%if data == "Active"%}
                 <h2>Prediction Result: Active</h2>
                 {% for row in temp %}
