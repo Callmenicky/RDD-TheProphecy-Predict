@@ -46,9 +46,11 @@
 	      <div class="slideshow-container">
 		  <div class="mySlides">
 		      <img src="{{url_for('static', filename='images/result_ml.jpg')}}" alt="result icon">
+		      <div class="centered">Centered 1</div>
 		  </div>
 		  <div class="mySlides">
 		      <img src="{{url_for('static', filename='images/plots.PNG')}}" alt="pca chart">
+		      <div class="centered">Centered 2</div>
 		  </div>
 		  <div class="sliderButtons">
 		      <span class="dot" onclick="currentSlide(1)"></span>
