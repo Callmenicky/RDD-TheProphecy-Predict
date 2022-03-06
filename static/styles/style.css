@@ -369,18 +369,9 @@ table, th, td {
 
 /*slider or carousel*/
 .slideshow-container{
-	width: 50%;
 	padding: 8%;
 	position: relative;
 	margin: auto;
-}
-
-.mySlides fade{
-	margin: 0 auto;
-}
-	
-.mySlides fade>img{	
-	width: 40vw;
 }
 
 .sliderbutton{
@@ -393,40 +384,6 @@ table, th, td {
 
 .mySlides img{	
 	width:100%;
-}
-
-.prev{
-    cursor: pointer;
-    position: absolute;
-    top: 45%;
-    padding: 13px;
-  
-    margin-left: -34%;
-    color: white;
-    font-weight: bold;
-    font-size: 20px;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
-	
-}
-.next {
-    cursor: pointer;
-    position: absolute;
-    top: 45%;
-    padding: 13px;
-    
-    margin-left:25%;
-    color: white;
-    font-weight: bold;
-    font-size: 20px;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
-  
-}
-
-.prev:hover,
-.next:hover {
-    background-color: rgba(0, 0, 0, 0.8);
 }
 
 .dot{
@@ -442,31 +399,6 @@ table, th, td {
 
 .dot:hover{
 	background-color: #717171;
-}
-
-.fade{
-	-webkit-animation-name: fade;
-	-webkit-animation-duration: 1.5s;
-	animation-name: fade;
-	animation-duration: 1.5s;
-}
-
-@-webkit-keyframes fade{
-	from {
-		opacity: .4
-	}
-	to{
-		opacity: 1
-	}
-}
-
-@keyframes fade{
-	from { 
-		opacity: .4
-	}
-	to{ 	
-		opacity: 1
-	}
 }
 
 /*profile page*/
