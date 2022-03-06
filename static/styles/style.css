@@ -353,7 +353,7 @@ table, th, td {
     border-width: 1vw;
 }
 
-.predimg img{
+.predimg img.pca{
     height: 23vw;
     opacity: 0.95;
 }
@@ -399,10 +399,6 @@ table, th, td {
 .mySlides img{
 	opacity: 0.2;
 	width:100%;
-}
-
-.pca{
-	opacity: 1;
 }
 
 .dot{
