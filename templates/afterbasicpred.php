@@ -41,17 +41,17 @@
         <button type="submit" name="predictadvance" class="btn btn-info">Predict</button>
     </form>
 	</div>
-        <div class="predimg predimgafter">\
+        <div class="predimg predimgafter">
             <!--Start of slideshow-->
               <div class="slideshow-container">
                   <div class="mySlides fade">
-                    <img src="{{url_for('static', filename='images/result_ml.png')}}" alt="image1">
+                    <img src="{{url_for('static', filename='images/icon_ml.JPG')}}" alt="image1">
               </div>
               <div class="mySlides fade">
-                    <img src="{{url_for('static', filename='images/result_ml.png')}}" alt="image2">
+                    <img src="{{url_for('static', filename='images/icon_ml.JPG')}}" alt="image2">
               </div>
               <div class="mySlides fade">
-		    <img src="{{url_for('static', filename='images/result_ml.png')}}" alt="image3">
+		    <img src="{{url_for('static', filename='images/icon_ml.JPG')}}" alt="image3">
               </div>
 
                 <a class="prev" onclick="plusSlides(-1)">❮</a>
