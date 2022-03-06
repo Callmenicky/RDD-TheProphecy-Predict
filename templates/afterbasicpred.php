@@ -45,13 +45,13 @@
             <!--Start of slideshow-->
               <div class="slideshow-container">
                   <div class="mySlides fade">
-                    <img src="{{url_for('static', filename='images/record_ml.png')}}" alt="image1">
+                    <img src="{{url_for('static', filename='images/result_ml.png')}}" alt="image1">
               </div>
               <div class="mySlides fade">
-                    <img src="{{url_for('static', filename='images/record_ml.png')}}" alt="image2">
+                    <img src="{{url_for('static', filename='images/result_ml.png')}}" alt="image2">
               </div>
               <div class="mySlides fade">
-		    <img src="{{url_for('static', filename='images/record_ml.png')}}" alt="image3">
+		    <img src="{{url_for('static', filename='images/result_ml.png')}}" alt="image3">
               </div>
 
                 <a class="prev" onclick="plusSlides(-1)">❮</a>
