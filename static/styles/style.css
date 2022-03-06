@@ -378,11 +378,25 @@ table, th, td {
 	text-align: center;
 }
 
+.mySlides{
+	position: relative;
+  	text-align: center;
+  	color: #000000;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .mySlides:not(:first-child){
 	display: none;
 }
 
-.mySlides img{	
+.mySlides img{
+	opacity: 0.2;
 	width:100%;
 }
 
@@ -397,7 +411,7 @@ table, th, td {
 	transition: background-color 0.6s ease;
 }
 
-.dot:hover{
+.dot:hover, .dot:active{
 	background-color: #717171;
 }
 
