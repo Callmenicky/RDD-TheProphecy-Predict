@@ -3,10 +3,6 @@
 
 {% extends 'adminheader.php' %}
 {% block content %}
-<script>
-      let smilesName = sessionStorage.getItem("smiles");
-      document.getElementById("mysmiles").innerHTML = smilesName;
-</script>
 <body>
   <h1>Machine Learning Reverse Drug Discovery</h1>
   <section class="predict">
@@ -22,7 +18,7 @@
         </select>
         <select name="modelName" id="modelName"><option>Select ML Model</option></select>
         <br/>
-        <button type="submit" name="predictbasicadmin" class="btn btn-info">Predict</button>
+        <button type="submit" name="predictbasicadmin" class="btn btn-info" onclick="saveData();">Predict</button>
         </form>
         </div>
         <div class="predimg predimgafter">
@@ -62,9 +58,18 @@
 		<address>&#169; RDD 2021. All rights reserved</address> 
 		<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 	</footer>
+    <script>
+          let smilesName = sessionStorage.getItem("smiles");
+          document.getElementById("mysmiles").innerHTML = smilesName;
+       </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
         <script>
+            function saveData(){
+                var input = document.getElementById("smiles");
+                sessionStorage.setItem("smiles", input.value);
+            }
+            
             $(document).ready(function () {
                 $("#disease").selectpicker();
    
