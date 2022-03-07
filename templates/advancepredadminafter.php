@@ -23,24 +23,35 @@
         </form>
       </div>
       <div class="predimg predimgafter">
-	      <p><b>Prediction Results</b></p>
-				{%if data[0] == "Active"%}
-                {% for row in temp %}
+          <!--Start of slideshow-->
+	      <div class="slideshow-container">
+		  <div class="mySlides">
+		      <img src="{{url_for('static', filename='images/result_ml.jpg')}}" alt="result icon">
+		      <div class="centered">
+			  {% for row in temp %}
                 <p>In <b>{{row.ModelName}}</b> model that target on <b>{{row.TargetDisease}}</b>, molecule that has pIC50 higher than <b>{{row.pIC50}}</b> is consider as active.</p>
-                {% endfor %}
-				<a download href="outcome.txt">  
-				<a href=" {{url_for('static', filename='outcome.txt')}}" download>Download</a>
-				<img src="{{url_for('static', filename='images/plots1.PNG')}}" alt="identity icon"> 
-
-				{%else%}
-                {% for row in temp %}
-                <p>In <b>{{row.ModelName}}</b> model that target on <b>{{row.TargetDisease}}</b>, molecule that has pIC50 higher than <b>{{row.pIC50}}</b> is consider as active.</p>
-                {% endfor %}
-				<a href=" {{url_for('static', filename='outcome.txt')}}" download>Download</a>
-				<img src="{{url_for('static', filename='images/plots1.PNG')}}" alt="identity icon"> 
-				
-				{%endif%}
-					<br><br>
+              {% endfor %}
+		      </div>
+		  </div>
+		  <div class="mySlides">
+		      <img src="{{url_for('static', filename='images/plots1.PNG')}}" alt="pca chart" class="pca">
+		  </div>
+		  <div class="mySlides">
+		      <img src="{{url_for('static', filename='images/result_ml.jpg')}}" alt="result icon">
+		      <div class="centered"><p>PCA chart is applied to visualize the accuacy of prediction. <b>If the SMILES(green) lays between the range of training sample(red), the prediction result is promising.</b></p></div>
+		  </div>
+		  <div class="sliderButtons">
+		      <span class="dot" onclick="currentSlide(1)"></span>
+		      <span class="dot" onclick="currentSlide(2)"></span>
+		      <span class="dot" onclick="currentSlide(3)"></span>
+		  </div>
+	      </div>
+	<!--End of slideshow-->
+          <h2>Prediction Result: 
+              <a download href="outcome.txt">
+                <a href=" {{url_for('static', filename='outcome.txt')}}" download>Download</a>
+              </a>
+          </h2>
       </div>
     </section>
   	<footer>
