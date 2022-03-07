@@ -3,6 +3,10 @@
 
 {% extends 'enduserheader.php' %}
 {% block content %}
+<script>
+      let smilesName = sessionStorage.getItem("smiles");
+      document.getElementById("mysmiles").innerHTML = smilesName;
+</script>
 <body>
   <h1>Machine Learning Reverse Drug Discovery</h1>
   <section class="predict">
@@ -22,6 +26,7 @@
         </form>
         </div>
         <div class="predimg predimgafter">
+            <h2 id="mysmiles"></h2>
 	  <!--Start of slideshow-->
 	      <div class="slideshow-container">
 		  <div class="mySlides">

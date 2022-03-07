@@ -18,7 +18,7 @@
         </select>
         <select name="modelName" id="modelName"><option>Select ML Model</option></select>
         <br/>
-        <button type="submit" name="predictbasicadmin" class="btn btn-info">Predict</button>
+        <button type="submit" name="predictbasicadmin" class="btn btn-info" onclick="saveData();">Predict</button>
         </form>
         </div>
         <div class="predimg">
@@ -32,6 +32,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
         <script>
+            function saveData(){
+                var input = document.getElementById("smiles");
+                sessionStorage.setItem("smiles", input.value);
+            }
+            
             $(document).ready(function () {
                 $("#disease").selectpicker();
    
