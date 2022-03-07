@@ -441,8 +441,8 @@ def advancepredmethod():
     
     with open(path, "w") as f:
         for i in pred: 
-            f.write("Smile String ")
-            f.write(str(count + 1))
+            f.write("Smile String - ")
+            f.write(molecule_list[count + 1])
             f.write(": ")
             f.write(prediction[count] + "\n") 
             count += 1
