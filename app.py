@@ -5,6 +5,8 @@ import pickle
 import sklearn
 import csv
 import seaborn as sns
+import psycopg2
+import psycopg2.extras
 
 #Import RDKit
 import kora.install.rdkit
@@ -40,59 +42,58 @@ with open('hiv_rfc', 'rb') as f:
 
 #model2 = pickle.load(open('hiv_rfc', 'rb'))
 
-app.config['MYSQL_HOST'] = 'us-cdbr-east-04.cleardb.com'
-app.config['MYSQL_USER'] = 'b0f9135aa66d86'
-app.config['MYSQL_PASSWORD'] = '2e28f6a7'
-app.config['MYSQL_DB'] = 'heroku_c703864e708562a'
-
-mysql = MySQL(app)
+conn = psycopg2.connect(user="frzxfyklyoytbw",
+                        password="6be1eb7f38291fdde5be4fc7707a108f3db8f11542897ff6716b80cf9fe93c64",
+                        host="ec2-3-216-221-31.compute-1.amazonaws.com",
+                        port="5432",
+                        database="ddji904cha3set")
 
 @app.route('/')
 def man():
-    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    result = cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC")
     disease = cur.fetchall()
     return render_template('basicpred.php', disease=disease)
 
 @app.route('/basicpred')
 def basicpred():
-    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    result = cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC")
     disease = cur.fetchall()
     return render_template('basicpred.php', disease=disease)
     
 @app.route('/advancepred')
 def advancepred():
-    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    result = cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC")
     disease = cur.fetchall()
     return render_template('advancepred.php', disease=disease)
     
 @app.route('/basicpredadmin')
 def basicpredadmin():
-    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    result = cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC")
     disease = cur.fetchall()
     return render_template('basicpredadmin.php', disease=disease)
     
 @app.route('/advancepredadmin')
 def advancepredadmin():
-    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    result = cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC")
     disease = cur.fetchall()
     return render_template('advancepredadmin.php', disease=disease)
     
 @app.route('/basicpredenduser')
 def basicpredenduser():
-    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    result = cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC")
     disease = cur.fetchall()
     return render_template('basicpredenduser.php', disease=disease)
     
 @app.route('/advancepredenduser')
 def advancepredenduser():
-    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
+    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+    result = cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC")
     disease = cur.fetchall()
     return render_template('advancepredenduser.php', disease=disease)
 
@@ -259,11 +260,11 @@ def basicpredmethod():
     today = date.today()
     
     cur = mysql.connection.cursor()
-    sql = "SELECT ModelID FROM model WHERE ModelName=%s and TargetDisease=%s"
+    sql = "SELECT model_id FROM model WHERE model_name=%s and target_disease=%s"
     val = (data3,data2)
     cur.execute(sql,val)
     Modelid = cur.fetchall()
-    cur.execute("INSERT INTO basic_prediction(Smiles, TargetDisease, ModelApply, Output, PredictionDate) VALUES (%s, %s , %s , %s, %s)", (data1, data2, Modelid, pred, today))
+    cur.execute("INSERT INTO basic_prediction(smiles, target_disease, model_apply, output, prediction_date) VALUES (%s, %s , %s , %s, %s)", (data1, data2, Modelid, pred, today))
     mysql.connection.commit()
     cur.close()
     return pred
