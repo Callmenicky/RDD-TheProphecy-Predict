@@ -6,7 +6,8 @@ import sklearn
 import csv
 import seaborn as sns
 import psycopg2
-import psycopg2.extras
+import base64
+import binascii
 
 #Import RDKit
 import kora.install.rdkit
@@ -25,6 +26,7 @@ from tqdm import notebook
 from rdkit import Chem
 from rdkit.Chem import AllChem
 from mordred import Calculator, descriptors, is_missing
+from psycopg2.extras import RealDictCursor
 
 #scalar
 from sklearn.preprocessing import StandardScaler
@@ -36,79 +38,82 @@ from datetime import date
 
 app = Flask(__name__)
 
-# Use pickle to load in the pre-trained model.
-with open('hiv_rfc', 'rb') as f:
-    model1 = pickle.load(f)
-
-#model2 = pickle.load(open('hiv_rfc', 'rb'))
-
-conn = psycopg2.connect(user="frzxfyklyoytbw",
-                        password="6be1eb7f38291fdde5be4fc7707a108f3db8f11542897ff6716b80cf9fe93c64",
-                        host="ec2-3-216-221-31.compute-1.amazonaws.com",
-                        port="5432",
-                        database="ddji904cha3set")
+conn = psycopg2.connect(
+    host="ec2-3-216-221-31.compute-1.amazonaws.com",
+    database="ddji904cha3set",
+    user="frzxfyklyoytbw",
+    password="6be1eb7f38291fdde5be4fc7707a108f3db8f11542897ff6716b80cf9fe93c64")
+    
+print ("Opened database successfully")
 
 @app.route('/')
 def man():
-    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    result = cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC")
+    cur = conn.cursor()     
+    cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
     disease = cur.fetchall()
     return render_template('basicpred.php', disease=disease)
 
 @app.route('/basicpred')
 def basicpred():
-    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    result = cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC")
+    cur = conn.cursor()     
+    cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
     disease = cur.fetchall()
     return render_template('basicpred.php', disease=disease)
     
 @app.route('/advancepred')
-def advancepred():
-    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    result = cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC")
+def advancepred(): 
+    cur = conn.cursor()     
+    cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
     disease = cur.fetchall()
     return render_template('advancepred.php', disease=disease)
     
 @app.route('/basicpredadmin')
 def basicpredadmin():
-    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    result = cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC")
+    cur = conn.cursor()     
+    cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
     disease = cur.fetchall()
     return render_template('basicpredadmin.php', disease=disease)
     
 @app.route('/advancepredadmin')
 def advancepredadmin():
-    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    result = cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC")
+    cur = conn.cursor()     
+    cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
     disease = cur.fetchall()
     return render_template('advancepredadmin.php', disease=disease)
     
 @app.route('/basicpredenduser')
 def basicpredenduser():
-    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    result = cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC")
+    cur = conn.cursor()     
+    cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
     disease = cur.fetchall()
     return render_template('basicpredenduser.php', disease=disease)
     
 @app.route('/advancepredenduser')
 def advancepredenduser():
-    cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-    result = cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC")
+    cur = conn.cursor()     
+    cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
     disease = cur.fetchall()
     return render_template('advancepredenduser.php', disease=disease)
+    
+def loadmodel(modelname,targetdis):
+    cur = conn.cursor()
+    sql = "SELECT model FROM model WHERE model_name=%s and target_disease=%s"
+    val = (modelname,targetdis)
+    cur.execute(sql,val)
+    model = cur.fetchone()[0] #Memoryview Object
+     
+    model1 = bytes(model)
+    model2 = base64.b64decode(model1); #Decode
+    model3 = model2.hex() #become hex
+    model4 = binascii.unhexlify(model3) #hex to binary
+    model5 = pickle.loads(model4)
+   
+    return model5;
 
 def basicpredmethod():
     data1 = request.form['smiles']
     data2 = request.form['disease']
     data3 = request.form['modelName']
-
-    #diseases = ["HIV", "Coronavirus"]
-    #modelName = [model1, model2]
-    
-    #for disease in diseases:
-        #if(data2 == disease):
-            #position = diseases.index(disease)
-            #model = modelName[position]
             
     # Convert SMILES into molecular descriptors
     molecule_list = [data1]#insert name of list containing only SMILES e.g. smiles_only_lst
@@ -127,7 +132,8 @@ def basicpredmethod():
         descriptors_table[index, :] = Calculator(descriptors, ignore_3D=False)(mol).fill_missing()
         
     df =  pd.DataFrame(descriptors_table, columns=Calculator(descriptors, ignore_3D=False).descriptors)
-            
+      
+    ##
     dataset_train = pd.read_csv('hiv integrase dataset (mordred_active_train).csv')
     
     dataset_train = dataset_train.dropna(axis='columns')
@@ -154,8 +160,8 @@ def basicpredmethod():
     #identify x_train and y_train
     x_train = dataset_train.loc[:, feature_train].values
 
+    ##
     dataset_train = pd.read_csv('hiv integrase dataset (mordred_active_train).csv')
-    #dataset_train = pd.read_csv('hiv integrase dataset (padelpy_active_train).csv')
     y_train = dataset_train.loc[:, ['active']].values
     
     feature_test
@@ -184,6 +190,7 @@ def basicpredmethod():
     new_test_df = pd.concat([df_test_pca],axis = 1)
     
     #save as csv
+    ##
     new_train_df.to_csv('hiv integrase dataset (pca_train_descriptors).csv', index=True, header=True)
     new_test_df.to_csv('hiv integrase dataset (pca_test_descriptors).csv', index=True, header=True)
     
@@ -203,6 +210,7 @@ def basicpredmethod():
     X_test_norm = scaler.transform(X_test)
     
     #load dataset
+    ##
     dataset_train = pd.read_csv('hiv integrase dataset (pca_train_descriptors).csv')
     dataset_test = pd.read_csv('hiv integrase dataset (pca_test_descriptors).csv')
     
@@ -245,7 +253,8 @@ def basicpredmethod():
     
     plt.savefig('static/images/plots.PNG')
     
-    pred = model1.predict(X_test_norm)
+    predmodel = loadmodel(data3,data2)
+    pred = predmodel.predict(X_test_norm)
     
     print(pred)
     
@@ -260,11 +269,11 @@ def basicpredmethod():
     today = date.today()
     
     cur = mysql.connection.cursor()
-    sql = "SELECT model_id FROM model WHERE model_name=%s and target_disease=%s"
+    sql = "SELECT ModelID FROM model WHERE ModelName=%s and TargetDisease=%s"
     val = (data3,data2)
     cur.execute(sql,val)
     Modelid = cur.fetchall()
-    cur.execute("INSERT INTO basic_prediction(smiles, target_disease, model_apply, output, prediction_date) VALUES (%s, %s , %s , %s, %s)", (data1, data2, Modelid, pred, today))
+    cur.execute("INSERT INTO basic_prediction(Smiles, TargetDisease, ModelApply, Output, PredictionDate) VALUES (%s, %s , %s , %s, %s)", (data1, data2, Modelid, pred, today))
     mysql.connection.commit()
     cur.close()
     return pred
@@ -273,15 +282,6 @@ def advancepredmethod():
     data1 = request.files['smilescsv']
     data2 = request.form['disease']
     data3 = request.form['modelName']
-    
-    
-    #diseases = ["HIV", "Coronavirus"]
-    #modelName = [model1, model2]
-    
-    #for disease in diseases:
-        #if(data2 == disease):
-            #position = diseases.index(disease)
-            #model = modelName[position]
       
     if data1.filename != '':
         data1.save("inputsmiles.txt")
@@ -376,7 +376,8 @@ def advancepredmethod():
     X_train_norm = scaler.fit_transform(X_train)
     X_test_norm = scaler.transform(X_test)
     
-    pred = model1.predict(X_test_norm)
+    predmodel = loadmodel(data3,data2)
+    pred = predmodel.predict(X_test_norm)
     
     prediction = []
     
@@ -436,12 +437,13 @@ def advancepredmethod():
     )
     
     plt.savefig('static/images/plots1.PNG')
-        
-    
-    path = "static/outcome.txt"
-    
+
+    path = "static/outcome.csv"
+            
     with open(path, "w") as f:
+        writer = csv.writer(f)
         for i in pred: 
+            #write a row to the csv file
             f.write(molecule_list[count])
             f.write(": ")
             f.write(prediction[count] + "\n") 
@@ -449,13 +451,14 @@ def advancepredmethod():
            
     today = date.today()
     
-    cur = mysql.connection.cursor()
-    sql = "SELECT ModelID FROM model WHERE ModelName=%s and TargetDisease=%s"
+    cur = conn.cursor()  
+    sql = "SELECT model_id FROM model WHERE model_name=%s and target_disease=%s"
     val = (data3,data2)
     cur.execute(sql,val)
     Modelid = cur.fetchall()
-    cur.execute("INSERT INTO advance_prediction(InputCSV, TargetDisease, ModelApply, OutputCSV, Date) VALUES (%s, %s , %s , %s, %s)", (data1, data2, Modelid, "static/outcome.txt", today))
-    mysql.connection.commit()
+     
+    cur = conn.cursor()
+    cur.execute("INSERT INTO public.advanceprediction(user_id, target_disease, model_apply, output_csv, date) VALUES (%s, %s , %s , %s, %s)", (1,data2, int(Modelid[0][0]), "static/outcome.txt", today))
     cur.close()
    
     return prediction
@@ -463,79 +466,79 @@ def advancepredmethod():
 @app.route('/basicpredict', methods=['POST'])
 def basicpredict():
     pred = basicpredmethod()
-    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
+    cur = conn.cursor()     
+    cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC")
     disease = cur.fetchall()
-    result = cur.execute("SELECT ModelID,ModelName,TargetDisease,pIC50 FROM model WHERE ModelID=575")
+    result = cur.execute("SELECT model_id,model_name,target_disease,pic50 FROM model WHERE model_id=97")
     temp = cur.fetchall()
     return render_template('afterbasicpred.php', disease=disease, temp=temp, data = pred)
 
 @app.route('/basicpredictadmin', methods=['POST'])
 def basicpredictadmin():
     pred = basicpredmethod()
-    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
+    cur = conn.cursor()     
+    cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC")
     disease = cur.fetchall()
-    result = cur.execute("SELECT ModelID,ModelName,TargetDisease,pIC50 FROM model WHERE ModelID=575")
+    result = cur.execute("SELECT model_id,model_name,target_disease,pic50 FROM model WHERE model_id=97")
     temp = cur.fetchall()
     return render_template('basicpredadminafter.php', disease=disease, temp=temp, data = pred)
 
 @app.route('/basicpredictenduser', methods=['POST'])
 def basicpredictenduser():
     pred = basicpredmethod()
-    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
+    cur = conn.cursor()     
+    cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC")
     disease = cur.fetchall()
-    result = cur.execute("SELECT ModelID,ModelName,TargetDisease,pIC50 FROM model WHERE ModelID=575")
+    result = cur.execute("SELECT model_id,model_name,target_disease,pic50 FROM model WHERE model_id=97")
     temp = cur.fetchall()
     return render_template('basicpredenduserafter.php', disease=disease, temp=temp, data = pred)
     
 @app.route('/advancepredict', methods=['POST'])
 def advancepredict():
     pred = advancepredmethod()
-    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
+    cur = conn.cursor()     
+    cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC")
     disease = cur.fetchall()
-    result = cur.execute("SELECT ModelID,ModelName,TargetDisease,pIC50 FROM model WHERE ModelID=575")
+    result = cur.execute("SELECT model_id,model_name,target_disease,pic50 FROM model WHERE model_id=97")
     temp = cur.fetchall()
     return render_template('afteradvancepred.php', disease=disease, temp=temp, data = pred)
 
 @app.route('/advancepredictadmin', methods=['POST'])
 def advancepredictadmin():
     pred = advancepredmethod()
-    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
+    cur = conn.cursor()     
+    cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC")
     disease = cur.fetchall()
-    result = cur.execute("SELECT ModelID,ModelName,TargetDisease,pIC50 FROM model WHERE ModelID=575")
+    result = cur.execute("SELECT model_id,model_name,target_disease,pic50 FROM model WHERE model_id=97")
     temp = cur.fetchall()
     return render_template('advancepredadminafter.php', disease=disease, temp=temp, data = pred)
 
 @app.route('/advancepredictenduser', methods=['POST'])
 def advancepredictenduser():
     pred = advancepredmethod()
-    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    result = cur.execute("SELECT DISTINCT TargetDisease FROM model ORDER BY TargetDisease ASC")
+    cur = conn.cursor()     
+    cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC")
     disease = cur.fetchall()
-    result = cur.execute("SELECT ModelID,ModelName,TargetDisease,pIC50 FROM model WHERE ModelID=575")
+    result = cur.execute("SELECT model_id,model_name,target_disease,pic50 FROM model WHERE model_id=97")
     temp = cur.fetchall()
     return render_template('advancepredenduserafter.php', disease=disease, temp=temp, data = pred)
 
 @app.route("/mlmodel",methods=["POST","GET"])
 def dropdownlist():  
-    cursor = mysql.connection.cursor()
-    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cur = conn.cursor()
     if request.method == 'POST':
         disease_name = request.form['disease_name'] 
-        print(disease_name)  
-        result = cur.execute("SELECT * FROM model WHERE isEnable=1 AND TargetDisease = %s ORDER BY ModelName ASC", [disease_name] )
+        print(disease_name) 
+        result = cur.execute("SELECT * FROM model WHERE is_enable=true AND target_disease = %s ORDER BY model_name ASC", [disease_name] )
         mlmodel = cur.fetchall()  
         OutputArray = []
         for row in mlmodel:
             outputObj = {
-                'id': row['TargetDisease'],
-                'name': row['ModelName']}
+                'id': row[2],
+                'name': row[1]}
             OutputArray.append(outputObj)
     return jsonify(OutputArray)
 
 if __name__=="__main__":
     app.run(debug=True)
+    
