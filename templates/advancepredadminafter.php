@@ -49,7 +49,7 @@
 	<!--End of slideshow-->
           <h2>Prediction Result: 
               <a download href="outcome.txt">
-                <a href=" {{url_for('static', filename='outcome.txt')}}" download>Download</a>
+                <a href=" {{url_for('static', filename='outcome.csv')}}" download>Download</a>
               </a>
           </h2>
       </div>
