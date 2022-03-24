@@ -49,7 +49,7 @@
 		      <img src="{{url_for('static', filename='images/result_ml.jpg')}}" alt="result icon">
 		      <div class="centered">
 			  {% for row in temp %}
-                <p>In <b>{{row.[1]}}</b> model that target on <b>{{row[2]}}</b>, molecule that has pIC50 higher than <b>{{row[3]}}</b> is consider as active.</p>
+                <p>In <b>{{row[1]}}</b> model that target on <b>{{row[2]}}</b>, molecule that has pIC50 higher than <b>{{row[3]}}</b> is consider as active.</p>
               {% endfor %}
 		      </div>
 		  </div>
