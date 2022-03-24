@@ -14,7 +14,7 @@
         <select name="disease" id="disease"> 
             <option>Select Target Disease</option>
             {% for row in disease %}
-            <option value="{{row.TargetDisease}}">{{row.TargetDisease}}</option>
+            <option value="{{row[0]}}">{{row[0]}}</option>
             {% endfor %}
         </select>
         <select name="modelName" id="modelName"><option>Select ML Model</option></select>
