@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<script>
+if (location.search) {
+    var parts = location.search.substring(1).split('?');
+    alert(parts);
+</script>
 {% extends 'adminheader.php' %}
 {% block content %}
 <body>
