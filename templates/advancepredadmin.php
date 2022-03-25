@@ -5,6 +5,12 @@
 if (location.search) {
     var parts = location.search.substring(1).split('?');
     alert(parts);
+}
+	
+else
+{
+	alert("hi")
+}
 </script>
 {% extends 'adminheader.php' %}
 {% block content %}
