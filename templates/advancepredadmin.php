@@ -4,12 +4,7 @@
 <script>
 if (location.search) {
     var parts = location.search.substring(1).split('=');
-    alert(parts);
-}
-	
-else
-{
-	alert("hi")
+    alert(parts[1]);
 }
 </script>
 {% extends 'adminheader.php' %}
