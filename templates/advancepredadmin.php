@@ -3,7 +3,7 @@
 
 <script>
 if (location.search) {
-    var parts = location.search.substring(1).split('?');
+    var parts = location.search.substring(1).split('=');
     alert(parts);
 }
 	
