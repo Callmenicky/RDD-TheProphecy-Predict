@@ -468,8 +468,7 @@ def advancepredmethod():
      
     email = session['email']
     email = str(email)
-    email = email.split("?")
-    print("email: " + email)
+    print("email1: " + email)
    
     sql = "SELECT user_id FROM users WHERE email =%s"
     cur.execute(sql,val)
