@@ -3,12 +3,7 @@
 
 
 
-<?php 
-$email = $_GET['email'];
-echo $email;
 
-$_SESSION["email"] = $email;
-?>
 	
 {% extends 'adminheader.php' %}
 {% block content %}
@@ -27,7 +22,13 @@ $_SESSION["email"] = $email;
             <option value="{{row[0]}}">{{row[0]}}</option>
             {% endfor %}
         </select>
-        <select name="modelName" id="modelName"><option>Select ML Model</option></select>
+        <select name="modelName" id="modelName"><option>Select ML Model 
+		<?php 
+			$email = $_GET['email'];
+			echo $email;
+
+			$_SESSION["email"] = $email;
+		?></option></select>
         <br/>
         <button type="submit" name="predictadvanceAdmin" class="btn btn-info">Predict</button>
         </form>
