@@ -67,10 +67,8 @@ def basicpred():
 def advancepred(): 
     cur = conn.cursor()     
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
-    url = request.base_url
+    url = request.args.get('email')
     session['email'] = url
-    print("1:" + url)
-    disease = cur.fetchall()
     return render_template('advancepred.php', disease=disease)
     
 @app.route('/basicpredadmin')
@@ -87,7 +85,6 @@ def advancepredadmin():
     disease = cur.fetchall()
     url = request.args.get('email')
     session['email'] = url
-    print("1:" + url)
     return render_template('advancepredadmin.php', disease=disease)
     
 @app.route('/basicpredenduser')
@@ -468,9 +465,10 @@ def advancepredmethod():
     cur.close()
      
     email = session['email']
+    print(type(email))
     emails = str(email)
-    
-   
+    print(type(emails))
+
     cur = conn.cursor()  
     sql = "SELECT user_id FROM users WHERE email=%s"
     cur.execute(sql,emails)
