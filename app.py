@@ -468,7 +468,8 @@ def advancepredmethod():
     emails = str(email)
 
     cur = conn.cursor()  
-    sql = "SELECT user_id FROM users WHERE email=" + email
+    sql = "SELECT user_id FROM users WHERE email='" + email + '
+    print(sql)
     cur.execute(sql)
     Userid = cur.fetchone()
     cur.close()
