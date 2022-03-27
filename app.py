@@ -467,7 +467,7 @@ def advancepredmethod():
     Modelid = cur.fetchall()
      
     url = session['email']
-    url = str(url)
+    url = str(url[0])
     print("url:" + url)
     email = url.split("?")
     print("email: " + email)
