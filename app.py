@@ -467,9 +467,10 @@ def advancepredmethod():
     Modelid = cur.fetchall()
      
     url = session['email']
-    print("2:" + url)
     url = str(url)
+    print("url:" + url)
     email = url.split("?")
+    print("email: " + email)
    
     sql = "SELECT user_id FROM users WHERE email =%s"
     cur.execute(sql,val)
