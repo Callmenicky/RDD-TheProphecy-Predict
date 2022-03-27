@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, send_file
+from flask import Flask, render_template, jsonify, request, send_file, session
 from flask_mysqldb import MySQL,MySQLdb
 import numpy as np
 import pickle
@@ -38,6 +38,9 @@ from datetime import date
 
 app = Flask(__name__)
 
+# Set the secret key to some random bytes. Keep this really secret!
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+
 conn = psycopg2.connect(
     host="ec2-3-216-221-31.compute-1.amazonaws.com",
     database="ddji904cha3set",
@@ -64,6 +67,8 @@ def basicpred():
 def advancepred(): 
     cur = conn.cursor()     
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
+    url = request.base_url
+    session['email'] = url
     disease = cur.fetchall()
     return render_template('advancepred.php', disease=disease)
     
@@ -456,6 +461,14 @@ def advancepredmethod():
     val = (data3,data2)
     cur.execute(sql,val)
     Modelid = cur.fetchall()
+    
+    
+    url = session['email']
+    email = url.split("?")
+   
+    sql = "SELECT user_id FROM users WHERE email =%s"
+    cur.execute(sql,val)
+    Userid = cur.fetchone()
      
     cur = conn.cursor()
     cur.execute("INSERT INTO public.advanceprediction(user_id, target_disease, model_apply, output_csv, date) VALUES (%s, %s , %s , %s, %s)", (1,data2, int(Modelid[0][0]), "static/outcome.txt", today))
