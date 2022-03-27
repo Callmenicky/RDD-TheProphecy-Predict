@@ -465,13 +465,11 @@ def advancepredmethod():
     cur.close()
      
     email = session['email']
-    print(type(email))
     emails = str(email)
-    print(type(emails))
 
     cur = conn.cursor()  
-    sql = "SELECT user_id FROM users WHERE email=%s"
-    cur.execute(sql,emails)
+    sql = "SELECT user_id FROM users WHERE email=" + email
+    cur.execute(sql)
     Userid = cur.fetchone()
     cur.close()
      
