@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<script>
-if (location.search) {
-    var parts = location.search.substring(1).split('=');
-    alert(parts[1]);
-}
-</script>
+
+
+<?php 
+$actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+echo $actual_link;
+
+parse_str($url_components['query'], $params);
+
+$email = $params['email'];
+echo $email;
+?>
+	
 {% extends 'adminheader.php' %}
 {% block content %}
 <body>
+  
   <h1>Machine Learning Reverse Drug Discovery</h1>
   <section class="predict">
     <div class="predcontent">
