@@ -69,7 +69,7 @@ def advancepred():
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
     url = request.base_url
     session['email'] = url
-    print(session['email'])
+    print("1:" + url)
     disease = cur.fetchall()
     return render_template('advancepred.php', disease=disease)
     
@@ -464,7 +464,7 @@ def advancepredmethod():
     Modelid = cur.fetchall()
      
     url = session['email']
-    print(url)
+    print("2:" + url)
     email = url.split("?")
    
     sql = "SELECT user_id FROM users WHERE email =%s"
