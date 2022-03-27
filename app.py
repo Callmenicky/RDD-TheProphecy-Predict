@@ -461,8 +461,7 @@ def advancepredmethod():
     val = (data3,data2)
     cur.execute(sql,val)
     Modelid = cur.fetchall()
-    
-    
+     
     url = session['email']
     email = url.split("?")
    
@@ -471,7 +470,7 @@ def advancepredmethod():
     Userid = cur.fetchone()
      
     cur = conn.cursor()
-    cur.execute("INSERT INTO public.advanceprediction(user_id, target_disease, model_apply, output_csv, date) VALUES (%s, %s , %s , %s, %s)", (1,data2, int(Modelid[0][0]), "static/outcome.txt", today))
+    cur.execute("INSERT INTO public.advanceprediction(user_id, target_disease, model_apply, output_csv, date) VALUES (%s, %s , %s , %s, %s)", (Userid, data2, int(Modelid[0][0]), "static/outcome.txt", today))
     cur.close()
    
     return prediction
