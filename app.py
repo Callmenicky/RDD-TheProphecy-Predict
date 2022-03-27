@@ -472,6 +472,7 @@ def advancepredmethod():
     print(sql)
     cur.execute(sql)
     Userid = cur.fetchone()
+    print(Userid)
     cur.close()
      
     cur = conn.cursor()
