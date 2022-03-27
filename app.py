@@ -465,14 +465,20 @@ def advancepredmethod():
     val = (data3,data2)
     cur.execute(sql,val)
     Modelid = cur.fetchall()
+    cur.close()
      
     email = session['email']
     email = str(email)
-    print("email1: " + email)
+    emailtesting = "email1: " + email
+    print(emailtesting)
+    print("email2: " + email)
+    
    
+    cur = conn.cursor()  
     sql = "SELECT user_id FROM users WHERE email =%s"
     cur.execute(sql,email)
     Userid = cur.fetchone()
+    cur.close()
      
     cur = conn.cursor()
     cur.execute("INSERT INTO public.advanceprediction(user_id, target_disease, model_apply, output_csv, date) VALUES (%s, %s , %s , %s, %s)", (Userid, data2, int(Modelid[0][0]), "static/outcome.txt", today))
