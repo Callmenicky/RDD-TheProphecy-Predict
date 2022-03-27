@@ -468,6 +468,7 @@ def advancepredmethod():
      
     url = session['email']
     print("2:" + url)
+    url = str(url)
     email = url.split("?")
    
     sql = "SELECT user_id FROM users WHERE email =%s"
