@@ -571,7 +571,8 @@ def advancepredictadmin():
     disease = cur.fetchall()
     
     modelid = session['model']
-    modelid = int(modelid)
+    print(modelid[0])
+    modelid = int(modelid[0])
     sql = "SELECT model_id,model_name,target_disease,pic50 FROM model WHERE model_id='" + modelid + "'"
     print(sql)
     
