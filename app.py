@@ -69,6 +69,8 @@ def basicpred():
 def advancepred(): 
     cur = conn.cursor()     
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
+    disease = cur.fetchall()
+    session['email'] = None
     return render_template('advancepred.php', disease=disease)
     
 @app.route('/basicpredadmin')
