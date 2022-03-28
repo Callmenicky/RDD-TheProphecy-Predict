@@ -569,7 +569,13 @@ def advancepredictadmin():
     cur = conn.cursor()     
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC")
     disease = cur.fetchall()
-    result = cur.execute("SELECT model_id,model_name,target_disease,pic50 FROM model WHERE model_id=97")
+    
+    modelid = session['model']
+    modelid = int(modelid)
+    sql = "SELECT model_id,model_name,target_disease,pic50 FROM model WHERE model_id='" + modelid + "'"
+    print(sql)
+    
+    result = cur.execute(sql) 
     temp = cur.fetchall()
     return render_template('advancepredadminafter.php', disease=disease, temp=temp, data = pred)
 
