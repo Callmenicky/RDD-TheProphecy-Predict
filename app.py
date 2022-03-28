@@ -92,11 +92,8 @@ def advancepredadmin():
     disease = cur.fetchall()
     url = request.args.get('email')
     print(url)
-    if (url != None)
-    {
+    if (url != None):
         session['email'] = url
-    }
-    retu
     return render_template('advancepredadmin.php', disease=disease)
     
 @app.route('/basicpredenduser')
