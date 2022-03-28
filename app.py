@@ -456,6 +456,7 @@ def advancepredmethod():
             count += 1
            
     today = date.today()
+    print(today)
     
     cur = conn.cursor()  
     sql = "SELECT model_id FROM model WHERE model_name=%s and target_disease=%s"
@@ -478,7 +479,8 @@ def advancepredmethod():
      
     cur = conn.cursor()
     #cur.execute("INSERT INTO advanceprediction(user_id, target_disease, model_apply, output_csv, date) VALUES (%s, %s , %s , %s, %s)", (Userid, data2, int(Modelid[0][0]), "static/outcome.csv", today))
-    cur.execute("INSERT INTO advanceprediction(user_id, target_disease, model_apply, output_csv, date) VALUES (%s, %s , %s , %s, %s)", (3, 'HIV', 25, "static/outcome.csv", today))
+    #cur.execute("INSERT INTO advanceprediction(user_id, target_disease, model_apply, output_csv, date) VALUES (%s, %s , %s , %s, %s)", (3, 'HIV', 25, "static/outcome.csv", today))
+    conn.commit()
     cur.close()
    
     return prediction
