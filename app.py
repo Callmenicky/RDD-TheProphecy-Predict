@@ -81,9 +81,8 @@ def basicpredadmin():
     url = request.args.get('email')
     if (url != None):
         session['email'] = url
-        flash(session['email'])
     if (url == None):
-        flash('message is printed')
+        flash('Login is required to proceed')
     return render_template('basicpredadmin.php', disease=disease)
     
 @app.route('/advancepredadmin')
@@ -94,6 +93,8 @@ def advancepredadmin():
     url = request.args.get('email')
     if (url != None):
         session['email'] = url
+    if (url == None):
+        flash('Login is required to proceed')
     return render_template('advancepredadmin.php', disease=disease)
     
 @app.route('/basicpredenduser')
@@ -104,6 +105,8 @@ def basicpredenduser():
     url = request.args.get('email')
     if (url != None):
         session['email'] = url
+    if (url == None):
+        flash('Login is required to proceed')
     return render_template('basicpredenduser.php', disease=disease)
     
 @app.route('/advancepredenduser')
@@ -114,6 +117,8 @@ def advancepredenduser():
     url = request.args.get('email')
     if (url != None):
         session['email'] = url
+    if (url == None):
+        flash('Login is required to proceed')
     return render_template('advancepredenduser.php', disease=disease)
     
 def loadmodel(modelname,targetdis):

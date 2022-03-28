@@ -5,6 +5,18 @@
 {% block content %}
 <body>
   <h1>Machine Learning Reverse Drug Discovery</h1>
+    
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <script>
+          var messages = {{ messages | safe }};
+          for (var i=0; i<messages.length; i++) {
+            alert(messages[i]);
+          }
+          location.href = "https://rdd-theprophecy.herokuapp.com/login.php";
+        </script>
+    {% endif %}
+  {% endwith %}
   <section class="predict">
     <div class="predcontent">
         <h2>Advance Prediction</h2>
