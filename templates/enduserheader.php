@@ -20,7 +20,6 @@
 
 <header>
 <nav>
-    <?php include "sessioncheckenduser.php"; ?>
 	<!-- The logo is originally illustrated and designed -->
 	  <ul>
 		<a href="https://rdd-theprophecy.herokuapp.com/dashboardenduser.php"><img src="{{url_for('static', filename='images/logo_RDD.png')}}" alt="logo"/></a>
