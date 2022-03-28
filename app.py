@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, send_file, session
+from flask import Flask, render_template, jsonify, request, send_file, session, flash
 from flask_mysqldb import MySQL,MySQLdb
 import numpy as np
 import pickle
@@ -35,9 +35,6 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 
 from datetime import date
-
-#show message
-import flash
 
 app = Flask(__name__)
 
