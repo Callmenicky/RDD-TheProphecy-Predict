@@ -43,7 +43,7 @@
         <li><a href="https://rdd-theprophecy.herokuapp.com/profileall.php">All</a></li>
       </ul>
     </li>
-    <li class="parent"><a href="https://rdd-theprophecy.herokuapp.com/index.php">Logout</a></li>
+    <li class="parent"><a href="#" onclick = "logout()">Logout</a></li>
   </ul>
 </nav>
 </header>
