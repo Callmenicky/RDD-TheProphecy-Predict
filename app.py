@@ -91,7 +91,12 @@ def advancepredadmin():
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
     disease = cur.fetchall()
     url = request.args.get('email')
-    session['email'] = url
+    print(url)
+    if (url != None)
+    {
+        session['email'] = url
+    }
+    retu
     return render_template('advancepredadmin.php', disease=disease)
     
 @app.route('/basicpredenduser')
@@ -573,7 +578,7 @@ def advancepredictadmin():
     modelid = session['model']
     print(modelid[0][0])
     modelid = modelid[0][0]
-    sql = "SELECT model_id,model_name,target_disease,pic50 FROM model WHERE model_id='" + modelid + "'"
+    sql = "SELECT model_id,model_name,target_disease,pic50 FROM model WHERE model_id='" + str(modelid) + "'"
     print(sql)
     
     result = cur.execute(sql) 
