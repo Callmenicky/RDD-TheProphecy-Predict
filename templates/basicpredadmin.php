@@ -5,12 +5,14 @@
 {% block content %}
 <body>
   <h1>Machine Learning Reverse Drug Discovery</h1>
-  <button onclick="alertFunction()" name ="alert"> Create Alert</button>
-    <script>
-    function alertFunction() {
-     alert("Hi!, I am a Simple Alert. Please Click on the 'OK' Button.");
-    }
-    </script>
+    
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for msg in messages %}
+            <p>{{msg}}</p>
+        {% endfor %}
+    {% endif %}
+  {% endwith %}
   <section class="predict">
         <div class="predcontent">
         <h2>Basic Prediction</h2>
