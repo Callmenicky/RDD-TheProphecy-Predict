@@ -13,7 +13,7 @@
         <select name="disease" id="disease"> 
             <option>Select Target Disease</option>
             {% for row in disease %}
-            <option value="{{row.TargetDisease}}">{{row.TargetDisease}}</option>
+            <option value="{{row[0]}}">{{row[0]}}</option>
             {% endfor %}
         </select>
         <select name="modelName" id="modelName"><option>Select ML Model</option></select>
@@ -29,8 +29,8 @@
 		      <img src="{{url_for('static', filename='images/result_ml.jpg')}}" alt="result icon">
 		      <div class="centered">
 			  {% for row in temp %}
-                            <p>In <b>{{row.ModelName}}</b> model that target on <b>{{row.TargetDisease}}</b>, molecule that has pIC50 higher than <b>{{row.pIC50}}</b> is consider as active.</p>
-                          {% endfor %}
+                <p>In <b>{{row[1]}}</b> model that target on <b>{{row[2]}}</b>, molecule that has pIC50 higher than <b>{{row[3]}}</b> is consider as active.</p>
+              {% endfor %}
 		      </div>
 		  </div>
 		  <div class="mySlides">
