@@ -68,7 +68,7 @@ function logout(){
 	logout = confirm("Do you want to continue your action");
 	if (logout == true)
 	{
-		location.href = "index.php";
+		location.href = "https://rdd-theprophecy.herokuapp.com/index.php";
 	}
 }
 
