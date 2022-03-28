@@ -478,7 +478,7 @@ def advancepredmethod():
     cur.close()
      
     cur = conn.cursor()
-    #cur.execute("INSERT INTO advanceprediction(user_id, target_disease, model_apply, output_csv, date) VALUES (%s, %s , %s , %s, %s)", (Userid, data2, int(Modelid[0][0]), "static/outcome.csv", today))
+    cur.execute("INSERT INTO advanceprediction(user_id, target_disease, model_apply, output_csv, date) VALUES (%s, %s , %s , %s, %s)", (Userid, data2, int(Modelid[0][0]), "static/outcome.csv", today))
     #cur.execute("INSERT INTO advanceprediction(user_id, target_disease, model_apply, output_csv, date) VALUES (%s, %s , %s , %s, %s)", (3, 'HIV', 25, "static/outcome.csv", today))
     conn.commit()
     cur.close()
