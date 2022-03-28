@@ -1,6 +1,6 @@
 <?php
 session_start();
-$_SESSION['Email'] = intval($_GET['email']);
+$_SESSION['Email'] = $_GET['email'];
 if($_SESSION['Email']==""){
 ?>
     <script type="text/javascript">
