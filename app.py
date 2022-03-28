@@ -54,8 +54,6 @@ def man():
     cur = conn.cursor()     
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
     disease = cur.fetchall()
-    url = request.args.get('email')
-    session['email'] = url
     return render_template('basicpred.php', disease=disease)
 
 @app.route('/basicpred')
@@ -63,17 +61,12 @@ def basicpred():
     cur = conn.cursor()     
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
     disease = cur.fetchall()
-    url = request.args.get('email')
-    session['email'] = url
     return render_template('basicpred.php', disease=disease)
     
 @app.route('/advancepred')
 def advancepred(): 
     cur = conn.cursor()     
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
-    url = request.args.get('email')
-    session['email'] = url
-    print(url)
     return render_template('advancepred.php', disease=disease)
     
 @app.route('/basicpredadmin')
@@ -82,7 +75,8 @@ def basicpredadmin():
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
     disease = cur.fetchall()
     url = request.args.get('email')
-    session['email'] = url
+    if (url != None):
+        session['email'] = url
     return render_template('basicpredadmin.php', disease=disease)
     
 @app.route('/advancepredadmin')
@@ -91,7 +85,6 @@ def advancepredadmin():
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
     disease = cur.fetchall()
     url = request.args.get('email')
-    print(url)
     if (url != None):
         session['email'] = url
     return render_template('advancepredadmin.php', disease=disease)
@@ -102,7 +95,8 @@ def basicpredenduser():
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
     disease = cur.fetchall()
     url = request.args.get('email')
-    session['email'] = url
+    if (url != None):
+        session['email'] = url
     return render_template('basicpredenduser.php', disease=disease)
     
 @app.route('/advancepredenduser')
@@ -111,7 +105,8 @@ def advancepredenduser():
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
     disease = cur.fetchall()
     url = request.args.get('email')
-    session['email'] = url
+    if (url != None):
+        session['email'] = url
     return render_template('advancepredenduser.php', disease=disease)
     
 def loadmodel(modelname,targetdis):
@@ -522,9 +517,9 @@ def basicpredict():
     disease = cur.fetchall()
     
     modelid = session['model']
-    modelid = int(modelid)
-    sql = "SELECT model_id,model_name,target_disease,pic50 FROM model WHERE model_id='" + modelid + "'"
-    print(sql)
+    modelid = modelid[0][0]
+    sql = "SELECT model_id,model_name,target_disease,pic50 FROM model WHERE model_id='" + str(modelid) + "'"
+    
     result = cur.execute(sql) 
     temp = cur.fetchall()
     return render_template('afterbasicpred.php', disease=disease, temp=temp, data = pred)
@@ -535,7 +530,12 @@ def basicpredictadmin():
     cur = conn.cursor()     
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC")
     disease = cur.fetchall()
-    result = cur.execute("SELECT model_id,model_name,target_disease,pic50 FROM model WHERE model_id=97")
+    
+    modelid = session['model']
+    modelid = modelid[0][0]
+    sql = "SELECT model_id,model_name,target_disease,pic50 FROM model WHERE model_id='" + str(modelid) + "'"
+    
+    result = cur.execute(sql) 
     temp = cur.fetchall()
     return render_template('basicpredadminafter.php', disease=disease, temp=temp, data = pred)
 
@@ -545,7 +545,12 @@ def basicpredictenduser():
     cur = conn.cursor()     
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC")
     disease = cur.fetchall()
-    result = cur.execute("SELECT model_id,model_name,target_disease,pic50 FROM model WHERE model_id=97")
+    
+    modelid = session['model']
+    modelid = modelid[0][0]
+    sql = "SELECT model_id,model_name,target_disease,pic50 FROM model WHERE model_id='" + str(modelid) + "'"
+    
+    result = cur.execute(sql) 
     temp = cur.fetchall()
     return render_template('basicpredenduserafter.php', disease=disease, temp=temp, data = pred)
     
@@ -557,9 +562,8 @@ def advancepredict():
     disease = cur.fetchall()
     
     modelid = session['model']
-    modelid = int(modelid)
-    sql = "SELECT model_id,model_name,target_disease,pic50 FROM model WHERE model_id='" + modelid + "'"
-    print(sql)
+    modelid = modelid[0][0]
+    sql = "SELECT model_id,model_name,target_disease,pic50 FROM model WHERE model_id='" + str(modelid) + "'"
     
     result = cur.execute(sql) 
     temp = cur.fetchall()
@@ -573,10 +577,8 @@ def advancepredictadmin():
     disease = cur.fetchall()
     
     modelid = session['model']
-    print(modelid[0][0])
     modelid = modelid[0][0]
     sql = "SELECT model_id,model_name,target_disease,pic50 FROM model WHERE model_id='" + str(modelid) + "'"
-    print(sql)
     
     result = cur.execute(sql) 
     temp = cur.fetchall()
@@ -588,7 +590,12 @@ def advancepredictenduser():
     cur = conn.cursor()     
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC")
     disease = cur.fetchall()
-    result = cur.execute("SELECT model_id,model_name,target_disease,pic50 FROM model WHERE model_id=97")
+    
+    modelid = session['model']
+    modelid = modelid[0][0]
+    sql = "SELECT model_id,model_name,target_disease,pic50 FROM model WHERE model_id='" + str(modelid) + "'"
+    
+    result = cur.execute(sql) 
     temp = cur.fetchall()
     return render_template('advancepredenduserafter.php', disease=disease, temp=temp, data = pred)
 
