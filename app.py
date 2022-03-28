@@ -54,6 +54,7 @@ def man():
     cur = conn.cursor()     
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
     disease = cur.fetchall()
+    session['email'] = None
     return render_template('basicpred.php', disease=disease)
 
 @app.route('/basicpred')
@@ -61,6 +62,7 @@ def basicpred():
     cur = conn.cursor()     
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
     disease = cur.fetchall()
+    session['email'] = None
     return render_template('basicpred.php', disease=disease)
     
 @app.route('/advancepred')
@@ -490,22 +492,24 @@ def advancepredmethod():
     print(Modelid[0][0])
     session['model'] = Modelid
     cur.close()
-     
+    
     email = session['email']
-    emails = str(email)
+    
+    if(email != None):
+        emails = str(email)
 
-    cur = conn.cursor()  
-    sql = "SELECT user_id FROM users WHERE email='" + email + "'"
-    print(sql)
-    cur.execute(sql)
-    Userid = cur.fetchone()[0]
-    print(Userid)
-    cur.close()
-     
-    cur = conn.cursor()
-    cur.execute("INSERT INTO advanceprediction(user_id, target_disease, model_apply, output_csv, date) VALUES (%s, %s , %s , %s, %s)", (Userid, data2, int(Modelid[0][0]), "static/outcome.csv", today))
-    conn.commit()
-    cur.close()
+        cur = conn.cursor()  
+        sql = "SELECT user_id FROM users WHERE email='" + email + "'"
+        print(sql)
+        cur.execute(sql)
+        Userid = cur.fetchone()[0]
+        print(Userid)
+        cur.close()
+         
+        cur = conn.cursor()
+        cur.execute("INSERT INTO advanceprediction(user_id, target_disease, model_apply, output_csv, date) VALUES (%s, %s , %s , %s, %s)", (Userid, data2, int(Modelid[0][0]), "static/outcome.csv", today))
+        conn.commit()
+        cur.close()
    
     return prediction
 
