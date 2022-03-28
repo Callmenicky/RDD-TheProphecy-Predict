@@ -36,10 +36,28 @@ from sklearn.decomposition import PCA
 
 from datetime import date
 
+#alert box
+from selenium import webdriver
+import time
+
 app = Flask(__name__)
 
 # Set the secret key to some random bytes. Keep this really secret!
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+
+#alert box implementation
+# refer from https://www.techbeamers.com/handle-alert-popup-selenium-python/
+driver = webdriver.Firefox()
+
+#basic admin
+location = "https://rdd-theprophecy-predict.herokuapp.com/basicpredadmin"
+driver.get(location)
+button = driver.find_element_by_name('alert')
+button.click()
+obj = driver.switch_to.alert
+time.sleep(2)
+obj.accept()
+time.sleep(2)
 
 conn = psycopg2.connect(
     host="ec2-3-216-221-31.compute-1.amazonaws.com",
