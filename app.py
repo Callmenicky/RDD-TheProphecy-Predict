@@ -81,6 +81,8 @@ def basicpredadmin():
     url = request.args.get('email')
     if (url != None):
         session['email'] = url
+        flash(session['email'])
+    if (url == None):
         flash('message is printed')
     return render_template('basicpredadmin.php', disease=disease)
     
