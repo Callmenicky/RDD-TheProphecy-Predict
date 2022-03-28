@@ -295,20 +295,20 @@ def basicpredmethod():
     cur.close()
      
     email = session['email']
-    emails = str(email)
+    
+    if(email != None):
+        cur = conn.cursor()  
+        sql = "SELECT user_id FROM users WHERE email='" + email + "'"
+        print(sql)
+        cur.execute(sql)
+        Userid = cur.fetchone()[0]
+        print(Userid)
+        cur.close()
 
-    cur = conn.cursor()  
-    sql = "SELECT user_id FROM users WHERE email='" + email + "'"
-    print(sql)
-    cur.execute(sql)
-    Userid = cur.fetchone()[0]
-    print(Userid)
-    cur.close()
-     
-    cur = conn.cursor()
-    cur.execute("INSERT INTO basicprediction(user_id, smiles, target_disease, model_apply, output, date) VALUES (%s, %s , %s , %s, %s, %s)", (Userid, data1, data2, int(Modelid[0][0]), pred, today))
-    conn.commit()
-    cur.close()
+        cur = conn.cursor()
+        cur.execute("INSERT INTO basicprediction(user_id, smiles, target_disease, model_apply, output, date) VALUES (%s, %s , %s , %s, %s, %s)", (Userid, data1, data2, int(Modelid[0][0]), pred, today))
+        conn.commit()
+        cur.close()
    
     return pred
     
