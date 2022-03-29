@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, send_file, session, flash
+from flask import Flask, render_template, jsonify, request, send_file, session, flash, redirect
 from flask_mysqldb import MySQL,MySQLdb
 import numpy as np
 import pickle
@@ -49,13 +49,10 @@ conn = psycopg2.connect(
     
 print ("Opened database successfully")
 
-@app.route('/')
+@app.route('/logout')
 def man():
-    cur = conn.cursor()     
-    cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
-    disease = cur.fetchall()
-    session['email'] = None
-    return render_template('basicpred.php', disease=disease)
+    session.pop('email')
+    return redirect("https://rdd-theprophecy.herokuapp.com/index.php")
 
 @app.route('/basicpred')
 def basicpred():
