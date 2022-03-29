@@ -10,7 +10,7 @@
     {% if messages %}
         <script>
           var messages = {{ messages | safe }};
-	  console.log(messages)
+	  console.log(messages[0])
 	  alert(messages);
           location.href = "https://rdd-theprophecy.herokuapp.com/login.php";
         </script>
