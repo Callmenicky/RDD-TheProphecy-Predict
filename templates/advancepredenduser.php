@@ -10,8 +10,15 @@
     {% if messages %}
         <script>
           var messages = {{ messages | safe }};
-          alert(messages);
-          location.href = "https://rdd-theprophecy.herokuapp.com/login.php";
+	  console.log(messages[0])
+	  if (messages[0] === "Login is required to proceed") { 
+	    alert(messages);
+            location.href = "https://rdd-theprophecy.herokuapp.com/login.php";
+	  }
+	  if (messages[0] === "Unable to access end user content") { 
+	    alert(messages);
+            location.href = "https://rdd-theprophecy.herokuapp.com/dashboardadmin.php";
+	  }
         </script>
     {% endif %}
   {% endwith %}
