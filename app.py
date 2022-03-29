@@ -80,6 +80,9 @@ def basicpredadmin():
     disease = cur.fetchall()
     if session.get("email") is None:
         url = request.args.get('email')
+    if not session.get("email") is None:
+        url = session['email'] 
+    
     if (url != None):
         session['email'] = url
         
@@ -100,6 +103,8 @@ def advancepredadmin():
     disease = cur.fetchall()
     if session.get("email") is None:
         url = request.args.get('email')
+    if not session.get("email") is None:
+        url = session['email'] 
     if (url != None):
         session['email'] = url
         
@@ -120,6 +125,8 @@ def basicpredenduser():
     disease = cur.fetchall()
     if session.get("email") is None:
         url = request.args.get('email')
+    if not session.get("email") is None:
+        url = session['email'] 
     if (url != None):
         session['email'] = url
         
@@ -140,6 +147,8 @@ def advancepredenduser():
     disease = cur.fetchall()
     if session.get("email") is None:
         url = request.args.get('email')
+    if not session.get("email") is None:
+        url = session['email'] 
     if (url != None):
         session['email'] = url
         
