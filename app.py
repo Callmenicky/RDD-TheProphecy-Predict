@@ -81,10 +81,6 @@ def basicpredadmin():
     url = request.args.get('email')
     if (url != None):
         session['email'] = url
-        cur.execute("SELECT is_admin FROM users WHERE email = session['email']");
-        adminchk = cur.fetchall()
-        if (adminchk != 1):
-            flash('Unable to access admin content')
     if (url == None):
         flash('Login is required to proceed')
     return render_template('basicpredadmin.php', disease=disease)
