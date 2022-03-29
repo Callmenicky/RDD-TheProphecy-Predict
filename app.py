@@ -81,9 +81,9 @@ def basicpredadmin():
     if session.get("email") is None:
         url = request.args.get('email')
     if not session.get("email") is None:
-        if (session.get("email") == request.args.get('email'))
+        if (session.get("email") == request.args.get('email')):
             url = session['email'] 
-        if (session.get("email") != request.args.get('email'))
+        if (session.get("email") != request.args.get('email')):
             url = request.args.get('email')
     
     if (url != None):
@@ -107,9 +107,9 @@ def advancepredadmin():
     if session.get("email") is None:
         url = request.args.get('email')
     if not session.get("email") is None:
-        if (session.get("email") == request.args.get('email'))
+        if (session.get("email") == request.args.get('email')):
             url = session['email'] 
-        if (session.get("email") != request.args.get('email'))
+        if (session.get("email") != request.args.get('email')):
             url = request.args.get('email')
             
     if (url != None):
@@ -133,9 +133,9 @@ def basicpredenduser():
     if session.get("email") is None:
         url = request.args.get('email')
     if not session.get("email") is None:
-        if (session.get("email") == request.args.get('email'))
+        if (session.get("email") == request.args.get('email')):
             url = session['email'] 
-        if (session.get("email") != request.args.get('email'))
+        if (session.get("email") != request.args.get('email')):
             url = request.args.get('email')
             
     if (url != None):
@@ -159,9 +159,9 @@ def advancepredenduser():
     if session.get("email") is None:
         url = request.args.get('email')
     if not session.get("email") is None:
-        if (session.get("email") == request.args.get('email'))
+        if (session.get("email") == request.args.get('email')):
             url = session['email'] 
-        if (session.get("email") != request.args.get('email'))
+        if (session.get("email") != request.args.get('email')):
             url = request.args.get('email')
             
     if (url != None):
