@@ -86,8 +86,7 @@ def basicpredadmin():
         sql = "SELECT is_admin FROM users WHERE email='" + myemail + "'"
         result = cur.execute(sql) 
         temp = cur.fetchall()
-        print(temp)
-        if (temp[0][0] == 1):
+        if (temp[0][0] == 0):
             flash('Unable to access admin content')
     if (url == None):
         flash('Login is required to proceed')
@@ -101,6 +100,13 @@ def advancepredadmin():
     url = request.args.get('email')
     if (url != None):
         session['email'] = url
+        
+        myemail = session['email']
+        sql = "SELECT is_admin FROM users WHERE email='" + myemail + "'"
+        result = cur.execute(sql) 
+        temp = cur.fetchall()
+        if (temp[0][0] == 0):
+            flash('Unable to access admin content')
     if (url == None):
         flash('Login is required to proceed')
     return render_template('advancepredadmin.php', disease=disease)
@@ -118,7 +124,7 @@ def basicpredenduser():
         sql = "SELECT is_admin FROM users WHERE email='" + myemail + "'"
         result = cur.execute(sql) 
         temp = cur.fetchall()
-        if (temp == 1):
+        if (temp[0][0] == 1):
             flash('Unable to access end user content')
     if (url == None):
         flash('Login is required to proceed')
@@ -132,6 +138,13 @@ def advancepredenduser():
     url = request.args.get('email')
     if (url != None):
         session['email'] = url
+        
+        myemail = session['email']
+        sql = "SELECT is_admin FROM users WHERE email='" + myemail + "'"
+        result = cur.execute(sql) 
+        temp = cur.fetchall()
+        if (temp[0][0] == 1):
+            flash('Unable to access end user content')
     if (url == None):
         flash('Login is required to proceed')
     return render_template('advancepredenduser.php', disease=disease)
