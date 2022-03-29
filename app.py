@@ -81,6 +81,13 @@ def basicpredadmin():
     url = request.args.get('email')
     if (url != None):
         session['email'] = url
+        
+        myemail = session['email']
+        sql = "SELECT is_admin FROM users WHERE email='" + myemail + "'"
+        result = cur.execute(sql) 
+        temp = cur.fetchall()
+        if (temp == 0):
+            flash('Unable to access admin content')
     if (url == None):
         flash('Login is required to proceed')
     return render_template('basicpredadmin.php', disease=disease)
@@ -105,6 +112,13 @@ def basicpredenduser():
     url = request.args.get('email')
     if (url != None):
         session['email'] = url
+        
+        myemail = session['email']
+        sql = "SELECT is_admin FROM users WHERE email='" + myemail + "'"
+        result = cur.execute(sql) 
+        temp = cur.fetchall()
+        if (temp == 1):
+            flash('Unable to access end user content')
     if (url == None):
         flash('Login is required to proceed')
     return render_template('basicpredenduser.php', disease=disease)
