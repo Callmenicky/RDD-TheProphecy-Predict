@@ -78,10 +78,7 @@ def basicpredadmin():
     if session.get("email") is None:
         url = request.args.get('email')
     if not session.get("email") is None:
-        if request.args.get('email') is None:
-            url = session['email']
-        if not request.args.get('email') is None:
-            url = request.args.get('email')
+        url = session['email']
     
     if (url != None):
         session['email'] = url
@@ -104,10 +101,7 @@ def advancepredadmin():
     if session.get("email") is None:
         url = request.args.get('email')
     if not session.get("email") is None:
-        if request.args.get('email') is None:
-            url = session['email']
-        if not request.args.get('email') is None:
-            url = request.args.get('email')
+        url = session['email']
             
     if (url != None):
         session['email'] = url
@@ -130,10 +124,7 @@ def basicpredenduser():
     if session.get("email") is None:
         url = request.args.get('email')
     if not session.get("email") is None:
-        if request.args.get('email') is None:
-            url = session['email']
-        if not request.args.get('email') is None:
-            url = request.args.get('email')
+        url = session['email']
             
     if (url != None):
         session['email'] = url
@@ -156,10 +147,7 @@ def advancepredenduser():
     if session.get("email") is None:
         url = request.args.get('email')
     if not session.get("email") is None:
-        if request.args.get('email') is None:
-            url = session['email']
-        if not request.args.get('email') is None:
-            url = request.args.get('email')
+        url = session['email']
             
     if (url != None):
         session['email'] = url
