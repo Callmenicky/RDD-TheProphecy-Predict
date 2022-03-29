@@ -78,7 +78,8 @@ def basicpredadmin():
     cur = conn.cursor()     
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
     disease = cur.fetchall()
-    url = request.args.get('email')
+    if session.get("email") is None:
+        url = request.args.get('email')
     if (url != None):
         session['email'] = url
         
@@ -97,7 +98,8 @@ def advancepredadmin():
     cur = conn.cursor()     
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
     disease = cur.fetchall()
-    url = request.args.get('email')
+    if session.get("email") is None:
+        url = request.args.get('email')
     if (url != None):
         session['email'] = url
         
@@ -116,7 +118,8 @@ def basicpredenduser():
     cur = conn.cursor()     
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
     disease = cur.fetchall()
-    url = request.args.get('email')
+    if session.get("email") is None:
+        url = request.args.get('email')
     if (url != None):
         session['email'] = url
         
@@ -135,7 +138,8 @@ def advancepredenduser():
     cur = conn.cursor()     
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
     disease = cur.fetchall()
-    url = request.args.get('email')
+    if session.get("email") is None:
+        url = request.args.get('email')
     if (url != None):
         session['email'] = url
         
