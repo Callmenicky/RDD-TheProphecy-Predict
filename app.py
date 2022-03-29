@@ -87,7 +87,7 @@ def basicpredadmin():
         result = cur.execute(sql) 
         temp = cur.fetchall()
         print(temp)
-        if (temp == 0):
+        if (temp[0][0] == 1):
             flash('Unable to access admin content')
     if (url == None):
         flash('Login is required to proceed')
