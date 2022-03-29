@@ -86,6 +86,7 @@ def basicpredadmin():
         sql = "SELECT is_admin FROM users WHERE email='" + myemail + "'"
         result = cur.execute(sql) 
         temp = cur.fetchall()
+        print(temp)
         if (temp == 0):
             flash('Unable to access admin content')
     if (url == None):
