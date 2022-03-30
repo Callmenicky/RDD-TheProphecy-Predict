@@ -662,6 +662,7 @@ def dropdownlist():
         print(disease_name) 
         result = cur.execute("SELECT * FROM model WHERE is_enable=true AND target_disease = %s ORDER BY model_name ASC", [disease_name] )
         mlmodel = cur.fetchall()  
+        print("history")
         OutputArray = []
         for row in mlmodel:
             outputObj = {
