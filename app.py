@@ -341,6 +341,7 @@ def basicpredmethod():
     cur.execute(sql,val)
     Modelid = cur.fetchall()
     print(Modelid[0][0])
+    session['model'] = Modelid
     cur.close()
      
     email = session['email']
