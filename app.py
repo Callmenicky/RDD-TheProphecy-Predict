@@ -56,7 +56,7 @@ print ("Opened database successfully")
 def invalid_route(e):
     return "Invalid route."
 
-@app.route("/")
+@app.route('/')
 def index():
     return "This is an example app"
     
