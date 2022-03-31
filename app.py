@@ -28,6 +28,8 @@ from rdkit.Chem import AllChem
 from mordred import Calculator, descriptors, is_missing
 from psycopg2.extras import RealDictCursor
 
+
+
 #scalar
 from sklearn.preprocessing import StandardScaler
 
@@ -176,150 +178,36 @@ def loadmodel(modelname,targetdis):
     model5 = pickle.loads(model4)
    
     return model5;
+    
+def read_dataprocessing_codes(modelname,targetdis):
+    cur = conn.cursor()
+    sql = "SELECT processing FROM model WHERE model_name=%s and target_disease=%s"
+    val = (modelname,targetdis)
+    cur.execute(sql,val)
+    model = cur.fetchone()[0] #Memoryview Object
+     
+    #Method 3
+    model1 = bytes(model)
+    model2 = base64.b64decode(model1); #Decode
+    model5 = str(model2,'utf8') #become string
+    
+    #overwrite the file from database to MLScript.py
+    with open('MLScript.py', 'w') as f:
+        f.write(model5)
+   
+    #return model5;
 
 def basicpredmethod():
     data1 = request.form['smiles']
     data2 = request.form['disease']
     data3 = request.form['modelName']
-            
-    # Convert SMILES into molecular descriptors
-    molecule_list = [data1]#insert name of list containing only SMILES e.g. smiles_only_lst
-    counter = 0
     
-    descriptors_table = np.ndarray((len(molecule_list), 1826), dtype=object)
-    print("Generating mordred descriptors:")
-    for index in notebook.tqdm(range(descriptors_table.shape[0])):
-        structure = molecule_list[index]
-        mol = Chem.MolFromSmiles(structure)
+    read_dataprocessing_codes(data3,data2) 
     
-    if mol is None:
-        descriptors_table[index, :] = [None] * 1826
-    else:
-        AllChem.EmbedMolecule(mol, useExpTorsionAnglePrefs=True, useBasicKnowledge=True)
-        descriptors_table[index, :] = Calculator(descriptors, ignore_3D=False)(mol).fill_missing()
-        
-    df =  pd.DataFrame(descriptors_table, columns=Calculator(descriptors, ignore_3D=False).descriptors)
-      
-    ##
-    dataset_train = pd.read_csv('hiv integrase dataset (mordred_active_train).csv')
+    #RunDataProcessingCodesForML
+    import MLScript
     
-    dataset_train = dataset_train.dropna(axis='columns')
-    df = df.dropna(axis='columns')
-    
-    df.to_csv('singlesmiles', index=False) 
-    df = pd.read_csv('singlesmiles')
-    
-    for column1 in dataset_train.columns:
-        if column1 not in df.columns : del dataset_train[column1]
-    for column2 in df.columns:
-        if column2 not in dataset_train.columns : del df[column2]
-
-    #Training set remove columns that is not features
-    #feature_train = [dataset_train.drop(['active'], axis=1, inplace=True)]
-    feature_train = dataset_train.columns
-    print('Training set updated columns:')
-    dataset_train.columns
-    
-    feature_test = df.columns
-    print('Testing set updated columns:')
-    feature_test
-    
-    #identify x_train and y_train
-    x_train = dataset_train.loc[:, feature_train].values
-
-    ##
-    dataset_train = pd.read_csv('hiv integrase dataset (mordred_active_train).csv')
-    y_train = dataset_train.loc[:, ['active']].values
-    
-    feature_test
-    x_test = df.loc[:,feature_test].values
-    y_test = x_test
-    
-    #value standarization in x_train and x_test
-    stdsc = StandardScaler()
-    x_train_norm = stdsc.fit_transform(x_train)
-    x_test_norm = stdsc.transform(x_test)
-    
-    #fit transform and transform in training and test PCA respectively (75.06% variance explained)
-    pca = PCA(n_components = 10)
-    x_train_pca = pca.fit_transform(x_train_norm)
-    x_test_pca = pca.transform(x_test_norm)
-    
-    #Perform the principal component analysis at train set (10 PCA)
-    df_train_pca = pd.DataFrame(data = x_train_pca, columns = ['PC1', 'PC2', 'PC3', 'PC4', 'PC5', 'PC6', 'PC7', 'PC8', 'PC9', 'PC10'])
-    df_train_target = dataset_train[['active']]
-    #df_train_pca['active'] = df_train_target
-    new_train_df = pd.concat([df_train_pca, df_train_target],axis = 1)
-    
-    #Perform the principal component analysis at test set (10 PCA)
-    df_test_pca = pd.DataFrame(data = x_test_pca, columns = ['PC1', 'PC2', 'PC3', 'PC4', 'PC5', 'PC6', 'PC7', 'PC8', 'PC9', 'PC10'])
-    #df_test_target = dataset_test[['active']]
-    new_test_df = pd.concat([df_test_pca],axis = 1)
-    
-    #save as csv
-    ##
-    new_train_df.to_csv('hiv integrase dataset (pca_train_descriptors).csv', index=True, header=True)
-    new_test_df.to_csv('hiv integrase dataset (pca_test_descriptors).csv', index=True, header=True)
-    
-    dataset_train = new_train_df
-    dataset_test = new_test_df 
-    
-    print('\n=====Testing======')
-    print(dataset_test.shape)
-    print(dataset_test.columns)
-    
-    X_train = dataset_train.iloc[:,0:10] #11 columns 
-    y_train = dataset_train['active']
-    X_test = dataset_test.iloc[:,0:10] #11 columns
-    
-    scaler = StandardScaler()
-    X_train_norm = scaler.fit_transform(X_train)
-    X_test_norm = scaler.transform(X_test)
-    
-    #load dataset
-    ##
-    dataset_train = pd.read_csv('hiv integrase dataset (pca_train_descriptors).csv')
-    dataset_test = pd.read_csv('hiv integrase dataset (pca_test_descriptors).csv')
-    
-    # Remove columns
-    dataset_train.drop(['Unnamed: 0'], axis=1, inplace=True)
-    dataset_train.drop(['active'], axis=1, inplace=True)
-    dataset_test.drop(['Unnamed: 0'], axis=1, inplace=True)
-    
-    #Add column with value train or test
-    dataset_train['designation'] = "Train"
-    dataset_test['designation'] = "Test"
-    
-    #complie dataset
-    all = pd.concat([dataset_train,dataset_test], axis=0)
-    
-    all.reset_index(inplace=True)
-    
-    #set target value to y
-    y = all['designation']
-    
-    #generate 2d pca
-    pca_train = PCA(n_components=2)
-    principalComponents_train = pca_train.fit_transform(all.iloc[:,:-1])
-    principal_Df = pd.DataFrame(data = principalComponents_train, columns = ['PC1', 'PC2'])
-    principal_Df['Designation'] = y
-    principal_Df.head()
-    
-    #plot pca graph
-    plt.figure(figsize=(7,7))
-    sns.scatterplot(
-        x="PC1", y="PC2",
-        hue="Designation",
-        size = "Designation",
-        sizes=[20,100],
-        palette=['red', 'green'],
-        data=principal_Df,
-        legend="full",
-        alpha=0.7
-    )
-    
-    plt.savefig('static/images/plots.PNG')
-    
+    X_test_norm = MLScript.process_data_basic(data1)
     predmodel = loadmodel(data3,data2)
     pred = predmodel.predict(X_test_norm)
     
@@ -366,7 +254,10 @@ def advancepredmethod():
     data1 = request.files['smilescsv']
     data2 = request.form['disease']
     data3 = request.form['modelName']
-      
+    
+    read_dataprocessing_codes(data3,data2)
+    import MLScript
+    
     if data1.filename != '':
         data1.save("inputsmiles.txt")
     
@@ -377,89 +268,11 @@ def advancepredmethod():
     molecule_list = []
     for i in data:
         molecule_list.append(i[0])
-
-    # Convert SMILES into molecular descriptors
-    counter = 0
-    
-    descriptors_table = np.ndarray((len(molecule_list), 1826), dtype=object)
-    print("Generating mordred descriptors:")
-    for index in notebook.tqdm(range(descriptors_table.shape[0])):
-        structure = molecule_list[index]
-        mol = Chem.MolFromSmiles(structure)
-    
-        if mol is None:
-            descriptors_table[index, :] = [None] * 1826
-        else:
-            AllChem.EmbedMolecule(mol, useExpTorsionAnglePrefs=True, useBasicKnowledge=True)
-            descriptors_table[index, :] = Calculator(descriptors, ignore_3D=False)(mol).fill_missing()
         
-    df =  pd.DataFrame(descriptors_table, columns=Calculator(descriptors, ignore_3D=False).descriptors)
+    print(molecule_list)
+        
     
-    df.to_csv('singlesmiles', index=False) 
-    
-    df = pd.read_csv('singlesmiles')     
-    dataset_train = pd.read_csv('hiv integrase dataset (mordred_active_train).csv')
-    
-    dataset_train = dataset_train.dropna(axis='columns')
-    df = df.dropna(axis='columns')
-    
-    for column1 in dataset_train.columns:
-        if column1 not in df.columns : del dataset_train[column1]
-    for column2 in df.columns:
-        if column2 not in dataset_train.columns : del df[column2]
-
-    #Training set remove columns that is not features
-    #feature_train = [dataset_train.drop(['active'], axis=1, inplace=True)]
-    feature_train = dataset_train.columns
-    print('Training set updated columns:')
-    dataset_train.columns
-    
-    feature_test = df.columns
-    print('Testing set updated columns:')
-    feature_test
-    
-    #identify x_train and y_train
-    x_train = dataset_train.loc[:, feature_train].values
-
-    dataset_train = pd.read_csv('hiv integrase dataset (mordred_active_train).csv')
-    y_train = dataset_train.loc[:, ['active']].values
-    
-    feature_test
-    x_test = df.loc[:,feature_test].values
-    y_test = x_test
-    
-    #value standarization in x_train and x_test
-    stdsc = StandardScaler()
-    x_train_norm = stdsc.fit_transform(x_train)
-    x_test_norm = stdsc.transform(x_test)
-    
-    #fit transform and transform in training and test PCA respectively (75.06% variance explained)
-    pca = PCA(n_components = 10)
-    x_train_pca = pca.fit_transform(x_train_norm)
-    x_test_pca = pca.transform(x_test_norm)
-    
-    #Perform the principal component analysis at train set (10 PCA)
-    df_train_pca = pd.DataFrame(data = x_train_pca, columns = ['PC1', 'PC2', 'PC3', 'PC4', 'PC5', 'PC6', 'PC7', 'PC8', 'PC9', 'PC10'])
-    df_train_target = dataset_train[['active']]
-    #df_train_pca['active'] = df_train_target
-    new_train_df = pd.concat([df_train_pca, df_train_target],axis = 1)
-    
-    #Perform the principal component analysis at test set (10 PCA)
-    df_test_pca = pd.DataFrame(data = x_test_pca, columns = ['PC1', 'PC2', 'PC3', 'PC4', 'PC5', 'PC6', 'PC7', 'PC8', 'PC9', 'PC10'])
-    #df_test_target = dataset_test[['active']]
-    new_test_df = pd.concat([df_test_pca],axis = 1)
-    
-    dataset_train = new_train_df
-    dataset_test = new_test_df 
-    
-    X_train = dataset_train.iloc[:,0:10] #11 columns 
-    y_train = dataset_train['active']
-    X_test = dataset_test.iloc[:,0:10] #11 columns
-    
-    scaler = StandardScaler()
-    X_train_norm = scaler.fit_transform(X_train)
-    X_test_norm = scaler.transform(X_test)
-    
+    X_test_norm = MLScript.process_data_advance(molecule_list)
     predmodel = loadmodel(data3,data2)
     pred = predmodel.predict(X_test_norm)
     
@@ -472,57 +285,11 @@ def advancepredmethod():
         else:
            prediction.append("Inactive")
            
-    count = 0
+    
     print(prediction)
-    
-    #save as csv
-    new_train_df.to_csv('hiv integrase dataset (pca_train_descriptors).csv', index=True, header=True)
-    new_test_df.to_csv('hiv integrase dataset (pca_test_descriptors_advance).csv', index=True, header=True)
-    
-    #load dataset
-    dataset_train = pd.read_csv('hiv integrase dataset (pca_train_descriptors).csv')
-    dataset_test = pd.read_csv('hiv integrase dataset (pca_test_descriptors_advance).csv')
-    
-    # Remove columns
-    dataset_train.drop(['Unnamed: 0'], axis=1, inplace=True)
-    dataset_train.drop(['active'], axis=1, inplace=True)
-    dataset_test.drop(['Unnamed: 0'], axis=1, inplace=True)
-    
-    #Add column with value train or test
-    dataset_train['designation'] = "Train"
-    dataset_test['designation'] = "Test"
-    
-    #complie dataset
-    all = pd.concat([dataset_train,dataset_test], axis=0)
-    
-    all.reset_index(inplace=True)
-    
-    #set target value to y
-    y = all['designation']
-    
-    #generate 2d pca
-    pca_train = PCA(n_components=2)
-    principalComponents_train = pca_train.fit_transform(all.iloc[:,:-1])
-    principal_Df = pd.DataFrame(data = principalComponents_train, columns = ['PC1', 'PC2'])
-    principal_Df['Designation'] = y
-    principal_Df.head()
-    
-    #plot pca graph
-    plt.figure(figsize=(7,7))
-    sns.scatterplot(
-        x="PC1", y="PC2",
-        hue="Designation",
-        size = "Designation",
-        sizes=[20,100],
-        palette=['red', 'green'],
-        data=principal_Df,
-        legend="full",
-        alpha=0.7
-    )
-    
-    plt.savefig('static/images/plots1.PNG')
 
     path = "static/outcome.csv"
+    count = 0
             
     with open(path, "w") as f:
         writer = csv.writer(f)
@@ -567,6 +334,7 @@ def advancepredmethod():
 
 @app.route('/basicpredict', methods=['POST'])
 def basicpredict():
+    
     pred = basicpredmethod()
     cur = conn.cursor()     
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC")
@@ -612,6 +380,7 @@ def basicpredictenduser():
     
 @app.route('/advancepredict', methods=['POST'])
 def advancepredict():
+    #read_dataprocessing_codes(modelname,targetdis)
     pred = advancepredmethod()
     cur = conn.cursor()     
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC")
@@ -663,7 +432,6 @@ def dropdownlist():
         print(disease_name) 
         result = cur.execute("SELECT * FROM model WHERE is_enable=true AND target_disease = %s ORDER BY model_name ASC", [disease_name] )
         mlmodel = cur.fetchall()  
-        print("history")
         OutputArray = []
         for row in mlmodel:
             outputObj = {
