@@ -53,7 +53,7 @@ print ("Opened database successfully")
 
 @app.route("/")
 def hello():
-    return render_template('advancepred.php', disease=disease)
+    return 'This is RDD Flask app!'
     
 @app.route('/logout')
 def man():
