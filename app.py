@@ -53,7 +53,7 @@ print ("Opened database successfully")
 
 @app.route("/")
 def hello():
-    return "Hello World!"
+    return render_template('advancepred.php', disease=disease)
     
 @app.route('/logout')
 def man():
