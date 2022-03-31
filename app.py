@@ -65,7 +65,7 @@ def man():
     session.pop('email')
     return redirect("https://reverse-drug-discovery.herokuapp.com/index.php")
 
-@app.route('/basicpred')
+@app.route('/blogs/basicpred')
 def basicpred():
     cur = conn.cursor()     
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
@@ -73,7 +73,7 @@ def basicpred():
     session['email'] = None
     return render_template('basicpred.php', disease=disease)
     
-@app.route('/advancepred')
+@app.route('/blogs/advancepred')
 def advancepred(): 
     cur = conn.cursor()     
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
