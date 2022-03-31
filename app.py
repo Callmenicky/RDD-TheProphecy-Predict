@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, send_file, session, flash, redirect
+from flask import Flask, render_template, jsonify, request, send_file, session, flash, redirect, Blueprint
 from flask_mysqldb import MySQL,MySQLdb
 import numpy as np
 import pickle
@@ -39,6 +39,7 @@ from sklearn.decomposition import PCA
 from datetime import date
 
 app = Flask(__name__)
+app = Blueprint('blog', __name__,url_prefix='blog')
 
 # Set the secret key to some random bytes. Keep this really secret!
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
@@ -52,8 +53,8 @@ conn = psycopg2.connect(
 print ("Opened database successfully")
 
 @app.route("/")
-def hello():
-    return 'This is RDD Flask app!'
+def index():
+    return "This is an example app"
     
 @app.route('/logout')
 def man():
