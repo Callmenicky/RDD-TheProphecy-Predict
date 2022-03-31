@@ -58,7 +58,7 @@ def invalid_route(e):
 
 @app.route('/')
 def index():
-    return "This is an example app"
+    return redirect("/static/images/identity.png")
     
 @app.route('/logout')
 def man():
