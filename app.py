@@ -70,7 +70,7 @@ def advancepred():
     session['email'] = None
     return render_template('advancepred.php', disease=disease)
     
-@app.route('/basicpredadmin')
+@app.route('/prediction/basicpredadmin')
 def basicpredadmin():
     cur = conn.cursor()     
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
@@ -93,7 +93,7 @@ def basicpredadmin():
         flash('Login is required to proceed')
     return render_template('basicpredadmin.php', disease=disease)
     
-@app.route('/advancepredadmin')
+@app.route('/prediction/advancepredadmin')
 def advancepredadmin():
     cur = conn.cursor()     
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
