@@ -58,7 +58,7 @@ def invalid_route(e):
 
 @app.route('/')
 def index():
-    return redirect("/basicpred")
+    return 'This is index for RDD Flask App'
     
 @app.route('/logout')
 def man():
