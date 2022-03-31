@@ -56,7 +56,7 @@ def man():
     session.pop('email')
     return redirect("https://rdd-theprophecy.herokuapp.com/index.php")
 
-@app.route('/pred/basicpred')
+@app.route('/basicpred')
 def basicpred():
     cur = conn.cursor()     
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
@@ -64,7 +64,7 @@ def basicpred():
     session['email'] = None
     return render_template('basicpred.php', disease=disease)
     
-@app.route('/pred/advancepred')
+@app.route('/advancepred')
 def advancepred(): 
     cur = conn.cursor()     
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
@@ -72,7 +72,7 @@ def advancepred():
     session['email'] = None
     return render_template('advancepred.php', disease=disease)
     
-@app.route('/prediction/basicpredadmin')
+@app.route('/basicpredadmin')
 def basicpredadmin():
     cur = conn.cursor()     
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
@@ -95,7 +95,7 @@ def basicpredadmin():
         flash('Login is required to proceed')
     return render_template('basicpredadmin.php', disease=disease)
     
-@app.route('/prediction/advancepredadmin')
+@app.route('/advancepredadmin')
 def advancepredadmin():
     cur = conn.cursor()     
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
