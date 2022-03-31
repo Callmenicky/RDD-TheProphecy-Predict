@@ -54,7 +54,7 @@
 		      </div>
 		  </div>
 		  <div class="mySlides">
-		      <img src="{{url_for('static', filename='images/plots1.PNG')}}" alt="pca chart" class="pca">
+		      <img src="{{url_for('static', filename='images/plots.PNG')}}" alt="pca chart" class="pca">
 		  </div>
 		  <div class="mySlides">
 		      <img src="{{url_for('static', filename='images/result_ml.jpg')}}" alt="result icon">
