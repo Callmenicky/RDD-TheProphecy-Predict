@@ -58,14 +58,14 @@ def invalid_route(e):
 
 @app.route('/')
 def index():
-    return redirect("/static/images/identity.png")
+    return redirect("/basicpred")
     
 @app.route('/logout')
 def man():
     session.pop('email')
     return redirect("https://reverse-drug-discovery.herokuapp.com/index.php")
 
-@app.route('/basicpred/')
+@app.route('/basicpred')
 def basicpred():
     cur = conn.cursor()     
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
