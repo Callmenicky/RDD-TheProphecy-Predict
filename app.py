@@ -58,7 +58,7 @@ def hello():
 @app.route('/logout')
 def man():
     session.pop('email')
-    return redirect("https://rdd-theprophecy.herokuapp.com/index.php")
+    return redirect("https://reverse-drug-discovery.herokuapp.com/index.php")
 
 @app.route('/basicpred/')
 def basicpred():
