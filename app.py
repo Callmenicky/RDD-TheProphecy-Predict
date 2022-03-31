@@ -56,7 +56,7 @@ def man():
     session.pop('email')
     return redirect("https://rdd-theprophecy.herokuapp.com/index.php")
 
-@app.route('/basicpred')
+@app.route('/pred/basicpred')
 def basicpred():
     cur = conn.cursor()     
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
