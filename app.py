@@ -54,7 +54,7 @@ print ("Opened database successfully")
 #error handler
 @app.errorhandler(404)
 def invalid_route(e):
-    return "Invalid route."
+    return e
     
 @app.route('/logout')
 def man():
