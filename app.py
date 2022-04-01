@@ -55,10 +55,6 @@ print ("Opened database successfully")
 @app.errorhandler(404)
 def invalid_route(e):
     return "Invalid route."
-
-@app.route('/')
-def index():
-    return 'This is index for RDD Flask App'
     
 @app.route('/logout')
 def man():
