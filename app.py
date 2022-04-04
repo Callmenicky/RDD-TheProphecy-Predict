@@ -201,6 +201,29 @@ def read_dataprocessing_codes(modelname,targetdis):
     #overwrite the file from database to MLScript.py
     with open('MLScript.py', 'w') as f:
         f.write(model5)
+        
+def read_dataprocessing_files(modelname,targetdis):
+    cur = conn.cursor()
+    sql = "SELECT dataset FROM model WHERE model_name=%s and target_disease=%s"
+    #sql = "SELECT processing FROM model WHERE model_id = 154"
+    val = (modelname,targetdis)
+    cur.execute(sql,val)
+    model = cur.fetchone()[0] #Memoryview Object
+     
+    #Method 3
+    model1 = bytes(model)
+    model2 = base64.b64decode(model1); #Decode
+    model5 = str(model2,'utf8') #become string
+    
+    #overwrite the file from database to MLScript.py
+    with open('temporary.txt', 'w') as f:
+        f.write(model5)
+    
+    dataframe1 = pd.read_csv("temporary.txt")
+  
+    # storing this dataframe in a csv file
+    dataframe1.to_csv('trainingfile.csv', 
+                      index = None)
 
 def basicpredmethod():
     data1 = request.form['smiles']
@@ -208,6 +231,7 @@ def basicpredmethod():
     data3 = request.form['modelName']
     
     read_dataprocessing_codes(data3,data2) 
+    read_dataprocessing_files(data3,data2)
     
     #RunDataProcessingCodesForML
     import MLScript
@@ -261,6 +285,7 @@ def advancepredmethod():
     data3 = request.form['modelName']
     
     read_dataprocessing_codes(data3,data2)
+    read_dataprocessing_files(data3,data2)
     import MLScript
     
     if data1.filename != '':
