@@ -201,8 +201,6 @@ def read_dataprocessing_codes(modelname,targetdis):
     #overwrite the file from database to MLScript.py
     with open('MLScript.py', 'w') as f:
         f.write(model5)
-   
-    #return model5;
 
 def basicpredmethod():
     data1 = request.form['smiles']
