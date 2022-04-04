@@ -58,7 +58,9 @@ def invalid_route(e):
     
 @app.route('/logout')
 def man():
-    session.pop('email')
+    if(session('email') != none):
+        session.pop('email')
+    
     return redirect("https://reverse-drug-discovery.herokuapp.com/index.php")
 
 @app.route('/basicpred')
