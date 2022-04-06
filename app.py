@@ -328,7 +328,8 @@ def advancepredmethod():
         writer.writerow(header)
         for i in pred: 
             #write a row to the csv file
-            writer.writerow(molecule_list[count],prediction[count])
+            result = [molecule_list[count],prediction[count]]
+            writer.writerow(result)
             count += 1
            
     today = date.today()
