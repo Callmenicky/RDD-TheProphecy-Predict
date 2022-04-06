@@ -321,13 +321,14 @@ def advancepredmethod():
     path = "static/outcome.csv"
     count = 0
             
-    with open(path, "w") as f:
+    header = ["Smiles", "Result"]
+            
+    with open(path, "w", newline='') as f:
         writer = csv.writer(f)
+        writer.writerow(header)
         for i in pred: 
             #write a row to the csv file
-            f.write(molecule_list[count])
-            f.write(": ")
-            f.write(prediction[count] + "\n") 
+            writer.writerow(molecule_list[count],prediction[count])
             count += 1
            
     today = date.today()
