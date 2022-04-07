@@ -54,15 +54,7 @@ print ("Opened database successfully")
 #error handler
 @app.errorhandler(404)
 def invalid_route(e):
-    return e
-    
-@app.route('/')
-def prediction():
-    cur = conn.cursor()     
-    cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
-    disease = cur.fetchall()
-    session['email'] = None
-    return render_template('basicpred.php', disease=disease)
+    return "404 Page Not Found"
 
 @app.route('/logout')
 def man():
