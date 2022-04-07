@@ -56,6 +56,14 @@ print ("Opened database successfully")
 def invalid_route(e):
     return e
     
+@app.route('/')
+def prediction():
+    cur = conn.cursor()     
+    cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
+    disease = cur.fetchall()
+    session['email'] = None
+    return render_template('basicpred.php', disease=disease)
+
 @app.route('/logout')
 def man():
     if session.get("email") is not None:
@@ -71,7 +79,7 @@ def basicpred():
     session['email'] = None
     return render_template('basicpred.php', disease=disease)
     
-@app.route('/blog/advancepred')
+@app.route('/advancepred')
 def advancepred(): 
     cur = conn.cursor()     
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
@@ -79,7 +87,7 @@ def advancepred():
     session['email'] = None
     return render_template('advancepred.php', disease=disease)
     
-@app.route('/basicpredadmin/')
+@app.route('/basicpredadmin')
 def basicpredadmin():
     cur = conn.cursor()     
     cur.execute("SELECT DISTINCT target_disease FROM model ORDER BY target_disease ASC");
