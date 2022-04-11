@@ -22,20 +22,20 @@
 <nav>
 	<!-- The logo is originally illustrated and designed -->
 	  <ul>
-		<a href="https://rdd-theprophecy.herokuapp.com/dashboardenduser.php"><img src="{{url_for('static', filename='images/logo_RDD.png')}}" alt="logo"/></a>
+		<a href="https://reversedrugdiscovery.ml/dashboardenduser.php"><img src="{{url_for('static', filename='images/logo_RDD.png')}}" alt="logo"/></a>
 		<li class="parent"><a href="#">Prediction</a>
 		  <ul class="child">
-			<li><a href="https://rdd-theprophecy-predict.herokuapp.com/basicpredenduser">Basic</a></li>
-			<li><a href="https://rdd-theprophecy-predict.herokuapp.com/advancepredenduser">Advance</a></li>
+			<li><a href="https://reversedrugdiscovery-predict.ml/basicpredenduser">Basic</a></li>
+			<li><a href="https://reversedrugdiscovery-predict.ml/advancepredenduser">Advance</a></li>
 		  </ul>
 		</li>
 		<li class="parent"><a href="#">History</a>
 		  <ul class="child">
-			<li><a href="https://rdd-theprophecy.herokuapp.com/basichistoryenduser.php">Basic</a></li>
-			<li><a href="https://rdd-theprophecy.herokuapp.com/advancehistoryenduser.php">Advance</a></li>
+			<li><a href="https://reversedrugdiscovery.ml/basichistoryenduser.php">Basic</a></li>
+			<li><a href="https://reversedrugdiscovery.ml/advancehistoryenduser.php">Advance</a></li>
 		  </ul>
 		</li>
-		<li class="parent"><a href="https://rdd-theprophecy.herokuapp.com/profileenduser.php">Profile</a></li>
+		<li class="parent"><a href="https://reversedrugdiscovery.ml/profileenduser.php">Profile</a></li>
 		<li class="parent"><a href="#" onclick = "logout()">Logout</a></li>
 	  </ul>
 </nav>
