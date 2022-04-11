@@ -173,9 +173,16 @@ def advancepredenduser():
     
 def loadmodel(modelname,targetdis):
     cur = conn.cursor()
-    sql = "SELECT model FROM model WHERE model_name=%s and target_disease=%s"
+    sql = "SELECT model_id FROM model WHERE model_name=%s and target_disease=%s"
     val = (modelname,targetdis)
     cur.execute(sql,val)
+    model_id = cur.fetchone()[0]
+    
+    model_id_list = []
+    model_id_list.append(model_id)
+    
+    sql = "SELECT model FROM modelfile WHERE model_id=%s"
+    cur.execute(sql,model_id_list)
     model = cur.fetchone()[0] #Memoryview Object
      
     model1 = bytes(model)
@@ -188,9 +195,17 @@ def loadmodel(modelname,targetdis):
     
 def read_dataprocessing_codes(modelname,targetdis):
     cur = conn.cursor()
-    sql = "SELECT processing FROM model WHERE model_name=%s and target_disease=%s"
+    sql = "SELECT model_id FROM model WHERE model_name=%s and target_disease=%s"
     val = (modelname,targetdis)
     cur.execute(sql,val)
+    model_id = cur.fetchone()[0]
+    
+    model_id_list = []
+    model_id_list.append(model_id)
+    
+    cur = conn.cursor()
+    sql = "SELECT processing FROM modelfile WHERE model_id=%s"
+    cur.execute(sql,model_id_list)
     model = cur.fetchone()[0] #Memoryview Object
      
     #Method 3
@@ -204,10 +219,16 @@ def read_dataprocessing_codes(modelname,targetdis):
         
 def read_dataprocessing_files(modelname,targetdis):
     cur = conn.cursor()
-    sql = "SELECT dataset FROM model WHERE model_name=%s and target_disease=%s"
-    #sql = "SELECT processing FROM model WHERE model_id = 154"
+    sql = "SELECT model_id FROM model WHERE model_name=%s and target_disease=%s"
     val = (modelname,targetdis)
     cur.execute(sql,val)
+    model_id = cur.fetchone()[0]
+    
+    model_id_list = []
+    model_id_list.append(model_id)
+    
+    sql = "SELECT dataset FROM modelfile WHERE model_id=%s"
+    cur.execute(sql,model_id_list)
     model = cur.fetchone()[0] #Memoryview Object
      
     #Method 3
