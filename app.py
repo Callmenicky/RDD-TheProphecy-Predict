@@ -61,7 +61,7 @@ def man():
     if session.get("email") is not None:
         session.pop('email')
     
-    return redirect("https://reverse-drug-discovery.herokuapp.com/index.php")
+    return redirect("https://reversedrugdiscovery.ml/index.php")
 
 @app.route('/basicpred')
 def basicpred():
