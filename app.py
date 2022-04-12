@@ -378,11 +378,10 @@ def advancepredmethod():
         print(Userid)
         cur.close()
         
-        dataframe1 = pd.read_csv(path)
-        df = pd.DataFrame(data)
-         
+        file = open(path, 'rb').read()
+        
         cur = conn.cursor()
-        cur.execute("INSERT INTO advanceprediction(user_id, target_disease, model_apply, output_csv, date) VALUES (%s, %s , %s , %s, %s)", (Userid, data2, int(Modelid[0][0]), df, today))
+        cur.execute("INSERT INTO advanceprediction(user_id, target_disease, model_apply, output_csv, date) VALUES (%s, %s , %s , %s, %s)", (Userid, data2, int(Modelid[0][0]), psycopg2.Binary(file), today))
         conn.commit()
         cur.close()
    
