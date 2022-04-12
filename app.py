@@ -379,6 +379,7 @@ def advancepredmethod():
         cur.close()
         
         file = open(path, 'rb').read()
+        print("hi")
         
         cur = conn.cursor()
         cur.execute("INSERT INTO advanceprediction(user_id, target_disease, model_apply, output_csv, date) VALUES (%s, %s , %s , %s, %s)", (Userid, data2, int(Modelid[0][0]), psycopg2.Binary(file), today))
