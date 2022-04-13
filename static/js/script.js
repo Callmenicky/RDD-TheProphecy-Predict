@@ -69,7 +69,7 @@ function logout(){
 	if (logout == true)
 	{
 		sessionStorage.clear();
-		location.href = "https://reversedrugdiscovery.ml/logout";
+		location.href = "https://rdd-theprophecy.herokuapp.com/logout";
 	}
 }
 
