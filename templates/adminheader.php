@@ -22,24 +22,24 @@
 <nav>
 	<!-- The logo is originally illustrated and designed -->
   <ul>
-    <a href="https://reversedrugdiscovery.ml/dashboardadmin.php"><img src="{{url_for('static', filename='images/logo_RDD.png')}}" alt="logo"/></a>
+    <a href="https://rdd-theprophecy.herokuapp.com/dashboardadmin.php"><img src="{{url_for('static', filename='images/logo_RDD.png')}}" alt="logo"/></a>
     <li class="parent"><a href="#">Prediction</a>
       <ul class="child">
-        <li><a href="https://reversedrugdiscovery-predict.ml/basicpredadmin">Basic</a></li>
-        <li><a href="https://reversedrugdiscovery-predict.ml/advancepredadmin">Advance</a></li>
-        <li><a href="https://reversedrugdiscovery.ml/modeldeploy.php">New Model</a></li>
+        <li><a href="https://rdd-theprophecy-predict.herokuapp.com/basicpredadmin">Basic</a></li>
+        <li><a href="https://rdd-theprophecy-predict.herokuapp.com/advancepredadmin">Advance</a></li>
+        <li><a href="https://rdd-theprophecy.herokuapp.com/modeldeploy.php">New Model</a></li>
       </ul>
     </li>
     <li class="parent"><a href="#">History</a>
       <ul class="child">
-        <li><a href="https://reversedrugdiscovery.ml/basichistoryadmin.php">Basic</a></li>
-        <li><a href="https://reversedrugdiscovery.ml/advancehistoryadmin.php">Advance</a></li>
+        <li><a href="https://rdd-theprophecy.herokuapp.com/basichistoryadmin.php">Basic</a></li>
+        <li><a href="https://rdd-theprophecy.herokuapp.com/advancehistoryadmin.php">Advance</a></li>
       </ul>
     </li>
     <li class="parent"><a href="#">Profile</a>
       <ul class="child">
-        <li><a href="https://reversedrugdiscovery.ml/profileadmin.php">Personal</a></li>
-        <li><a href="https://reversedrugdiscovery.ml/profileall.php">All</a></li>
+        <li><a href="https://rdd-theprophecy.herokuapp.com/profileadmin.php">Personal</a></li>
+        <li><a href="https://rdd-theprophecy.herokuapp.com/profileall.php">All</a></li>
       </ul>
     </li>
     <li class="parent"><a href="#" onclick = "logout()">Logout</a></li>
