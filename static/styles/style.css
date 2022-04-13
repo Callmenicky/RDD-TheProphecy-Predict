@@ -476,3 +476,138 @@ input:checked + .slider:before {
   -ms-transform: translateX(26px);
   transform: translateX(26px);
 }
+
+/*icons*/
+.fa-times{
+    color:red;
+    padding: 0 5px;
+}
+
+.fa-search, .fa-image{
+    color:#0070ff;
+    padding: 0 5px;
+}
+
+.fa-plus-square{
+    background-color: #0070ff;
+    color:#fff;
+    padding: 0 5px;
+}
+
+ul.iconinfo, ul.iconinfo li{
+    width:70%;
+    margin-left: auto;
+    margin-right: auto;
+    list-style-type: none;
+}
+
+ul.iconinfo li{
+    text-align: left;
+}
+
+/*Pop Ups*/
+.design{
+    background: none;
+}
+
+.modal-header{
+    margin: 1px;
+    background-color: #0070ff;
+}
+
+.modal-title{
+    background-color: #0070ff;
+    color: #fff;
+}
+
+.modal-footer{
+    background-color: #fff;
+}
+
+.left div{
+    text-align: left;
+    margin-left: 20px;
+}
+
+.modal-body ol {
+    padding-left: 20%;
+}
+
+.modal-body p, .modal-body ol li{
+    text-align: left;
+    padding-left: 2%;
+}
+
+/* media query */
+/* max-width=browser width is less than / euqual to value */
+/* min-width=browser width is greater than / euqual to value */
+@media (max-width: 767px){
+    *{
+        font-size: 1.8vw;
+    }
+    
+    h1{
+        font-size: 2.5vw;
+    }
+    
+    h2{
+        font-size: 2.3vw;
+    }
+    
+    .logo{
+        margin-top: 8vw;
+        height: 15vw;
+    }
+    
+    input[type=text],input[type=password]{
+        height: 4vw;
+        font-size: 1.8vw;
+    }
+    
+    .link, .index p a{
+        font-size: 1.7vw;
+    }
+}
+
+@media (max-width: 500px){
+    *{
+        font-size: 2vw;
+    }
+    
+    h1{
+        font-size: 2.8vw;
+        padding: 2%;
+        font-weight: bold; 
+    }
+    
+    h2{
+        font-size: 2.6vw;
+    }
+    
+    .logo{
+        margin-top: 8vw;
+        height: 18vw;
+    }
+    
+    input[type=text],input[type=password]{
+        height: 5vw;
+        font-size: 2vw;
+    }
+    
+    .link, .index p a{
+        font-size: 1.9vw;
+    }
+}
+
+/*card view*/
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    position:relative;
+    float: left;
+    transition: 0.3s;
+    width: 23%;
+    height: 25vw;
+    padding: 1%;
+    background-color: #fff;
+    margin: 1%;
+}
