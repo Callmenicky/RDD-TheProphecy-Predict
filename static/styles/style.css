@@ -10,23 +10,23 @@
     text-align: center;
 	font-family: Arial, sans-serif;
     background-color: #ffffff;
-    font-size: 1.5vw;
+    font-size: 16px;
 }
 
 h1{
-	font-size: 2vw;
+	font-size: 22px;
     padding: 2%;
     font-weight: bold; 
 }
 
 h2{
-	font-size: 1.8vw;
+	font-size: 20px;
     padding: 2%;
     font-weight: bold; 
 }
 
 .logo{
-    margin-top: 5vw;
+    margin-top: 3vw;
     height: 10vw;
 }
 
@@ -35,7 +35,7 @@ header, header h1{
 }
 
 footer{
-    margin-top: 12%;
+    margin-top: 1%;
 }
 
 footer>address{
@@ -52,34 +52,31 @@ footer>address{
     text-decoration: none;
 }
 
-.link, .index p a{
-    font-size: 1.4vw;
-}
-
 .link a{
     color: #0070ff;
 }
 
 button{
-	background-color: #0070ff;
 	border: none;
 	color: white;
-	padding: 1vw 5vw;
 	text-decoration: none;
-	margin: 1vw;
 	cursor: pointer;
 	text-align: center;
 	border-radius: 1vw;
-    margin-bottom: 10px;
-    width:15%;
+    margin: 10px;
+    width:10%;
 }
 
 button.long{
-    width:30%;
+    padding: 1vw 3vw;
+    width:20%;
+}
+
+button.long2{
+    width:20%;
 }
 
 button a, button a:hover{
-    background-color: #0070ff;
 	border: none;
 	color: white;
 	text-decoration: none;
@@ -90,6 +87,13 @@ button a, button a:hover{
 button:hover{
 	font-weight: bold;
 	text-decoration: none;
+}
+
+button.add{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
 }
 
 /*navigation bar*/
@@ -119,7 +123,7 @@ nav ul a, nav ul a img{
     margin: 0.5vw 2vw 2vw 2vw;
     background-color: #e1e2e1;
     text-align: left;
-	height: 10vw;
+	height: 15vh;
 }
 
 nav a{
@@ -170,46 +174,11 @@ nav a:hover{
     left:0;
 }
 
-/*index page*/
-.index p{
-    margin-top: 4vw;
-    text-align: right;
-    margin-right: 5%;
-    font-weight: bold;
-}
-
-.logo0{
-    height: 10vw;
-}
-
-.steps{
-    width:100%;
-    padding: 0 5%;
-}
-
-.steps p, .steps ol li{
-    margin-left: 2%;
-    text-align: left;
-}
-
-.steps ol li{
-    line-height: 40px;
-}
-
-.pred{
-	background-color: #0070ff;
-	border: none;
-	color: white;
-	padding: 1%;
-	text-decoration: none;
-	margin: 1vw;
-	cursor: pointer;
-	text-align: center;
-	border-radius: 1vw;
-    max-width:15%;
-}
-
 /*forms*/
+input[readonly] {
+  background-color: #d3d3d3;
+}
+
 form label.required:after
 {
     color: red;
@@ -241,7 +210,8 @@ input[type=text],input[type=password],select,input[type=date]{
 	box-sizing: border-box;
 	border: 2px solid #000;
     border-radius: 0.5vw;
-	font-size: 1.5vw;
+    padding-left: 3%;
+    text-align: left;
 }
 
 input[type=file]{
@@ -249,89 +219,21 @@ input[type=file]{
 	height: 3vw;
 	margin: 1vw;
 	box-sizing: border-box;
-	font-size: 1.5vw;
-}
-
-input[type=submit],input[type=button]{
-	background-color: #0070ff;
-	border: none;
-	color: white;
-	padding: 1vw 5vw;
-	text-decoration: none;
-	margin: 1vw;
-	cursor: pointer;
-	text-align: center;
-	border-radius: 1vw;
-}
-
-input[type=submit]:hover,input[type=button]:hover{
-	font-weight: bold;
-	text-decoration: none;
-}
-
-p.chklink{
-    text-align: center;
-}
-
-.bootstrap-select .dropdown-toggle{
-    display:none;
-}
-
-#smiles, #smilescsv, #disease, #modelName{
-    width: 30vw;
-    height: 3vw;
-    margin: 1vw;
-    box-sizing: border-box;
-    border: 2px solid #000;
-    border-radius: 0.5vw;
-    font-size: 1.5vw;
-}
-
-/*hide password icon*/
-.eye{
-	position: absolute;
-	cursor: pointer;
-	left: 67.5vw;
-    font-size: 1.5vw;
-    margin-top: 1.5vw;
-}
-
-.eye2{
-	position: absolute;
-	cursor: pointer;
-	margin-top: 1.6vw;
-	left: 77.5vw;
-}
-
-#hide1, #hide3{
-	display: none;
-}
-
-/*tables*/
-table {
-    margin:2% auto;
-    border-collapse: collapse;
-    width: 80%;
-}
-
-table, th, td {
-    border: 1px solid black;
-    padding: 1vw 0;
 }
 
 /*prediction page*/
 .predict{
-    width:100%;
+    width:80%;
     display: inline-flex;
 }
 
 .predcontent{
-    width:50%;
+    width:70%;
 }
 
 .predcontent h2{
     text-align: left;
-    margin-left: 18%;
+    margin-left: 8vw;
 }
 
 .predcontent p{
@@ -348,296 +250,11 @@ table, th, td {
     margin-top: 5%;
 }
 
-.predimgafter{
-    border: solid #0070ff 1px;
-    border-width: 1vw;
-}
-
 .predimg img{
     height: 23vw;
     opacity: 0.95;
 }
 
-.predimg h2{
-    background: #0070ff;
-    color:#fff;
-}
-
 #more{
     display: none;
-}
-
-/*slider or carousel*/
-.slideshow-container{
-	padding: 8%;
-	position: relative;
-	margin: auto;
-}
-
-.sliderbutton{
-	text-align: center;
-}
-
-.mySlides{
-	position: relative;
-  	text-align: center;
-  	color: #000000;
-}
-
-.centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.mySlides:not(:first-child){
-	display: none;
-}
-
-.mySlides img{
-	opacity: 0.2;
-	width:100%;
-}
-
-.mySlides img.pca{
-	opacity: 1;
-}
-
-.dot{
-	height: 15px;
-	width: 15px;
-	cursor: pointer;
-	margin:0 2px;
-	background-color:#bbb;
-	border-radius: 50%;
-	display: inline-block;
-	transition: background-color 0.6s ease;
-}
-
-.dot:hover, .active{
-	background-color: #717171;
-}
-
-/*profile page*/
-.profile{
-    width:70%;
-    display: inline-flex;
-}
-
-.content{
-    width:60%;
-}
-
-.content p{
-    text-align: left;
-    margin-left: 2vw;
-}
- 
-.img{
-    width:40%;
-    margin-right: 5%;
-}
-
-.img img{
-    height: 23vw;
-    opacity: 0.95;
-}
-
-.content p{
-    margin-left: 3vw;
-}
-
-.content p label{
-    display: inline-block;
-    width: 28%;
-    margin-left: 15%;
-    text-align: left;
-}
-
-.form-group label{
-    display: inline-block;
-    width: 28%;
-    margin-left: 5%;
-    text-align: left;
-}
-
-.form-view label.viewtext{
-    display: inline-block;
-    width: 28%;
-    margin-left: 0;
-    text-align: left;
-}
-
-.content p span.labelcolon{
-    text-align: right;
-    padding-right: 25px;
-}
-
-span.labelcolons{
-    text-align: right;
-    padding-right: 25px;
-}
-
-.content button{
-	padding: 1vw 5vw 1vw 2.5vw;
-}
-
-
-/*toggle switch*/
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 24px;
-}
-
-.switch input { 
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 16px;
-  width: 16px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-input:checked + .slider {
-  background-color: #2196F3;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-/*icons*/
-.fa-times{
-    color:red;
-    padding: 0 5px;
-}
-
-.fa-search{
-    color:#0070ff;
-    padding: 0 5px;
-}
-
-/*Pop Ups*/
-.design{
-    background: none;
-}
-
-.modal-header{
-    margin: 1px;
-    background-color: #0070ff;
-}
-
-.modal-title{
-    background-color: #0070ff;
-    color: #fff;
-}
-
-.modal-footer{
-    background-color: #fff;
-}
-
-.left div{
-    text-align: left;
-    margin-left: 20px;
-}
-
-.modal-body ol {
-    padding-left: 35%;
-}
-
-.modal-body p, .modal-body ol li{
-    text-align: left;
-    padding-left: 2%;
-}
-
-/* media query */
-/* max-width=browser width is less than / euqual to value */
-/* min-width=browser width is greater than / euqual to value */
-@media (max-width: 767px){
-    *{
-        font-size: 1.8vw;
-    }
-    
-    h1{
-        font-size: 2.5vw;
-    }
-    
-    h2{
-        font-size: 2.3vw;
-    }
-    
-    .logo{
-        margin-top: 8vw;
-        height: 15vw;
-    }
-    
-    input[type=text],input[type=password]{
-        height: 4vw;
-        font-size: 1.8vw;
-    }
-    
-    .link, .index p a{
-        font-size: 1.7vw;
-    }
-}
-
-@media (max-width: 500px){
-    *{
-        font-size: 2vw;
-    }
-    
-    h1{
-        font-size: 2.8vw;
-        padding: 2%;
-        font-weight: bold; 
-    }
-    
-    h2{
-        font-size: 2.6vw;
-    }
-    
-    .logo{
-        margin-top: 8vw;
-        height: 18vw;
-    }
-    
-    input[type=text],input[type=password]{
-        height: 5vw;
-        font-size: 2vw;
-    }
-    
-    .link, .index p a{
-        font-size: 1.9vw;
-    }
 }

@@ -32,37 +32,6 @@ function showSlides(n) {
  
 }
 
-//Show Password by Chin Jing Jie
-function showPswd(){
-	var show = document.getElementById("pswd");
-	var hidepass1 = document.getElementById("hide1");
-	var hidepass2 = document.getElementById("hide2");
-	if (show.type == "password") {
-		show.type = "text";
-		hidepass1.style.display = "block";
-		hidepass2.style.display = "none";
-	} else {
-		show.type = "password";
-		hidepass1.style.display = "none";
-		hidepass2.style.display = "block";
-	}
-}
-
-function showPswd1(){
-	var show = document.getElementById("pswd1");
-	var hidepass1 = document.getElementById("hide3");
-	var hidepass2 = document.getElementById("hide4");
-	if (show.type == "password") {
-		show.type = "text";
-		hidepass1.style.display = "block";
-		hidepass2.style.display = "none";
-	} else {
-		show.type = "password";
-		hidepass1.style.display = "none";
-		hidepass2.style.display = "block";
-	}
-}
-
 function logout(){
 	var logout;
 	logout = confirm("Do you want to continue your action");
@@ -71,11 +40,6 @@ function logout(){
 		sessionStorage.clear();
 		location.href = "https://rdd-theprophecy.herokuapp.com/logout";
 	}
-}
-
-function windowClose() {
-    window.open('','_parent','');
-    window.close();
 }
 
 var gErrorMsg = "";
