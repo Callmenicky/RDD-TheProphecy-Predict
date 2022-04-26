@@ -52,10 +52,6 @@ footer>address{
     text-decoration: none;
 }
 
-.link a{
-    color: #0070ff;
-}
-
 button{
 	border: none;
 	color: white;
@@ -268,16 +264,11 @@ table, th, td {
 
 .predimg{
     width:40%;
-    margin-top: 5%;
-}
-
-.predimgafter{
-    border: solid #0070ff 1px;
-    border-width: 1vw;
+    margin-top: 1%;
 }
 
 .predimg img{
-    height: 23vw;
+    height: 35vh;
     opacity: 0.95;
 }
 

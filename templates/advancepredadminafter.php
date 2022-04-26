@@ -19,7 +19,7 @@
         </select>
         <select name="modelName" id="modelName"><option>Select ML Model</option></select>
         <br/>
-        <button type="submit" name="predictadvanceAdmin" class="btn btn-info">Predict</button>
+        <button type="submit" name="predictadvanceAdmin" class="btn btn-primary long2">Predict</button>
         </form>
       </div>
       <div class="predimg predimgafter">

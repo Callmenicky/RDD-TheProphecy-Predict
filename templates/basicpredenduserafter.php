@@ -18,7 +18,7 @@
         </select>
         <select name="modelName" id="modelName"><option>Select ML Model</option></select>
         <br/>
-        <button type="submit" name="predictbasicenduser" class="btn btn-info" onclick="saveData();">Predict</button>
+        <button type="submit" name="predictbasicenduser" class="btn btn-primary long2" onclick="saveData();">Predict</button>
         </form>
         </div>
         <div class="predimg predimgafter">

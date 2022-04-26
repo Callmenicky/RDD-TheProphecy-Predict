@@ -44,7 +44,7 @@
 			$_SESSION["email"] = $email;
 		?></option></select>
         <br/>
-        <button type="submit" name="predictadvanceAdmin" class="btn btn-info">Predict</button>
+        <button type="submit" name="predictadvanceAdmin" class="btn btn-primary long2">Predict</button>
         </form>
       </div>
       <div class="predimg">
