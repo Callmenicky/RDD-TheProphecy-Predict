@@ -342,3 +342,36 @@ table, th, td {
 .dot:hover, .active{
 	background-color: #717171;
 }
+
+/*Pop Ups*/
+.design{
+    background: none;
+}
+
+.modal-header{
+    margin: 1px;
+    background-color: #0070ff;
+}
+
+.modal-title{
+    background-color: #0070ff;
+    color: #fff;
+}
+
+.modal-footer{
+    background-color: #fff;
+}
+
+.left div{
+    text-align: left;
+    margin-left: 20px;
+}
+
+.modal-body ol {
+    padding-left: 20%;
+}
+
+.modal-body p, .modal-body ol li{
+    text-align: left;
+    padding-left: 2%;
+}

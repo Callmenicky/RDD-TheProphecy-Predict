@@ -72,8 +72,8 @@
                 <a class="white" href=" {{url_for('static', filename='outcome.csv')}}" download>Download</a>
               </a>
           </h2>
+        <br/><br/>
       </div>
-      <br/><br/>
     </section>
   	<footer>
 		<address>&#169; RDD 2021. All rights reserved</address> 
