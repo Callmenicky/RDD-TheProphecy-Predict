@@ -47,7 +47,6 @@
 		      <span class="dot" onclick="currentSlide(2)"></span>
 		      <span class="dot" onclick="currentSlide(3)"></span>
 		  </div>
-	      </div>
 	<!--End of slideshow-->
 		{%if data == "Active"%}
                   <h2>Prediction Result: Active</h2>
@@ -55,6 +54,7 @@
                   <h2>Prediction Result: Inactive</h2>		
 		{%endif%}
         </div>
+        <br/><br/>
     </section>
   	<footer>
 		<address>&#169; RDD 2021. All rights reserved</address> 

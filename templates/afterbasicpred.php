@@ -73,6 +73,7 @@
                   <h2>Prediction Result: Inactive</h2>		
 		{%endif%}
         </div>
+      <br/><br/>
     </section>	
   	<footer>
 		<address>&#169; RDD 2021. All rights reserved</address> 

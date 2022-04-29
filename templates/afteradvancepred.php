@@ -73,6 +73,7 @@
               </a>
           </h2>
       </div>
+      <br/><br/>
     </section>
   	<footer>
 		<address>&#169; RDD 2021. All rights reserved</address> 
