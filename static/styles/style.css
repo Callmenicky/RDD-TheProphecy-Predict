@@ -281,9 +281,18 @@ table, th, td {
     display: none;
 }
 
+.scrollmenu {
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.white{
+    color: #ffffff;
+}
+
 /*slider or carousel*/
 .slideshow-container{
-	padding: 8%;
+	padding: 2%;
 	position: relative;
 	margin: auto;
 }
@@ -332,65 +341,4 @@ table, th, td {
 
 .dot:hover, .active{
 	background-color: #717171;
-}
-
-/* media query */
-/* max-width=browser width is less than / euqual to value */
-/* min-width=browser width is greater than / euqual to value */
-@media (max-width: 767px){
-    *{
-        font-size: 1.8vw;
-    }
-    
-    h1{
-        font-size: 2.5vw;
-    }
-    
-    h2{
-        font-size: 2.3vw;
-    }
-    
-    .logo{
-        margin-top: 8vw;
-        height: 15vw;
-    }
-    
-    input[type=text],input[type=password]{
-        height: 4vw;
-        font-size: 1.8vw;
-    }
-    
-    .link, .index p a{
-        font-size: 1.7vw;
-    }
-}
-
-@media (max-width: 500px){
-    *{
-        font-size: 2vw;
-    }
-    
-    h1{
-        font-size: 2.8vw;
-        padding: 2%;
-        font-weight: bold; 
-    }
-    
-    h2{
-        font-size: 2.6vw;
-    }
-    
-    .logo{
-        margin-top: 8vw;
-        height: 18vw;
-    }
-    
-    input[type=text],input[type=password]{
-        height: 5vw;
-        font-size: 2vw;
-    }
-    
-    .link, .index p a{
-        font-size: 1.9vw;
-    }
 }

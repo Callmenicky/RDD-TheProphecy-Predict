@@ -42,7 +42,7 @@
     </form>
 	</div>
         <div class="predimg predimgafter">
-          <h2 id="mysmiles"></h2>
+          <h2 id="mysmiles scrollmenu"></h2>
 	  <!--Start of slideshow-->
 	      <div class="slideshow-container">
 		  <div class="mySlides">

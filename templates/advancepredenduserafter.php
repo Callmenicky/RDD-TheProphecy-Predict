@@ -9,7 +9,7 @@
     <div class="predcontent">
         <h2>Advance Prediction</h2>
 		<form id="AdvancePrediction" method="post" action="{{url_for('advancepredictenduser')}}" enctype=multipart/form-data>
-        <p>Upload a CSV file containing SMILES</p>
+        <p>Upload a text file containing SMILES</p>
         <input type="file" id="smilescsv" name="smilescsv"/>
         <select name="disease" id="disease"> 
             <option>Select Target Disease</option>
@@ -49,7 +49,7 @@
 	<!--End of slideshow-->
           <h2>Prediction Result: 
               <a download href="outcome.txt">
-                <a href=" {{url_for('static', filename='outcome.csv')}}" download>Download</a>
+                <a class="white" href=" {{url_for('static', filename='outcome.csv')}}" download>Download</a>
               </a>
           </h2>
       </div>
