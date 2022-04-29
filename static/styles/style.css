@@ -272,9 +272,8 @@ table, th, td {
     opacity: 0.95;
 }
 
-.predimg h2{
-    background: #0070ff;
-    color:#fff;
+.predimg h2, .white{
+    color:#0070ff;
 }
 
 #more{
@@ -284,10 +283,6 @@ table, th, td {
 .scrollmenu {
   overflow: auto;
   white-space: nowrap;
-}
-
-.white{
-    color: #ffffff;
 }
 
 /*slider or carousel*/
