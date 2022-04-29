@@ -272,8 +272,13 @@ table, th, td {
     opacity: 0.95;
 }
 
-.predimg h2, .white{
+.predimg h2{
     color:#0070ff;
+}
+
+.white{
+    text-decoration: underline;
+    font-size: 16px;
 }
 
 #more{
@@ -287,7 +292,7 @@ table, th, td {
 
 /*slider or carousel*/
 .slideshow-container{
-	padding: 2%;
+	padding: 8%;
 	position: relative;
 	margin: auto;
 }
