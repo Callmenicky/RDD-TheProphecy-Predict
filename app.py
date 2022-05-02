@@ -378,8 +378,8 @@ def advancepredmethod():
         print(Userid)
         cur.close()
         
-        file = open(path, 'rb').read()
-        print("hisssssssssssssssssssssssssssssssssssssssssssssss")
+        with open(path,'rt')as f:
+            file = csv.reader(f)
         
         cur = conn.cursor()
         cur.execute("INSERT INTO advanceprediction(user_id, target_disease, model_apply, output_csv, date) VALUES (%s, %s , %s , %s, %s)", (Userid, data2, int(Modelid[0][0]), file, today))
