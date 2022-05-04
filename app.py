@@ -343,6 +343,7 @@ def advancepredmethod():
     count = 0
             
     header = ["Smiles", "Result"]
+    output_array = [header]
             
     with open(path, "w", newline='') as f:
         writer = csv.writer(f)
@@ -351,7 +352,10 @@ def advancepredmethod():
             #write a row to the csv file
             result = [molecule_list[count],prediction[count]]
             writer.writerow(result)
+            output_array.append(result)
             count += 1
+            
+    
            
     today = date.today()
     print(today)
@@ -382,7 +386,7 @@ def advancepredmethod():
             file = csv.reader(f)
         
         cur = conn.cursor()
-        cur.execute("INSERT INTO advanceprediction(user_id, target_disease, model_apply, output_csv, date) VALUES (%s, %s , %s , %s, %s)", (Userid, data2, int(Modelid[0][0]), file, today))
+        cur.execute("INSERT INTO advanceprediction(user_id, target_disease, model_apply, output, date) VALUES (%s, %s , %s , %s, %s)", (Userid, data2, int(Modelid[0][0]), output_array, today))
         conn.commit()
         cur.close()
    
