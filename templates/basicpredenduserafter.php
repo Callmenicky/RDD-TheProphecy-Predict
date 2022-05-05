@@ -22,7 +22,7 @@
         </form>
         </div>
         <div class="predimg predimgafter">
-          <h2 class="scrollmenu" id="mysmiles"></h2>
+          <h2 class="wrapping" id="mysmiles"></h2>
 		{%if data == "Active"%}
                   <h2>Prediction Result: Active</h2>
 		  {%else%}
