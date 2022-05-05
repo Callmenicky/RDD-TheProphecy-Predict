@@ -43,35 +43,12 @@
     </form>
 	</div>
         <div class="predimg predimgafter">
-		<!--Start of slideshow-->
-	      <div class="slideshow-container">
-		  <div class="mySlides">
-		      <img src="{{url_for('static', filename='images/result_ml.jpg')}}" alt="result icon">
-		      <div class="centered">
-			  {% for row in temp %}
-                <p>In <b>{{row[1]}}</b> model that target on <b>{{row[2]}}</b>, molecule that has pIC50 higher than <b>{{row[3]}}</b> is consider as active.</p>
-              {% endfor %}
-		      </div>
-		  </div>
-		  <div class="mySlides">
-		      <img src="{{url_for('static', filename='images/plots.PNG')}}" alt="pca chart" class="pca">
-		  </div>
-		  <div class="mySlides">
-		      <img src="{{url_for('static', filename='images/result_ml.jpg')}}" alt="result icon">
-		      <div class="centered"><p>PCA chart is applied to visualize the accuacy of prediction. <b>If the SMILES(green) lays between the range of training sample(red), the prediction result is promising.</b></p></div>
-		  </div>
-		  <div class="sliderButtons">
-		      <span class="dot" onclick="currentSlide(1)"></span>
-		      <span class="dot" onclick="currentSlide(2)"></span>
-		      <span class="dot" onclick="currentSlide(3)"></span>
-		  </div>
-	      </div>
-	<!--End of slideshow-->
           <h2>Prediction Result: 
               <a download href="outcome.txt">
                 <a class="white" href=" {{url_for('static', filename='outcome.csv')}}" download>Download</a>
               </a>
           </h2>
+        <button type="button" class="btn btn-info long2" data-bs-toggle="modal" data-bs-target="#ModelAnalysis" data-id ="<?php echo $row['user_id'];?>">Model Analysis</button>
         <br/><br/>
       </div>
     </section>
@@ -79,6 +56,46 @@
 		<address>&#169; RDD 2021. All rights reserved</address> 
 		<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 	</footer>
+    <div class="modal fade design" id="ModelAnalysis" tabindex="-1" data-bs-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-lg">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h3 class="modal-title" id="exampleModalLabel">Model Analysis</h3>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			  </div>
+              <div class="modal-body">
+				    <!--Start of slideshow-->
+                      <div class="slideshow-container">
+                      <div class="mySlides">
+                          <img src="{{url_for('static', filename='images/result_ml.jpg')}}" alt="result icon">
+                          <div class="centered">
+                          {% for row in temp %}
+                            <p>In <b>{{row[1]}}</b> model that target on <b>{{row[2]}}</b>, molecule that has pIC50 higher than <b>{{row[3]}}</b> is consider as active.</p>
+                          {% endfor %}
+                          </div>
+                      </div>
+                      <div class="mySlides">
+                          <img src="{{url_for('static', filename='images/plots.PNG')}}" alt="pca chart" class="pca">
+                      </div>
+                      <div class="mySlides">
+                          <img src="{{url_for('static', filename='images/result_ml.jpg')}}" alt="result icon">
+                          <div class="centered"><p>PCA chart is applied to visualize the accuacy of prediction. <b>If the SMILES(green) lays between the range of training sample(red), the prediction result is promising.</b></p></div>
+                      </div>
+                      <div class="sliderButtons">
+                          <span class="dot" onclick="currentSlide(1)"></span>
+                          <span class="dot" onclick="currentSlide(2)"></span>
+                          <span class="dot" onclick="currentSlide(3)"></span>
+                      </div>
+                      </div>
+                <!--End of slideshow-->
+				 
+				  <div class="modal-footer">
+					<button type="submit" name="updateadminprofile" class="btn btn-primary">Okay!</button>
+				  </div>
+			</div>
+		  </div>
+		</div>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
         <script>

@@ -276,6 +276,10 @@ table, th, td {
     color:#0070ff;
 }
 
+.predimgafter{
+    background-color: #e1e2e1;
+}
+
 .white{
     text-decoration: underline;
     font-size: 16px;
@@ -285,9 +289,8 @@ table, th, td {
     display: none;
 }
 
-.scrollmenu {
-  overflow: auto;
-  white-space: nowrap;
+.wrapping {
+  word-wrap: break-word;
 }
 
 /*slider or carousel*/

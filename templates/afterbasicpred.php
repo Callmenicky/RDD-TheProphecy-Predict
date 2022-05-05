@@ -42,37 +42,13 @@
     </form>
 	</div>
         <div class="predimg predimgafter">
-          <h2 class="scrollmenu" id="mysmiles"></h2>
-	  <!--Start of slideshow-->
-	      <div class="slideshow-container">
-		  <div class="mySlides">
-		      <img src="{{url_for('static', filename='images/result_ml.jpg')}}" alt="result icon">
-		      <div class="centered">
-			  {% for row in temp %}
-                <p>In <b>{{row[1]}}</b> model that target on <b>{{row[2]}}</b>, molecule that has pIC50 higher than <b>{{row[3]}}</b> is consider as active.</p>
-              {% endfor %}
-		      </div>
-		  </div>
-		  <div class="mySlides">
-		      <img src="{{url_for('static', filename='images/plots.PNG')}}" alt="pca chart" class="pca">
-		  </div>
-		  <div class="mySlides">
-		      <img src="{{url_for('static', filename='images/result_ml.jpg')}}" alt="result icon">
-		      <div class="centered"><p>PCA chart is applied to visualize the accuacy of prediction. <b>If the SMILES(green) lays between the range of training sample(red), the prediction result is promising.</b></p></div>
-		  </div>
-		  <div class="sliderButtons">
-		      <span class="dot" onclick="currentSlide(1)"></span>
-		      <span class="dot" onclick="currentSlide(2)"></span>
-		      <span class="dot" onclick="currentSlide(3)"></span>
-		  </div>
-	      </div>
-	<!--End of slideshow-->
+          <h2 class="wrapping" id="mysmiles"></h2>
 		{%if data == "Active"%}
                   <h2>Prediction Result: Active</h2>
 		  {%else%}
                   <h2>Prediction Result: Inactive</h2>		
 		{%endif%}
-        <button type="button" class="btn btn-primary long2" data-bs-toggle="modal" data-bs-target="#ModelAnalysis" data-id ="<?php echo $row['user_id'];?>">Edit</button>
+        <button type="button" class="btn btn-info long2" data-bs-toggle="modal" data-bs-target="#ModelAnalysis" data-id ="<?php echo $row['user_id'];?>">Model Analysis</button>
         <br/><br/>
         </div>
     </section>	
