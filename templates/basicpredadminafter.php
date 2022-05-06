@@ -23,13 +23,13 @@
         </div>
         <div class="predimg predimgafter">
           <h2 class="wrapping" id="mysmiles"></h2>
-		{%if data == "Active"%}
+          <p>Have a look at the model analysis :</p>
+          <button type="button" class="btn btn-info long2" data-bs-toggle="modal" data-bs-target="#ModelAnalysis" data-id ="<?php echo $row['user_id'];?>">Analyze</button>
+		  {%if data == "Active"%}
                   <h2>Prediction Result: Active</h2>
 		  {%else%}
                     <h2>Prediction Result: Inactive</h2>		
-		{%endif%}
-        <button type="button" class="btn btn-info long2" data-bs-toggle="modal" data-bs-target="#ModelAnalysis" data-id ="<?php echo $row['user_id'];?>">Model Analysis</button>
-        <br/><br/>
+		  {%endif%}
         </div>
     </section>
 	<footer>

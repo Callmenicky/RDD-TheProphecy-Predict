@@ -23,7 +23,10 @@
         </form>
       </div>
       <div class="predimg predimgafter">
-          <h2>Prediction Result: 
+          <h2>Prediction Result</h2>
+          <p>Have a look at the model analysis :</p>
+          <button type="button" class="btn btn-info long2" data-bs-toggle="modal" data-bs-target="#ModelAnalysis" data-id ="<?php echo $row['user_id'];?>">Analyze</button>
+          <h2>
               <a download href="outcome.txt">
                 <a class="white" href=" {{url_for('static', filename='outcome.csv')}}" download>Download</a>
               </a>

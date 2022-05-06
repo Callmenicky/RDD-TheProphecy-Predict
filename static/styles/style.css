@@ -273,11 +273,12 @@ table, th, td {
 }
 
 .predimg h2{
-    color:#0070ff;
+    color:#ffffff;
 }
 
 .predimgafter{
-    background-color: #e1e2e1;
+    border-left: solid 2px #0070ff;
+    border-right: solid 2px #0070ff;
 }
 
 .white{
