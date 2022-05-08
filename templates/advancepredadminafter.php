@@ -72,7 +72,7 @@
                 <!--End of slideshow-->
 				 
 				  <div class="modal-footer">
-					<button type="submit" name="updateadminprofile" class="btn btn-primary">Okay!</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 				  </div>
 			</div>
 		  </div>
