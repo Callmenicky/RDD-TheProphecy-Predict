@@ -31,7 +31,6 @@
                 <a class="white" href=" {{url_for('static', filename='outcome.csv')}}" download>Download</a>
               </a>
           </h2>
-        <button type="button" class="btn btn-info long2" data-bs-toggle="modal" data-bs-target="#ModelAnalysis" data-id ="<?php echo $row['user_id'];?>">Model Analysis</button>
         <br/><br/>
       </div>
     </section>
