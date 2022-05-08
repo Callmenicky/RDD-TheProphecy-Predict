@@ -277,7 +277,7 @@ table, th, td {
     background-color: #0070ff;
 }
 
-.predimgafter{
+.predimgafter, .predimg p{
     background: rgba(225,225,225, 0.5);
 }
 
@@ -326,7 +326,7 @@ table, th, td {
 
 .mySlides img{
 	opacity: 0.2;
-	height: 40vh;
+	height: 50vh;
 }
 
 .mySlides img.pca{
