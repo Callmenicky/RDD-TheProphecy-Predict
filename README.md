@@ -9,7 +9,7 @@ ____________________________________________________
     Action 1: Deployment of Code onto Heroku
     Action 2: Add Buildpacks
     Action 3: Configure SSL
-    Action 4: Add Private Domian Name
+    Action 4: Add Private Domain Name
 
 **2. PgAdmin**
 
@@ -37,7 +37,7 @@ The current buildpacks is heroku/php. New buildback can be added under the setti
 SSL Certificates is one of the category under setting. The Heroku free plan need to upgrade to a paid plan to utilize the build in SSL certification. Cloudflare is able to host domain with free SSL Certificates but it has limited upload size of 100MB that is not enough for this web portal to upload machine learning model.
 ![image](https://user-images.githubusercontent.com/34600547/168777568-7de1336a-cf65-4353-9bff-7ab08f6576a6.png)
 
-**Action 4: Add Private Domian Name**
+**Action 4: Add Private Domain Name**
 
 The web portal is using the default domain provided by heroku. A specific domain name can be added by configuring it through the Add domain button.
 ![image](https://user-images.githubusercontent.com/34600547/168778170-5dbb1460-27a8-4ea3-8ed0-5f5962cf89ae.png)
