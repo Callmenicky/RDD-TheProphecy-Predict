@@ -15,6 +15,14 @@ ____________________________________________________
 
     Action 1: View all information in selected table
     Action 2: Manage procedure set at PgAdmin
+    
+____________________________________________________
+
+## Accounts details used for Heroku and Gmail
+
+**Email    : RDDTheProphecy@gmail.com**
+
+**Password : RDD_TheProphecy1**
 ____________________________________________________
 
 ## Part 1: Heroku
